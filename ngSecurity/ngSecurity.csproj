@@ -1,0 +1,702 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{98133356-4ACE-4641-B22E-B606ABC65E03}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ngSecurity</RootNamespace>
+    <AssemblyName>ngSecurity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.4.1.0\lib\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors">
+      <HintPath>..\packages\Microsoft.Owin.Cors.3.0.0\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Jwt">
+      <HintPath>..\packages\Microsoft.Owin.Security.Jwt.3.0.0\lib\net45\Microsoft.Owin.Security.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.1\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.2\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.2\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Unity.WebApi">
+      <HintPath>..\packages\Unity.WebAPI.5.1\lib\net45\Unity.WebApi.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\common\components\entityAdminMenu\entityAdminMenu.html" />
+    <Content Include="app\common\components\entityAdminMenu\entityAdminMenu.js" />
+    <Content Include="app\common\components\entityAdminMenu\entityAdminMenu.js.map" />
+    <Content Include="app\common\components\entityAdminMenu\entityAdminMenuSpec.js" />
+    <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.less" />
+    <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.lg.less" />
+    <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.md.less" />
+    <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.sm.less" />
+    <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.xs.less" />
+    <Content Include="app\common\components\identityMenu\identityMenu.css" />
+    <Content Include="app\common\components\identityMenu\identityMenu.html" />
+    <Content Include="app\common\components\identityMenu\identityMenu.js" />
+    <Content Include="app\common\components\identityMenu\identityMenu.js.map" />
+    <Content Include="app\common\components\multiEntitySelect\multiEntitySelect.html" />
+    <Content Include="app\common\components\multiEntitySelect\multiEntitySelect.js" />
+    <Content Include="app\common\components\multiEntitySelect\multiEntitySelect.js.map" />
+    <Content Include="app\common\components\multiEntitySelect\multiEntitySelectSpec.js" />
+    <Content Include="app\common\components\multiEntitySelect\responsive less\multiEntitySelect.less" />
+    <Content Include="app\common\components\multiEntitySelect\responsive less\multiEntitySelect.lg.less" />
+    <Content Include="app\common\components\multiEntitySelect\responsive less\multiEntitySelect.md.less" />
+    <Content Include="app\common\components\multiEntitySelect\responsive less\multiEntitySelect.sm.less" />
+    <Content Include="app\common\components\multiEntitySelect\responsive less\multiEntitySelect.xs.less" />
+    <Content Include="app\common\components\workSpinner\responsive less\workSpinner.css" />
+    <Content Include="app\common\components\workSpinner\responsive less\workSpinner.css.map" />
+    <Content Include="app\common\components\workSpinner\responsive less\workSpinner.less" />
+    <Content Include="app\common\components\workSpinner\responsive less\workSpinner.lg.less" />
+    <Content Include="app\common\components\workSpinner\responsive less\workSpinner.md.less" />
+    <Content Include="app\common\components\workSpinner\responsive less\workSpinner.min.css" />
+    <Content Include="app\common\components\workSpinner\responsive less\workSpinner.sm.less" />
+    <Content Include="app\common\components\workSpinner\responsive less\workSpinner.xs.less" />
+    <Content Include="app\common\components\workSpinner\workSpinner.html" />
+    <Content Include="app\common\components\workSpinner\workSpinner.js" />
+    <Content Include="app\common\components\workSpinner\workSpinner.js.map" />
+    <Content Include="app\common\components\workSpinner\workSpinner.spec.js" />
+    <Content Include="app\common\module.js" />
+    <Content Include="app\common\module.js.map" />
+    <Content Include="app\configuration\module.js" />
+    <Content Include="app\configuration\module.js.map" />
+    <Content Include="app\configuration\services\configurationService.js" />
+    <Content Include="app\configuration\services\configurationService.js.map" />
+    <Content Include="app\configuration\services\interfaces\IConfigurationService.js" />
+    <Content Include="app\configuration\services\interfaces\IConfigurationService.js.map" />
+    <Content Include="app\core\interfaces\IApiEndpointConfig.js" />
+    <Content Include="app\core\interfaces\IApiEndpointConfig.js.map" />
+    <Content Include="app\core\interfaces\IApiEndpointProvider.js" />
+    <Content Include="app\core\interfaces\IApiEndpointProvider.js.map" />
+    <Content Include="app\core\interfaces\ICoreRootScope.js" />
+    <Content Include="app\core\interfaces\ICoreRootScope.js.map" />
+    <Content Include="app\core\interfaces\IDataService.js" />
+    <Content Include="app\core\interfaces\IDataService.js.map" />
+    <Content Include="app\core\interfaces\IRouteProvider.js" />
+    <Content Include="app\core\interfaces\IRouteProvider.js.map" />
+    <Content Include="app\core\interfaces\IRouteResolver.js" />
+    <Content Include="app\core\interfaces\IRouteResolver.js.map" />
+    <Content Include="app\core\intreceptors\authorizationInterceptor.js" />
+    <Content Include="app\core\intreceptors\authorizationInterceptor.js.map" />
+    <Content Include="app\core\intreceptors\requestCounter.js" />
+    <Content Include="app\core\intreceptors\requestCounter.js.map" />
+    <Content Include="app\core\jQuery\jQuery.js" />
+    <Content Include="app\core\jQuery\jQuery.js.map" />
+    <Content Include="app\core\module.js" />
+    <Content Include="app\core\module.js.map" />
+    <Content Include="app\core\providers\ApiEndpointProvider.js" />
+    <Content Include="app\core\providers\ApiEndpointProvider.js.map" />
+    <Content Include="app\core\storage\items\configuration.js" />
+    <Content Include="app\core\storage\items\configuration.js.map" />
+    <Content Include="app\core\storage\storage.js" />
+    <Content Include="app\core\styles\a.less" />
+    <Content Include="app\core\styles\app.css" />
+    <Content Include="app\core\styles\app.css.map" />
+    <Content Include="app\core\styles\app.less" />
+    <Content Include="app\core\styles\app.min.css" />
+    <Content Include="app\core\styles\body.css" />
+    <Content Include="app\core\styles\body.css.map" />
+    <Content Include="app\core\styles\body.less" />
+    <Content Include="app\core\styles\body.min.css" />
+    <Content Include="app\core\styles\btn.less" />
+    <Content Include="app\core\styles\button.css" />
+    <Content Include="app\core\styles\button.css.map" />
+    <Content Include="app\core\styles\button.less" />
+    <Content Include="app\core\styles\button.min.css" />
+    <Content Include="app\core\styles\clear.css" />
+    <Content Include="app\core\styles\clear.css.map" />
+    <Content Include="app\core\styles\clear.less" />
+    <Content Include="app\core\styles\clear.min.css" />
+    <Content Include="app\core\styles\component.less" />
+    <Content Include="app\core\styles\container.css" />
+    <Content Include="app\core\styles\container.css.map" />
+    <Content Include="app\core\styles\container.less" />
+    <Content Include="app\core\styles\container.min.css" />
+    <Content Include="app\core\styles\form-control.css" />
+    <Content Include="app\core\styles\form-control.css.map" />
+    <Content Include="app\core\styles\form-control.less" />
+    <Content Include="app\core\styles\form-control.min.css" />
+    <Content Include="app\core\styles\form-group.less" />
+    <Content Include="app\core\styles\h1.less" />
+    <Content Include="app\core\styles\header.less" />
+    <Content Include="app\core\styles\hr.less" />
+    <Content Include="app\core\styles\hrgroup h1.less" />
+    <Content Include="app\core\styles\label.less" />
+    <Content Include="app\core\styles\left.less" />
+    <Content Include="app\core\styles\link.less" />
+    <Content Include="app\core\styles\menu-bar.less" />
+    <Content Include="app\core\styles\overlay.less" />
+    <Content Include="app\core\styles\responsive-helper-classes.css" />
+    <Content Include="app\core\styles\responsive-helper-classes.css.map" />
+    <Content Include="app\core\styles\responsive-helper-classes.less" />
+    <Content Include="app\core\styles\responsive-helper-classes.min.css" />
+    <Content Include="app\core\styles\right.css" />
+    <Content Include="app\core\styles\right.css.map" />
+    <Content Include="app\core\styles\right.less" />
+    <Content Include="app\core\styles\right.min.css" />
+    <Content Include="app\core\styles\sr-only.less" />
+    <Content Include="app\core\styles\sub-view.less" />
+    <Content Include="app\core\styles\table.less" />
+    <Content Include="app\core\styles\transitions.less" />
+    <Content Include="app\core\styles\two-columns.css">
+      <DependentUpon>two-columns.less</DependentUpon>
+    </Content>
+    <Content Include="app\core\styles\two-columns.css.map">
+      <DependentUpon>two-columns.css</DependentUpon>
+    </Content>
+    <Content Include="app\core\styles\two-columns.less" />
+    <Content Include="app\core\styles\two-columns.min.css">
+      <DependentUpon>two-columns.css</DependentUpon>
+    </Content>
+    <Content Include="app\core\styles\view-container.less" />
+    <Content Include="app\core\styles\view.less" />
+    <Content Include="app\core\styles\_reset.less" />
+    <Content Include="app\core\utilities\getStringFromUrl.js" />
+    <Content Include="app\core\utilities\getStringFromUrl.js.map" />
+    <Content Include="app\group\components\groupEditor\groupEditor.html" />
+    <Content Include="app\group\components\groupEditor\groupEditor.js" />
+    <Content Include="app\group\components\groupEditor\groupEditor.js.map" />
+    <Content Include="app\group\components\groupEditor\groupEditorSpec.js" />
+    <Content Include="app\group\components\groupEditor\responsive less\groupEditor.less" />
+    <Content Include="app\group\components\groupEditor\responsive less\groupEditor.lg.less" />
+    <Content Include="app\group\components\groupEditor\responsive less\groupEditor.md.less" />
+    <Content Include="app\group\components\groupEditor\responsive less\groupEditor.sm.less" />
+    <Content Include="app\group\components\groupEditor\responsive less\groupEditor.xs.less" />
+    <Content Include="app\group\components\groupList\groupList.html" />
+    <Content Include="app\group\components\groupList\groupList.js" />
+    <Content Include="app\group\components\groupList\groupList.js.map" />
+    <Content Include="app\group\components\groupList\groupList.spec.js" />
+    <Content Include="app\group\components\groupList\responsive less\groupList.less" />
+    <Content Include="app\group\components\groupList\responsive less\groupList.lg.less" />
+    <Content Include="app\group\components\groupList\responsive less\groupList.md.less" />
+    <Content Include="app\group\components\groupList\responsive less\groupList.sm.less" />
+    <Content Include="app\group\components\groupList\responsive less\groupList.xs.less" />
+    <Content Include="app\group\interfaces\IGroupService.js" />
+    <Content Include="app\group\interfaces\IGroupService.js.map" />
+    <Content Include="app\group\module.js" />
+    <Content Include="app\group\module.js.map" />
+    <Content Include="app\group\services\groupService.js" />
+    <Content Include="app\group\services\groupService.js.map" />
+    <Content Include="app\security\default.html" />
+    <Content Include="app\layout.less" />
+    <Content Include="app\media-queries-variables.less" />
+    <Content Include="app\role\components\roleEditor\responsive less\roleEditor.less" />
+    <Content Include="app\role\components\roleEditor\responsive less\roleEditor.lg.less" />
+    <Content Include="app\role\components\roleEditor\responsive less\roleEditor.md.less" />
+    <Content Include="app\role\components\roleEditor\responsive less\roleEditor.sm.less" />
+    <Content Include="app\role\components\roleEditor\responsive less\roleEditor.xs.less" />
+    <Content Include="app\role\components\roleEditor\roleEditor.html" />
+    <Content Include="app\role\components\roleEditor\roleEditor.js" />
+    <Content Include="app\role\components\roleEditor\roleEditor.js.map" />
+    <Content Include="app\role\components\roleEditor\roleEditor.spec.js" />
+    <Content Include="app\role\components\roleList\responsive less\roleList.less" />
+    <Content Include="app\role\components\roleList\responsive less\roleList.lg.less" />
+    <Content Include="app\role\components\roleList\responsive less\roleList.md.less" />
+    <Content Include="app\role\components\roleList\responsive less\roleList.sm.less" />
+    <Content Include="app\role\components\roleList\responsive less\roleList.xs.less" />
+    <Content Include="app\role\components\roleList\roleList.html" />
+    <Content Include="app\role\components\roleList\roleList.js" />
+    <Content Include="app\role\components\roleList\roleList.js.map" />
+    <Content Include="app\role\components\roleList\roleList.spec.js" />
+    <Content Include="app\role\interfaces\IRoleService.js" />
+    <Content Include="app\role\interfaces\IRoleService.js.map" />
+    <Content Include="app\role\services\roleService.js" />
+    <Content Include="app\role\services\roleService.js.map" />
+    <Content Include="app\security\components\securityMenu\responsive less\securityMenu.css">
+      <DependentUpon>securityMenu.less</DependentUpon>
+    </Content>
+    <Content Include="app\security\components\securityMenu\responsive less\securityMenu.css.map">
+      <DependentUpon>securityMenu.css</DependentUpon>
+    </Content>
+    <Content Include="app\security\components\securityMenu\responsive less\securityMenu.less" />
+    <Content Include="app\security\components\securityMenu\responsive less\securityMenu.lg.less" />
+    <Content Include="app\security\components\securityMenu\responsive less\securityMenu.md.less" />
+    <Content Include="app\security\components\securityMenu\responsive less\securityMenu.min.css">
+      <DependentUpon>securityMenu.css</DependentUpon>
+    </Content>
+    <Content Include="app\security\components\securityMenu\responsive less\securityMenu.sm.less" />
+    <Content Include="app\security\components\securityMenu\responsive less\securityMenu.xs.less" />
+    <Content Include="app\security\components\securityMenu\securityMenu.html" />
+    <Content Include="app\security\components\securityMenu\securityMenuSpec.js">
+      <DependentUpon>securityMenu.ts</DependentUpon>
+    </Content>
+    <Content Include="app\security\components\userEditor\responsive less\userEditor.less" />
+    <Content Include="app\security\components\userEditor\responsive less\userEditor.lg.less" />
+    <Content Include="app\security\components\userEditor\responsive less\userEditor.md.less" />
+    <Content Include="app\security\components\userEditor\responsive less\userEditor.sm.less" />
+    <Content Include="app\security\components\userEditor\responsive less\userEditor.xs.less" />
+    <Content Include="app\security\components\userEditor\userEditor.html" />
+    <Content Include="app\security\components\userEditor\userEditor.js" />
+    <Content Include="app\security\components\userEditor\userEditor.js.map" />
+    <Content Include="app\security\components\userEditor\userEditorSpec.js" />
+    <Content Include="app\security\data\uow.js" />
+    <Content Include="app\security\data\uow.js.map" />
+    <Content Include="app\security\services\securityRouteResolver.js" />
+    <Content Include="app\security\services\securityRouteResolver.js.map" />
+    <Content Include="app\security\styles\security-sub-view.css">
+      <DependentUpon>security-sub-view.less</DependentUpon>
+    </Content>
+    <Content Include="app\security\styles\security-sub-view.css.map">
+      <DependentUpon>security-sub-view.css</DependentUpon>
+    </Content>
+    <Content Include="app\security\styles\security-sub-view.less" />
+    <Content Include="app\security\styles\security-sub-view.min.css">
+      <DependentUpon>security-sub-view.css</DependentUpon>
+    </Content>
+    <Content Include="app\security\templates\addgroup.html" />
+    <Content Include="app\security\templates\addrole.html" />
+    <Content Include="app\security\templates\adduser.html" />
+    <Content Include="app\security\templates\changepassword.html" />
+    <Content Include="app\security\templates\groups.html" />
+    <Content Include="app\security\templates\roles.html" />
+    <Content Include="app\security\templates\security.html" />
+    <Content Include="app\security\templates\signin.html" />
+    <Content Include="app\security\templates\splash.html" />
+    <Content Include="app\security\templates\users.html" />
+    <Content Include="app\session\interfaces\ISession.js" />
+    <Content Include="app\session\interfaces\ISession.js.map" />
+    <Content Include="app\session\model\session.js" />
+    <Content Include="app\session\model\session.js.map" />
+    <Content Include="app\user\components\changePasswordForm\changePasswordForm.html" />
+    <Content Include="app\user\components\changePasswordForm\changePasswordFormSpec.js">
+      <DependentUpon>changePasswordForm.ts</DependentUpon>
+    </Content>
+    <Content Include="app\user\components\changePasswordForm\responsive less\changePasswordForm.less" />
+    <Content Include="app\user\components\changePasswordForm\responsive less\changePasswordForm.lg.less" />
+    <Content Include="app\user\components\changePasswordForm\responsive less\changePasswordForm.md.less" />
+    <Content Include="app\user\components\changePasswordForm\responsive less\changePasswordForm.sm.less" />
+    <Content Include="app\user\components\changePasswordForm\responsive less\changePasswordForm.xs.less" />
+    <Content Include="app\user\components\preferences\preferences.html" />
+    <Content Include="app\user\components\preferences\preferences.js" />
+    <Content Include="app\user\components\preferences\preferences.js.map" />
+    <Content Include="app\user\components\preferences\preferencesSpec.js" />
+    <Content Include="app\user\components\preferences\responsive less\preferences.less" />
+    <Content Include="app\user\components\preferences\responsive less\preferences.lg.less" />
+    <Content Include="app\user\components\preferences\responsive less\preferences.md.less" />
+    <Content Include="app\user\components\preferences\responsive less\preferences.sm.less" />
+    <Content Include="app\user\components\preferences\responsive less\preferences.xs.less" />
+    <Content Include="app\user\components\registrationForm\registrationForm.css" />
+    <Content Include="app\user\components\registrationForm\registrationForm.html" />
+    <Content Include="app\user\components\registrationForm\registrationForm.js" />
+    <Content Include="app\user\components\registrationForm\registrationForm.js.map" />
+    <Content Include="app\user\components\signinForm\responsive less\signinForm.less" />
+    <Content Include="app\user\components\signinForm\responsive less\signinForm.lg.less" />
+    <Content Include="app\user\components\signinForm\responsive less\signinForm.md.less" />
+    <Content Include="app\user\components\signinForm\responsive less\signinForm.sm.less" />
+    <Content Include="app\user\components\signinForm\responsive less\signinForm.xs.less" />
+    <Content Include="app\user\components\signinForm\signInForm.css" />
+    <Content Include="app\user\components\signinForm\signinForm.html" />
+    <Content Include="app\user\components\signinForm\signinForm.js" />
+    <Content Include="app\user\components\signinForm\signinForm.js.map" />
+    <Content Include="app\user\components\signinForm\signinForm.spec.js">
+      <DependentUpon>signinForm.ts</DependentUpon>
+    </Content>
+    <Content Include="app\user\components\userAdminMenu\userAdminMenu.css" />
+    <Content Include="app\user\components\userAdminMenu\userAdminMenu.html" />
+    <Content Include="app\user\components\userAdminMenu\userAdminMenu.js" />
+    <Content Include="app\user\components\userAdminMenu\userAdminMenu.js.map" />
+    <Content Include="app\user\components\userDropDownList\responsive less\userDropDownList.less" />
+    <Content Include="app\user\components\userDropDownList\responsive less\userDropDownList.lg.less" />
+    <Content Include="app\user\components\userDropDownList\responsive less\userDropDownList.md.less" />
+    <Content Include="app\user\components\userDropDownList\responsive less\userDropDownList.sm.less" />
+    <Content Include="app\user\components\userDropDownList\responsive less\userDropDownList.xs.less" />
+    <Content Include="app\user\components\userDropDownList\userDropDownList.html" />
+    <Content Include="app\user\components\userDropDownList\userDropDownList.js" />
+    <Content Include="app\user\components\userDropDownList\userDropDownList.js.map" />
+    <Content Include="app\user\components\userList\responsive less\userList.less" />
+    <Content Include="app\user\components\userList\responsive less\userList.lg.less" />
+    <Content Include="app\user\components\userList\responsive less\userList.md.less" />
+    <Content Include="app\user\components\userList\responsive less\userList.sm.less" />
+    <Content Include="app\user\components\userList\responsive less\userList.xs.less" />
+    <Content Include="app\user\components\userList\userList.html" />
+    <Content Include="app\user\components\userList\userList.js" />
+    <Content Include="app\user\components\userList\userList.js.map" />
+    <Content Include="app\user\components\userList\userListSpec.js" />
+    <Content Include="app\user\interfaces\IPreferencesService.js" />
+    <Content Include="app\user\interfaces\IPreferencesService.js.map" />
+    <Content Include="app\user\templates\edit.html" />
+    <Content Include="app\user\templates\list.html" />
+    <Content Include="app\user\templates\preferences.html" />
+    <Content Include="app\user\templates\register.html" />
+    <Content Include="app\user\templates\signin.html" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\jasmine.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="scripts\angular-animate.js" />
+    <Content Include="scripts\angular-animate.min.js" />
+    <Content Include="scripts\angular-mocks.js" />
+    <Content Include="scripts\angular-route.js" />
+    <Content Include="scripts\angular-route.min.js" />
+    <Content Include="scripts\angular-sanitize.js" />
+    <Content Include="scripts\angular-sanitize.min.js" />
+    <Content Include="scripts\angular.js" />
+    <Content Include="scripts\angular.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="scripts\jasmine\boot.js" />
+    <Content Include="scripts\jasmine\console.js" />
+    <Content Include="scripts\jasmine\jasmine-html.js" />
+    <Content Include="scripts\jasmine\jasmine.css" />
+    <Content Include="scripts\jasmine\jasmine.js" />
+    <Content Include="scripts\jasmine\jasmine_favicon.png" />
+    <Content Include="scripts\jquery.signalR-2.2.0.js" />
+    <Content Include="scripts\jquery.signalR-2.2.0.min.js" />
+    <None Include="scripts\jquery-1.9.0.intellisense.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\jquery-1.9.0.js" />
+    <Content Include="scripts\jquery-1.9.0.min.js" />
+    <Content Include="scripts\moment-with-locales.js" />
+    <Content Include="scripts\moment-with-locales.min.js" />
+    <Content Include="scripts\moment.js" />
+    <Content Include="scripts\moment.min.js" />
+    <Content Include="scripts\npm.js" />
+    <None Include="Web.config" />
+    <Content Include="scripts\jquery-1.9.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Server\Api\v1\BaseApiController.cs" />
+    <Compile Include="Server\Api\v1\ConfigurationController.cs" />
+    <Compile Include="Server\Api\v1\GroupController.cs" />
+    <Compile Include="Server\Api\v1\IdentityController.cs" />
+    <Compile Include="Server\Api\v1\RoleController.cs" />
+    <Compile Include="Server\Api\v1\TenantController.cs" />
+    <Compile Include="Server\Api\v1\UserController.cs" />
+    <Compile Include="Server\Auth\JwtOptions.cs" />
+    <Compile Include="Server\Auth\JwtWriterFormat.cs" />
+    <Compile Include="Server\Auth\OAuthOptions.cs" />
+    <Compile Include="Server\Auth\OAuthProvider.cs" />
+    <Compile Include="Server\Config\AppConfiguration.cs" />
+    <Compile Include="Server\Dto\v1\ChangePasswordDto.cs" />
+    <Compile Include="Server\Dto\v1\ConfigurationDto.cs" />
+    <Compile Include="Server\Dto\v1\DevelopmentProgramDto.cs" />
+    <Compile Include="Server\Dto\v1\ModuleDto.cs" />
+    <Compile Include="Server\Dto\v1\PhaseDto.cs" />
+    <Compile Include="Server\Dto\v1\RegistrationRequestDto.cs" />
+    <Compile Include="Server\Dto\v1\GroupDto.cs" />
+    <Compile Include="Server\Dto\v1\RoleDto.cs" />
+    <Compile Include="Server\Dto\v1\SignInDto.cs" />
+    <Compile Include="Server\Dto\v1\TokenDto.cs" />
+    <Compile Include="Server\Dto\v1\UserDto.cs" />
+    <Compile Include="Server\Hubs\UserHub.cs" />
+    <Compile Include="Server\Migrations\Configuration.cs" />
+    <Compile Include="Server\Data\EFRepository.cs" />
+    <Compile Include="Server\Data\RepositoryFactories.cs" />
+    <Compile Include="Server\Data\RepositoryProvider.cs" />
+    <Compile Include="Server\Migrations\RoleConfiguration.cs" />
+    <Compile Include="Server\Migrations\UserConfiguration.cs" />
+    <Compile Include="Server\Models\Account.cs" />
+    <Compile Include="Server\Models\Group.cs" />
+    <Compile Include="Server\Models\Profile.cs" />
+    <Compile Include="Server\Models\Session.cs" />
+    <Compile Include="Server\Models\Tenant.cs" />
+    <Compile Include="Server\Services\CacheProvider.cs" />
+    <Compile Include="Server\Services\Contracts\ICache.cs" />
+    <Compile Include="Server\Services\Contracts\ICacheProvider.cs" />
+    <Compile Include="Server\Services\Contracts\IEncryptionService.cs" />
+    <Compile Include="Server\Services\Contracts\IIdentityService.cs" />
+    <Compile Include="Server\Services\Contracts\ISecurityService.cs" />
+    <Compile Include="Server\Services\Contracts\ISessionService.cs" />
+    <Compile Include="Server\Services\EncryptionService.cs" />
+    <Compile Include="Server\Services\IdentityService.cs" />
+    <Compile Include="Server\Services\MemoryCache.cs" />
+    <Compile Include="Server\Services\SecureDataFormat.cs" />
+    <Compile Include="Server\Services\SecurityService.cs" />
+    <Compile Include="Server\Services\ServiceCache.cs" />
+    <Compile Include="Server\Services\SessionService.cs" />
+    <Compile Include="Server\StartUp\OwinStartUp.cs" />
+    <Compile Include="Server\StartUp\UnityConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\Api\v1\AppConfigurationController.cs" />
+    <Compile Include="Server\Data\Contracts\IRepository.cs" />
+    <Compile Include="Server\Data\Contracts\IRepositoryProvider.cs" />
+    <Compile Include="Server\Data\Contracts\IUow.cs" />
+    <Compile Include="Server\Data\DbContext.cs" />
+    <Compile Include="Server\Data\Uow.cs" />
+    <Compile Include="Server\Models\BaseEntity.cs" />
+    <Compile Include="Server\Models\ILoggable.cs" />
+    <Compile Include="Server\Models\Role.cs" />
+    <Compile Include="Server\Models\User.cs" />
+    <Compile Include="Server\StartUp\WebApiStartup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="scripts\angular.min.js.map" />
+    <Content Include="packages.config" />
+    <Content Include="scripts\angular-route.min.js.map" />
+    <Content Include="scripts\angular-animate.min.js.map" />
+    <Content Include="scripts\angular-sanitize.min.js.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="app\account\module.ts" />
+    <TypeScriptCompile Include="app\common\components\entityAdminMenu\entityAdminMenu.ts" />
+    <TypeScriptCompile Include="app\common\components\identityMenu\identityMenu.ts" />
+    <TypeScriptCompile Include="app\common\components\multiEntitySelect\multiEntitySelect.ts" />
+    <TypeScriptCompile Include="app\common\components\workSpinner\workSpinner.ts" />
+    <TypeScriptCompile Include="app\common\module.ts" />
+    <TypeScriptCompile Include="app\configuration\module.ts" />
+    <TypeScriptCompile Include="app\configuration\services\configurationService.ts" />
+    <TypeScriptCompile Include="app\configuration\services\interfaces\IConfigurationService.ts" />
+    <TypeScriptCompile Include="app\core\interfaces\IApiEndpointConfig.ts" />
+    <TypeScriptCompile Include="app\core\interfaces\IApiEndpointProvider.ts" />
+    <TypeScriptCompile Include="app\core\interfaces\ICoreRootScope.ts" />
+    <TypeScriptCompile Include="app\core\interfaces\IDataService.ts" />
+    <TypeScriptCompile Include="app\core\interfaces\IRouteProvider.ts" />
+    <TypeScriptCompile Include="app\core\interfaces\IRouteResolver.ts" />
+    <TypeScriptCompile Include="app\core\intreceptors\authorizationInterceptor.ts" />
+    <TypeScriptCompile Include="app\core\intreceptors\requestCounter.ts" />
+    <TypeScriptCompile Include="app\core\jQuery\jQuery.ts" />
+    <TypeScriptCompile Include="app\core\module.ts" />
+    <TypeScriptCompile Include="app\core\providers\ApiEndpointProvider.ts" />
+    <TypeScriptCompile Include="app\core\storage\items\configuration.ts" />
+    <TypeScriptCompile Include="app\core\utilities\formEncode.ts" />
+    <TypeScriptCompile Include="app\core\utilities\getStringFromUrl.ts" />
+    <TypeScriptCompile Include="app\group\components\groupEditor\groupEditor.ts" />
+    <TypeScriptCompile Include="app\group\components\groupList\groupList.ts" />
+    <TypeScriptCompile Include="app\group\interfaces\IGroupService.ts" />
+    <TypeScriptCompile Include="app\group\module.ts" />
+    <TypeScriptCompile Include="app\group\services\groupService.ts" />
+    <TypeScriptCompile Include="app\profile\module.ts" />
+    <TypeScriptCompile Include="app\role\components\roleEditor\roleEditor.ts" />
+    <TypeScriptCompile Include="app\role\components\roleList\roleList.ts" />
+    <TypeScriptCompile Include="app\role\interfaces\IRoleService.ts" />
+    <TypeScriptCompile Include="app\role\module.ts" />
+    <TypeScriptCompile Include="app\role\services\roleService.ts" />
+    <TypeScriptCompile Include="app\security\components\securityMenu\securityMenu.ts" />
+    <TypeScriptCompile Include="app\security\components\userEditor\userEditor.ts" />
+    <TypeScriptCompile Include="app\security\data\uow.ts" />
+    <TypeScriptCompile Include="app\security\module.ts" />
+    <TypeScriptCompile Include="app\security\services\securityRouteResolver.ts" />
+    <TypeScriptCompile Include="app\session\interfaces\ISession.ts" />
+    <TypeScriptCompile Include="app\session\model\session.ts" />
+    <TypeScriptCompile Include="app\session\module.ts" />
+    <TypeScriptCompile Include="app\session\properties\configuration.ts" />
+    <TypeScriptCompile Include="app\session\properties\currentUser.ts" />
+    <TypeScriptCompile Include="app\session\properties\token.ts" />
+    <TypeScriptCompile Include="app\tenant\module.ts" />
+    <TypeScriptCompile Include="app\user\components\changePasswordForm\changePasswordForm.ts" />
+    <TypeScriptCompile Include="app\user\components\preferences\preferences.ts" />
+    <TypeScriptCompile Include="app\user\components\registrationForm\registrationForm.ts" />
+    <TypeScriptCompile Include="app\user\components\signinForm\signinForm.ts" />
+    <TypeScriptCompile Include="app\user\components\userAdminMenu\userAdminMenu.ts" />
+    <TypeScriptCompile Include="app\user\components\userDropDownList\userDropDownList.ts" />
+    <TypeScriptCompile Include="app\user\components\userList\userList.ts" />
+    <TypeScriptCompile Include="app\user\interfaces\IPreferencesService.ts" />
+    <TypeScriptCompile Include="app\user\module.ts" />
+    <TypeScriptCompile Include="app\user\services\identityService.ts" />
+    <TypeScriptCompile Include="app\user\services\preferencesService.ts" />
+    <TypeScriptCompile Include="app\user\services\userRouteResolver.ts" />
+    <TypeScriptCompile Include="app\user\services\userService.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular-animate.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular-cookies.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular-mocks.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular-resource.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular-route.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular-sanitize.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\moment\moment.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\account\components\" />
+    <Folder Include="app\account\services\" />
+    <Folder Include="app\account\templates\" />
+    <Folder Include="app\common\components\entityAdminMenu\interfaces\" />
+    <Folder Include="app\common\components\identityMenu\interfaces\" />
+    <Folder Include="app\common\components\multiEntitySelect\interfaces\" />
+    <Folder Include="app\common\components\workSpinner\interfaces\" />
+    <Folder Include="app\group\components\groupEditor\interfaces\" />
+    <Folder Include="app\group\components\groupList\interfaces\" />
+    <Folder Include="app\profile\components\" />
+    <Folder Include="app\profile\services\" />
+    <Folder Include="app\profile\templates\" />
+    <Folder Include="app\role\components\roleEditor\interfaces\" />
+    <Folder Include="app\role\components\roleList\interfaces\" />
+    <Folder Include="app\security\components\securityMenu\interfaces\" />
+    <Folder Include="app\security\components\userEditor\interfaces\" />
+    <Folder Include="app\session\model\interfaces\" />
+    <Folder Include="app\tenant\components\" />
+    <Folder Include="app\tenant\services\" />
+    <Folder Include="app\tenant\templates\" />
+    <Folder Include="app\user\components\changePasswordForm\interfaces\" />
+    <Folder Include="app\user\components\preferences\interfaces\" />
+    <Folder Include="app\user\components\signinForm\interfaces\" />
+    <Folder Include="app\user\components\userDropDownList\interfaces\" />
+    <Folder Include="app\user\components\userList\interfaces\" />
+    <Folder Include="Server\Api\vNext\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63813</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:63814/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

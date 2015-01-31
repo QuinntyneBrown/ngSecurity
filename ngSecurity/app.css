@@ -1,0 +1,217 @@
+#core-identity-menu { 
+    position:relative;
+    float:left;
+}
+
+#core-identity-menu ul { 
+    display:inline;
+    text-decoration:none;
+    list-style: outside none none;
+}
+
+#core-identity-menu ul li { 
+    position:relative;
+}
+.work-spinner {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  transition: all 1s linear;
+}
+.work-spinner img {
+  margin: 0 auto;
+}
+.work-spinner i {
+  margin: 0 auto;
+  font-size: 10em;
+  color: black;
+}
+/*# sourceMappingURL=workSpinner.css.map */
+.work-spinner{position:fixed;top:0;left:0;width:100%;height:100%;display:-ms-flex;display:-webkit-flex;display:flex;-ms-flex-align:center;-webkit-align-items:center;-webkit-box-align:center;align-items:center;text-align:center;background-color:rgba(0,0,0,.2);z-index:9999;transition:all 1s linear}.work-spinner img{margin:0 auto}.work-spinner i{margin:0 auto;font-size:10em;color:#000}
+html,
+body,
+#container,
+#page {
+  font-family: 'Segoe UI', Arial;
+  width: 100%;
+  height: 100%;
+  font-size: 13px;
+  font-weight: 100;
+  color: #666666;
+  min-width: 480px;
+}
+header {
+  margin-bottom: 54px;
+}
+header h1 {
+  font-size: 72px;
+  font-weight: 100;
+  line-height: 108px;
+}
+/*# sourceMappingURL=app.css.map */
+html,body,#container,#page{font-family:'Segoe UI',Arial;width:100%;height:100%;font-size:13px;font-weight:100;color:#666;min-width:480px}header{margin-bottom:54px}header h1{font-size:72px;font-weight:100;line-height:108px}
+body,
+html {
+  position: relative;
+}
+body.inViewTransition {
+  overflow: hidden;
+}
+/*# sourceMappingURL=body.css.map */
+body,html{position:relative}body.inViewTransition{overflow:hidden}
+button.close {
+  background: none repeat scroll 0 0 transparent;
+  border: 0 none;
+  cursor: pointer;
+  padding: 0;
+}
+.close {
+  color: #000000;
+  float: right;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  opacity: 0.2;
+  text-shadow: 0 1px 0 #ffffff;
+}
+button {
+  outline: 0 none !important;
+}
+/*# sourceMappingURL=button.css.map */
+button.close{background:none repeat scroll 0 0 transparent;border:0 none;cursor:pointer;padding:0}.close{color:#000;float:right;font-size:21px;font-weight:bold;line-height:1;opacity:.2;text-shadow:0 1px 0 #fff}button{outline:0 none !important}
+.clear {
+  clear: both;
+}
+/*# sourceMappingURL=clear.css.map */
+.clear{clear:both}
+#container {
+  position: relative;
+}
+#view-container {
+  position: relative;
+  margin: 0 auto;
+}
+.admin #view-container {
+  position: relative;
+  width: 100%;
+  margin: 0;
+}
+/*# sourceMappingURL=container.css.map */
+#container{position:relative}#view-container{position:relative;margin:0 auto}.admin #view-container{position:relative;width:100%;margin:0}
+input,
+.form-control {
+  box-shadow: none;
+}
+textarea.form-control {
+  height: auto;
+}
+.form-control {
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #dfd7ca;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  color: #3e3f3a;
+  display: block;
+  font-size: 14px;
+  height: 49px;
+  line-height: 2;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  padding: 10px;
+  width: 826px;
+}
+input,
+.form-control {
+  box-shadow: none;
+}
+/*# sourceMappingURL=form-control.css.map */
+input,.form-control{box-shadow:none}textarea.form-control{height:auto}.form-control{background-color:#fff;background-image:none;border:1px solid #dfd7ca;border-radius:4px;box-shadow:0 1px 1px rgba(0,0,0,.075) inset;color:#3e3f3a;display:block;font-size:14px;height:49px;line-height:2;transition:border-color .15s ease-in-out 0s,box-shadow .15s ease-in-out 0s;padding:10px;width:826px}input,.form-control{box-shadow:none}
+.visible-xs,
+.visible-sm,
+.visible-md,
+.visible-lg {
+  display: none !important;
+}
+@media (max-width: 767px) {
+  .visible-xs {
+    display: block !important;
+  }
+  .hidden-xs {
+    display: none !important;
+  }
+}
+/*# sourceMappingURL=visible.css.map */
+.visible-xs,.visible-sm,.visible-md,.visible-lg{display:none !important}@media(max-width:767px){.visible-xs{display:block !important}.hidden-xs{display:none !important}}
+.right {
+  float: right;
+}
+/*# sourceMappingURL=right.css.map */
+.right{float:right}
+.two-columns .sub-view {
+  postion: relative;
+  float: left;
+}
+.two-columns .sub-menu {
+  width: 250px;
+  postion: relative;
+  float: left;
+}
+.two-columns :after {
+  clear: both;
+  content: "";
+}
+/*# sourceMappingURL=two-columns.css.map */
+.two-columns .sub-view{postion:relative;float:left}.two-columns .sub-menu{width:250px;postion:relative;float:left}.two-columns :after{clear:both;content:""}
+#dashboard-header ul li {
+  display: inline-block;
+  padding: 5px;
+}
+/*# sourceMappingURL=dashboardHeader.css.map */
+#dashboard-header ul li{display:inline-block;padding:5px}
+#security-menu {
+  position: relative;
+  float: left;
+  width: 250px;
+}
+/*# sourceMappingURL=securityMenu.css.map */
+#security-menu{position:relative;float:left;width:250px}
+#security-sub-view {
+  position: relative;
+  float: left;
+}
+/*# sourceMappingURL=security-sub-view.css.map */
+#security-sub-view{position:relative;float:left}
+.running-server-process-list-item {
+  postion: relative;
+  float: left;
+  padding: 10px;
+  margin: 20px;
+  width: 300px;
+  height: 150px;
+}
+.running-server-process-list-item.completed {
+  background-color: #02b0ed;
+}
+.running-server-process-list-item.in-progress {
+  background-color: #c9fedf;
+}
+.running-server-process-list-item.started {
+  background-color: #ff0000;
+}
+.running-server-process-list-item h1 {
+  margin-bottom: 5px;
+}
+/*# sourceMappingURL=runningServerProcessListItem.css.map */
+.running-server-process-list-item{postion:relative;float:left;padding:10px;margin:20px;width:300px;height:150px}.running-server-process-list-item.completed{background-color:#02b0ed}.running-server-process-list-item.in-progress{background-color:#c9fedf}.running-server-process-list-item.started{background-color:red}.running-server-process-list-item h1{margin-bottom:5px}
