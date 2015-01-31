@@ -24,6 +24,7 @@ namespace ngSecurity.Server.Api.v1
             this.securityService = securityService;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IHttpActionResult> GetCurrentUser()
         {

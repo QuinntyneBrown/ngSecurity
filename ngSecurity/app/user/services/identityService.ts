@@ -24,19 +24,11 @@
 
             return $http.post("/login", data, configuration)
                 .then((results) => {
-                return results;
+                return results.data.access_token;
             }).catch((error) => {
-                console.log(error);
+
             });
-            //return $http({
-            //    method: "POST",
-            //    url: "/token",
-            //    data: JSON.stringify(params.model),
-            //}).then((results) => {
-            //    return results.data.token;
-            //}).catch((error) => {
-            //    console.log(error);
-            //});
+
         };
 
         self.register = (params) => {

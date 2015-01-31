@@ -5,7 +5,7 @@ var CoreModule;
         var self = this;
         self.request = function (config) {
             if (token.get()) {
-                config.headers["Authorization"] = "basic " + token.get();
+                config.headers.Authorization = "Bearer " + token.get();
             }
             return config;
         };

@@ -16,19 +16,9 @@ var UserModule;
                 grant_type: "password"
             });
             return $http.post("/login", data, configuration).then(function (results) {
-                return results;
+                return results.data.access_token;
             }).catch(function (error) {
-                console.log(error);
             });
-            //return $http({
-            //    method: "POST",
-            //    url: "/token",
-            //    data: JSON.stringify(params.model),
-            //}).then((results) => {
-            //    return results.data.token;
-            //}).catch((error) => {
-            //    console.log(error);
-            //});
         };
         self.register = function (params) {
             return $http({ method: "POST", url: "api/identity/register", data: JSON.stringify(params.model) }).then(function (results) {
