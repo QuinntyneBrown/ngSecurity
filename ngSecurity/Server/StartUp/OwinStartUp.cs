@@ -12,7 +12,6 @@ namespace ngSecurity.Server.StartUp
         {
             app.UseOAuthAuthorizationServer(new OAuthOptions());
             app.UseJwtBearerAuthentication(new JwtOptions());
-
             app.UseCors(CorsOptions.AllowAll);
             app.MapSignalR();
         }

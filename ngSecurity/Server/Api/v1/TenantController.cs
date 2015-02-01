@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using ngSecurity.Server.Data.Contracts;
-using ngSecurity.Server.Services.Contracts;
+﻿using ngSecurity.Server.Data.Contracts;
+using ngSecurity.Server.Dto.v1;
 using ngSecurity.Server.Models;
+using ngSecurity.Server.Services.Contracts;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace ngSecurity.Server.Api.v1
 {

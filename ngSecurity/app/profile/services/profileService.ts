@@ -119,7 +119,7 @@
     }
 
 
-    angular.module("role").service(ProfileService.serviceId,($http: ng.IHttpService, $q: ng.IQService, $rootScope: ICoreRootScope, configurationService: any) => new ProfileService($http, $q, $rootScope, configurationService));
+    angular.module("profile").service(ProfileService.serviceId,($http: ng.IHttpService, $q: ng.IQService, $rootScope: ICoreRootScope, configurationService: any) => new ProfileService($http, $q, $rootScope, configurationService));
 
 
 }

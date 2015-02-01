@@ -96,6 +96,6 @@ var ProfileModule;
         return ProfileService;
     })();
     ProfileModule.ProfileService = ProfileService;
-    angular.module("role").service(ProfileService.serviceId, function ($http, $q, $rootScope, configurationService) { return new ProfileService($http, $q, $rootScope, configurationService); });
+    angular.module("profile").service(ProfileService.serviceId, function ($http, $q, $rootScope, configurationService) { return new ProfileService($http, $q, $rootScope, configurationService); });
 })(ProfileModule || (ProfileModule = {}));
 //# sourceMappingURL=profileService.js.map

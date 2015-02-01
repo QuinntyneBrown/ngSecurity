@@ -17,12 +17,12 @@ var ProfileModule;
                 scope.tryToSave = function (form) {
                     if (scope.vm.entity.id) {
                         return _this.profileService.update({ entity: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/role/list");
+                            _this.$location.path("/profile/list");
                         });
                     }
                     else {
                         return _this.profileService.add({ entity: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/role/list");
+                            _this.$location.path("/profile/list");
                         });
                     }
                 };

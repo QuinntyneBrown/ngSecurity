@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin.Security.OAuth;
 using ngSecurity.Server.Dto.v1;
+using ngSecurity.Server.Models;
 using ngSecurity.Server.Services.Contracts;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,14 @@ namespace ngSecurity.Server.Auth
         public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var identity = new ClaimsIdentity("ngsecurity");
+
             var username = context.OwinContext.Get<string>("ngsecurity:username");
-            identity.AddClaim(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name", username));
-            identity.AddClaim(new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", "user"));
+
+            foreach (var claim in this.identityService.GetClaimsForUser(username))
+            {
+                identity.AddClaim(claim);
+            }
+            
             context.Validated(identity);
             return Task.FromResult(0);
         }

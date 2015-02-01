@@ -14,7 +14,6 @@ angular.module("security").run(["$templateCache", ($templateCache) => {
 		"    "+
 		"    <entity-admin-menu entity-name-pluralized=\"Tenants\" entity-name=\"Tenant\"></entity-admin-menu>"+
 		""+
-		""+
 		"</div>"
 	);
 }]);

@@ -1,13 +1,10 @@
-﻿using System.Data.Entity;
-using ngSecurity.Server.Data.Contracts;
+﻿using ngSecurity.Server.Data.Contracts;
 using ngSecurity.Server.Dto.v1;
 using ngSecurity.Server.Models;
 using ngSecurity.Server.Services.Contracts;
-using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 

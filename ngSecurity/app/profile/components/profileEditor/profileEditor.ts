@@ -31,12 +31,12 @@ module ProfileModule {
                 if (scope.vm.entity.id) {
 
                     return this.profileService.update({ entity: scope.vm.entity }).then((results) => {
-                        this.$location.path("/role/list");
+                        this.$location.path("/profile/list");
                     });
                 }
                 else {
                     return this.profileService.add({ entity: scope.vm.entity }).then((results) => {
-                        this.$location.path("/role/list");
+                        this.$location.path("/profile/list");
                     });
                 }
 

@@ -119,7 +119,7 @@
     }
 
 
-    angular.module("role").service(AccountService.serviceId,($http: ng.IHttpService, $q: ng.IQService, $rootScope: ICoreRootScope, configurationService: any) => new AccountService($http, $q, $rootScope, configurationService));
+    angular.module("account").service(AccountService.serviceId,($http: ng.IHttpService, $q: ng.IQService, $rootScope: ICoreRootScope, configurationService: any) => new AccountService($http, $q, $rootScope, configurationService));
 
 
 } 

@@ -16,20 +16,36 @@ var AccountModule;
 (function (AccountModule) {
     "use strict";
     var AccountEditor = (function () {
-        function AccountEditor(accountService) {
+        function AccountEditor($location, accountService) {
+            var _this = this;
+            this.$location = $location;
             this.accountService = accountService;
-            this.$inject = ["accountService"];
+            this.$inject = ["$location", "accountService"];
             this.restrict = "E";
             this.replace = true;
             this.scope = {};
             this.templateUrl = "/app/account/components/accountEditor/accountEditor.html";
             this.link = function (scope, element, attributes) {
+                scope.vm = {};
+                scope.vm.entity = scope.entity;
+                scope.tryToSave = function (form) {
+                    if (scope.vm.entity.id) {
+                        return _this.accountService.update({ entity: scope.vm.entity }).then(function (results) {
+                            _this.$location.path("/account/list");
+                        });
+                    }
+                    else {
+                        return _this.accountService.add({ entity: scope.vm.entity }).then(function (results) {
+                            _this.$location.path("/account/list");
+                        });
+                    }
+                };
             };
         }
         AccountEditor.componentId = "accountEditor";
         return AccountEditor;
     })();
-    angular.module("account").directive(AccountEditor.componentId, function (accountService) { return new AccountEditor(accountService); });
+    angular.module("account").directive(AccountEditor.componentId, function ($location, accountService) { return new AccountEditor($location, accountService); });
 })(AccountModule || (AccountModule = {}));
 //# sourceMappingURL=accountEditor.js.map
 var AccountModule;
@@ -166,7 +182,7 @@ var AccountModule;
         return AccountService;
     })();
     AccountModule.AccountService = AccountService;
-    angular.module("role").service(AccountService.serviceId, function ($http, $q, $rootScope, configurationService) { return new AccountService($http, $q, $rootScope, configurationService); });
+    angular.module("account").service(AccountService.serviceId, function ($http, $q, $rootScope, configurationService) { return new AccountService($http, $q, $rootScope, configurationService); });
 })(AccountModule || (AccountModule = {}));
 //# sourceMappingURL=accountService.js.map
 var CommonModule;
@@ -781,12 +797,12 @@ var ProfileModule;
                 scope.tryToSave = function (form) {
                     if (scope.vm.entity.id) {
                         return _this.profileService.update({ entity: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/role/list");
+                            _this.$location.path("/profile/list");
                         });
                     }
                     else {
                         return _this.profileService.add({ entity: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/role/list");
+                            _this.$location.path("/profile/list");
                         });
                     }
                 };
@@ -932,7 +948,7 @@ var ProfileModule;
         return ProfileService;
     })();
     ProfileModule.ProfileService = ProfileService;
-    angular.module("role").service(ProfileService.serviceId, function ($http, $q, $rootScope, configurationService) { return new ProfileService($http, $q, $rootScope, configurationService); });
+    angular.module("profile").service(ProfileService.serviceId, function ($http, $q, $rootScope, configurationService) { return new ProfileService($http, $q, $rootScope, configurationService); });
 })(ProfileModule || (ProfileModule = {}));
 //# sourceMappingURL=profileService.js.map
 var RoleModule;
@@ -1649,20 +1665,36 @@ var TenantModule;
 (function (TenantModule) {
     "use strict";
     var TenantEditor = (function () {
-        function TenantEditor(tenantService) {
+        function TenantEditor($location, tenantService) {
+            var _this = this;
+            this.$location = $location;
             this.tenantService = tenantService;
-            this.$inject = ["tenantService"];
+            this.$inject = ["$location", "tenantService"];
             this.restrict = "E";
             this.replace = true;
             this.scope = {};
             this.templateUrl = "/app/tenant/components/tenantEditor/tenantEditor.html";
             this.link = function (scope, element, attributes) {
+                scope.vm = {};
+                scope.vm.entity = scope.entity;
+                scope.tryToSave = function (form) {
+                    if (scope.vm.entity.id) {
+                        return _this.tenantService.update({ entity: scope.vm.entity }).then(function (results) {
+                            _this.$location.path("/tenant/list");
+                        });
+                    }
+                    else {
+                        return _this.tenantService.add({ entity: scope.vm.entity }).then(function (results) {
+                            _this.$location.path("/tenant/list");
+                        });
+                    }
+                };
             };
         }
         TenantEditor.componentId = "tenantEditor";
         return TenantEditor;
     })();
-    angular.module("tenant").directive(TenantEditor.componentId, function (tenantService) { return new TenantEditor(tenantService); });
+    angular.module("tenant").directive(TenantEditor.componentId, function ($location, tenantService) { return new TenantEditor($location, tenantService); });
 })(TenantModule || (TenantModule = {}));
 //# sourceMappingURL=tenantEditor.js.map
 var TenantModule;

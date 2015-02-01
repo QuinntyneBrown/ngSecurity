@@ -1,8 +1,6 @@
 ﻿using ngSecurity.Server.Dto.v1;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Security.Claims;
 
 namespace ngSecurity.Server.Services.Contracts
 {
@@ -13,5 +11,7 @@ namespace ngSecurity.Server.Services.Contracts
         TokenDto TryToRegister(RegistrationRequestDto registrationRequestDto);
 
         bool AuthenticateUser(string username, string password);
+
+        ICollection<Claim> GetClaimsForUser(string username);
     }
 }

@@ -14,7 +14,7 @@ angular.module("common").run(["$templateCache", ($templateCache) => {
 		""+
 		"        <li><a>Hi {{ session.getCurrentUser().username }}!</a></li>"+
 		""+
-		"        <li><a class=\"link\" data-ng-click=\"session.signOut()\">SIGN OUT</a></li>"+
+		"        <li><a class=\"link\" href=\"#/signin\">SIGN OUT</a></li>"+
 		""+
 		"    </ul>"+
 		""+

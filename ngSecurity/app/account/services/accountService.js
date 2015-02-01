@@ -96,6 +96,6 @@ var AccountModule;
         return AccountService;
     })();
     AccountModule.AccountService = AccountService;
-    angular.module("role").service(AccountService.serviceId, function ($http, $q, $rootScope, configurationService) { return new AccountService($http, $q, $rootScope, configurationService); });
+    angular.module("account").service(AccountService.serviceId, function ($http, $q, $rootScope, configurationService) { return new AccountService($http, $q, $rootScope, configurationService); });
 })(AccountModule || (AccountModule = {}));
 //# sourceMappingURL=accountService.js.map

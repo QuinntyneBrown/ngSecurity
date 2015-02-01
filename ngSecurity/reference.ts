@@ -1,14 +1,13 @@
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\account\module.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\account\components\accountEditor\accountEditor.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\account\components\accountEditor\accountEditor.ts'/>
-/// <reference path='C:\projects\ngSecurity\ngSecurity\app\account\components\accountEditor\_Chutzpah.18a7afe02abc88c25bde43b3e7d75ac7.test.html.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\account\components\accountList\accountList.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\account\components\accountList\accountList.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\account\interfaces\IAccountService.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\account\services\accountService.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\module.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\entityAdminMenu\entityAdminMenu.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\entityAdminMenu\entityAdminMenu.ts'/>
-/// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\entityAdminMenu\_Chutzpah.33798c2dac8baa759d949f7fb55c7ebc.test.html.ts'/>
-/// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\entityAdminMenu\_Chutzpah.3b00e6e6a8ba52b2b45b8142343a8509.test.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\identityMenu\identityMenu.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\identityMenu\identityMenu.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\multiEntitySelect\multiEntitySelect.html.ts'/>
@@ -39,7 +38,9 @@
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\group\interfaces\IGroupService.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\group\services\groupService.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\profile\module.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\profile\components\profileEditor\profileEditor.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\profile\components\profileEditor\profileEditor.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\profile\components\profileList\profileList.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\profile\components\profileList\profileList.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\profile\interfaces\IProfileService.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\profile\services\profileService.ts'/>
@@ -74,8 +75,9 @@
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\session\properties\currentUser.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\session\properties\token.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\tenant\module.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\tenant\components\tenantEditor\tenantEditor.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\tenant\components\tenantEditor\tenantEditor.ts'/>
-/// <reference path='C:\projects\ngSecurity\ngSecurity\app\tenant\components\tenantEditor\_Chutzpah.2da11a4e4ea14ae7bdcd6b6ed551cbef.test.html.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\tenant\components\tenantList\tenantList.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\tenant\components\tenantList\tenantList.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\tenant\interfaces\ITenantService.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\tenant\services\tenantService.ts'/>
