@@ -12,6 +12,163 @@ var AccountModule;
     }
 })(AccountModule || (AccountModule = {}));
 //# sourceMappingURL=module.js.map
+var AccountModule;
+(function (AccountModule) {
+    "use strict";
+    var AccountEditor = (function () {
+        function AccountEditor(accountService) {
+            this.accountService = accountService;
+            this.$inject = ["accountService"];
+            this.restrict = "E";
+            this.replace = true;
+            this.scope = {};
+            this.templateUrl = "/app/account/components/accountEditor/accountEditor.html";
+            this.link = function (scope, element, attributes) {
+            };
+        }
+        AccountEditor.componentId = "accountEditor";
+        return AccountEditor;
+    })();
+    angular.module("account").directive(AccountEditor.componentId, function (accountService) { return new AccountEditor(accountService); });
+})(AccountModule || (AccountModule = {}));
+//# sourceMappingURL=accountEditor.js.map
+var AccountModule;
+(function (AccountModule) {
+    "use strict";
+    var AccountList = (function () {
+        function AccountList(accountService) {
+            var _this = this;
+            this.accountService = accountService;
+            this.$inject = ["accountService"];
+            this.restrict = "E";
+            this.replace = true;
+            this.scope = {};
+            this.templateUrl = "/app/account/components/accountList/accountList.html";
+            this.link = function (scope, element, attributes) {
+                scope.vm = {};
+                scope.vm.remove = function (entity) {
+                    return _this.accountService.remove({ id: entity.id }).then(function () {
+                        for (var i = 0; i < scope.vm.entities.length; i++) {
+                            if (scope.vm.entities[i].id == entity.id) {
+                                scope.vm.entities.splice(i, 1);
+                            }
+                        }
+                    }).catch(function (error) {
+                    });
+                };
+                return _this.accountService.getAll().then(function (results) {
+                    return scope.vm.entities = results;
+                });
+            };
+        }
+        AccountList.componentId = "accountList";
+        return AccountList;
+    })();
+    angular.module("account").directive(AccountList.componentId, function (accountService) { return new AccountList(accountService); });
+})(AccountModule || (AccountModule = {}));
+//# sourceMappingURL=accountList.js.map
+//# sourceMappingURL=IAccountService.js.map
+var AccountModule;
+(function (AccountModule) {
+    "use strict";
+    var AccountService = (function () {
+        function AccountService($http, $q, $rootScope, configurationService) {
+            var _this = this;
+            this.$http = $http;
+            this.$q = $q;
+            this.$rootScope = $rootScope;
+            this.configurationService = configurationService;
+            this.dataStore = {
+                getAll: null,
+                getById: null,
+                pages: []
+            };
+            this.clearDataStore = function () {
+                _this.dataStore = {
+                    getAll: null,
+                    getById: null,
+                    pages: []
+                };
+            };
+            this.getBaseUri = function () {
+                if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
+                    return "api/" + _this.$rootScope.configuration.apiVersion + "/role/";
+                }
+                else {
+                    return "api/role/";
+                }
+            };
+            this.add = function (options) {
+                var deferred = _this.$q.defer();
+                _this.$http({ method: "POST", url: _this.getBaseUri() + "add", data: options.entity }).then(function (results) {
+                    deferred.resolve(results);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.remove = function (options) {
+                var deferred = _this.$q.defer();
+                _this.$http({ method: "DELETE", url: _this.getBaseUri() + "remove?id=" + options.id }).then(function (results) {
+                    deferred.resolve(results);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.getAll = function () {
+                var deferred = _this.$q.defer();
+                if (_this.dataStore.getAll) {
+                    deferred.resolve(_this.dataStore.getAll);
+                    return deferred.promise;
+                }
+                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                    _this.dataStore.getAll = results.data;
+                    deferred.resolve(results.data);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.getById = function (id) {
+                var deferred = _this.$q.defer();
+                if (_this.dataStore.getById && _this.dataStore.getById.id == id) {
+                    deferred.resolve(_this.dataStore.getById);
+                    return deferred.promise;
+                }
+                _this.$http({ method: "GET", url: _this.getBaseUri() + "getbyid?id=" + id }).then(function (results) {
+                    deferred.resolve(results);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.getPage = function (offset, setSize) {
+                var deferred = _this.$q.defer();
+                if (_this.dataStore.getAll) {
+                    deferred.resolve(_this.dataStore.getAll);
+                    return deferred.promise;
+                }
+                ;
+                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                    deferred.resolve(results);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.$rootScope.$on("$locationChangeStart", function () {
+                _this.clearDataStore();
+            });
+        }
+        AccountService.serviceId = "roleService";
+        AccountService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
+        return AccountService;
+    })();
+    AccountModule.AccountService = AccountService;
+    angular.module("role").service(AccountService.serviceId, function ($http, $q, $rootScope, configurationService) { return new AccountService($http, $q, $rootScope, configurationService); });
+})(AccountModule || (AccountModule = {}));
+//# sourceMappingURL=accountService.js.map
 var CommonModule;
 (function (CommonModule) {
     var app = angular.module("common", ["configuration", "core", "session"]);
@@ -605,6 +762,179 @@ var ProfileModule;
     }
 })(ProfileModule || (ProfileModule = {}));
 //# sourceMappingURL=module.js.map
+var ProfileModule;
+(function (ProfileModule) {
+    "use strict";
+    var ProfileEditor = (function () {
+        function ProfileEditor($location, profileService) {
+            var _this = this;
+            this.$location = $location;
+            this.profileService = profileService;
+            this.$inject = ["$location", "profileService"];
+            this.restrict = "E";
+            this.replace = true;
+            this.scope = {};
+            this.templateUrl = "/app/profile/components/profileEditor/profileEditor.html";
+            this.link = function (scope, element, attributes) {
+                scope.vm = {};
+                scope.vm.entity = scope.entity;
+                scope.tryToSave = function (form) {
+                    if (scope.vm.entity.id) {
+                        return _this.profileService.update({ entity: scope.vm.entity }).then(function (results) {
+                            _this.$location.path("/role/list");
+                        });
+                    }
+                    else {
+                        return _this.profileService.add({ entity: scope.vm.entity }).then(function (results) {
+                            _this.$location.path("/role/list");
+                        });
+                    }
+                };
+            };
+        }
+        ProfileEditor.componentId = "profileEditor";
+        return ProfileEditor;
+    })();
+    angular.module("profile").directive(ProfileEditor.componentId, function ($location, profileService) { return new ProfileEditor($location, profileService); });
+})(ProfileModule || (ProfileModule = {}));
+//# sourceMappingURL=profileEditor.js.map
+var ProfileModule;
+(function (ProfileModule) {
+    "use strict";
+    var ProfileList = (function () {
+        function ProfileList(profileService) {
+            var _this = this;
+            this.profileService = profileService;
+            this.$inject = ["profileService"];
+            this.restrict = "E";
+            this.replace = true;
+            this.scope = {};
+            this.templateUrl = "/app/profile/components/profileList/profileList.html";
+            this.link = function (scope, element, attributes) {
+                scope.vm = {};
+                scope.vm.remove = function (entity) {
+                    return _this.profileService.remove({ id: entity.id }).then(function () {
+                        for (var i = 0; i < scope.vm.entities.length; i++) {
+                            if (scope.vm.entities[i].id == entity.id) {
+                                scope.vm.entities.splice(i, 1);
+                            }
+                        }
+                    }).catch(function (error) {
+                    });
+                };
+                return _this.profileService.getAll().then(function (results) {
+                    return scope.vm.entities = results;
+                });
+            };
+        }
+        ProfileList.componentId = "profileList";
+        return ProfileList;
+    })();
+    angular.module("profile").directive(ProfileList.componentId, function (profileService) { return new ProfileList(profileService); });
+})(ProfileModule || (ProfileModule = {}));
+//# sourceMappingURL=profileList.js.map
+//# sourceMappingURL=IProfileService.js.map
+var ProfileModule;
+(function (ProfileModule) {
+    "use strict";
+    var ProfileService = (function () {
+        function ProfileService($http, $q, $rootScope, configurationService) {
+            var _this = this;
+            this.$http = $http;
+            this.$q = $q;
+            this.$rootScope = $rootScope;
+            this.configurationService = configurationService;
+            this.dataStore = {
+                getAll: null,
+                getById: null,
+                pages: []
+            };
+            this.clearDataStore = function () {
+                _this.dataStore = {
+                    getAll: null,
+                    getById: null,
+                    pages: []
+                };
+            };
+            this.getBaseUri = function () {
+                if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
+                    return "api/" + _this.$rootScope.configuration.apiVersion + "/role/";
+                }
+                else {
+                    return "api/role/";
+                }
+            };
+            this.add = function (options) {
+                var deferred = _this.$q.defer();
+                _this.$http({ method: "POST", url: _this.getBaseUri() + "add", data: options.entity }).then(function (results) {
+                    deferred.resolve(results);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.remove = function (options) {
+                var deferred = _this.$q.defer();
+                _this.$http({ method: "DELETE", url: _this.getBaseUri() + "remove?id=" + options.id }).then(function (results) {
+                    deferred.resolve(results);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.getAll = function () {
+                var deferred = _this.$q.defer();
+                if (_this.dataStore.getAll) {
+                    deferred.resolve(_this.dataStore.getAll);
+                    return deferred.promise;
+                }
+                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                    _this.dataStore.getAll = results.data;
+                    deferred.resolve(results.data);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.getById = function (id) {
+                var deferred = _this.$q.defer();
+                if (_this.dataStore.getById && _this.dataStore.getById.id == id) {
+                    deferred.resolve(_this.dataStore.getById);
+                    return deferred.promise;
+                }
+                _this.$http({ method: "GET", url: _this.getBaseUri() + "getbyid?id=" + id }).then(function (results) {
+                    deferred.resolve(results);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.getPage = function (offset, setSize) {
+                var deferred = _this.$q.defer();
+                if (_this.dataStore.getAll) {
+                    deferred.resolve(_this.dataStore.getAll);
+                    return deferred.promise;
+                }
+                ;
+                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                    deferred.resolve(results);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.$rootScope.$on("$locationChangeStart", function () {
+                _this.clearDataStore();
+            });
+        }
+        ProfileService.serviceId = "roleService";
+        ProfileService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
+        return ProfileService;
+    })();
+    ProfileModule.ProfileService = ProfileService;
+    angular.module("role").service(ProfileService.serviceId, function ($http, $q, $rootScope, configurationService) { return new ProfileService($http, $q, $rootScope, configurationService); });
+})(ProfileModule || (ProfileModule = {}));
+//# sourceMappingURL=profileService.js.map
 var RoleModule;
 (function (RoleModule) {
     angular.module("role", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
@@ -1315,6 +1645,163 @@ var TenantModule;
     }
 })(TenantModule || (TenantModule = {}));
 //# sourceMappingURL=module.js.map
+var TenantModule;
+(function (TenantModule) {
+    "use strict";
+    var TenantEditor = (function () {
+        function TenantEditor(tenantService) {
+            this.tenantService = tenantService;
+            this.$inject = ["tenantService"];
+            this.restrict = "E";
+            this.replace = true;
+            this.scope = {};
+            this.templateUrl = "/app/tenant/components/tenantEditor/tenantEditor.html";
+            this.link = function (scope, element, attributes) {
+            };
+        }
+        TenantEditor.componentId = "tenantEditor";
+        return TenantEditor;
+    })();
+    angular.module("tenant").directive(TenantEditor.componentId, function (tenantService) { return new TenantEditor(tenantService); });
+})(TenantModule || (TenantModule = {}));
+//# sourceMappingURL=tenantEditor.js.map
+var TenantModule;
+(function (TenantModule) {
+    "use strict";
+    var TenantList = (function () {
+        function TenantList(tenantService) {
+            var _this = this;
+            this.tenantService = tenantService;
+            this.$inject = ["tenantService"];
+            this.restrict = "E";
+            this.replace = true;
+            this.scope = {};
+            this.templateUrl = "/app/tenant/components/tenantList/tenantList.html";
+            this.link = function (scope, element, attributes) {
+                scope.vm = {};
+                scope.vm.remove = function (entity) {
+                    return _this.tenantService.remove({ id: entity.id }).then(function () {
+                        for (var i = 0; i < scope.vm.entities.length; i++) {
+                            if (scope.vm.entities[i].id == entity.id) {
+                                scope.vm.entities.splice(i, 1);
+                            }
+                        }
+                    }).catch(function (error) {
+                    });
+                };
+                return _this.tenantService.getAll().then(function (results) {
+                    return scope.vm.entities = results;
+                });
+            };
+        }
+        TenantList.componentId = "tenantList";
+        return TenantList;
+    })();
+    angular.module("tenant").directive(TenantList.componentId, function (tenantService) { return new TenantList(tenantService); });
+})(TenantModule || (TenantModule = {}));
+//# sourceMappingURL=tenantList.js.map
+//# sourceMappingURL=ITenantService.js.map
+var TenantModule;
+(function (TenantModule) {
+    "use strict";
+    var TenantService = (function () {
+        function TenantService($http, $q, $rootScope, configurationService) {
+            var _this = this;
+            this.$http = $http;
+            this.$q = $q;
+            this.$rootScope = $rootScope;
+            this.configurationService = configurationService;
+            this.dataStore = {
+                getAll: null,
+                getById: null,
+                pages: []
+            };
+            this.clearDataStore = function () {
+                _this.dataStore = {
+                    getAll: null,
+                    getById: null,
+                    pages: []
+                };
+            };
+            this.getBaseUri = function () {
+                if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
+                    return "api/" + _this.$rootScope.configuration.apiVersion + "/tenant/";
+                }
+                else {
+                    return "api/tenant/";
+                }
+            };
+            this.add = function (options) {
+                var deferred = _this.$q.defer();
+                _this.$http({ method: "POST", url: _this.getBaseUri() + "add", data: options.entity }).then(function (results) {
+                    deferred.resolve(results);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.remove = function (options) {
+                var deferred = _this.$q.defer();
+                _this.$http({ method: "DELETE", url: _this.getBaseUri() + "remove?id=" + options.id }).then(function (results) {
+                    deferred.resolve(results);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.getAll = function () {
+                var deferred = _this.$q.defer();
+                if (_this.dataStore.getAll) {
+                    deferred.resolve(_this.dataStore.getAll);
+                    return deferred.promise;
+                }
+                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                    _this.dataStore.getAll = results.data;
+                    deferred.resolve(results.data);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.getById = function (id) {
+                var deferred = _this.$q.defer();
+                if (_this.dataStore.getById && _this.dataStore.getById.id == id) {
+                    deferred.resolve(_this.dataStore.getById);
+                    return deferred.promise;
+                }
+                _this.$http({ method: "GET", url: _this.getBaseUri() + "getbyid?id=" + id }).then(function (results) {
+                    deferred.resolve(results);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.getPage = function (offset, setSize) {
+                var deferred = _this.$q.defer();
+                if (_this.dataStore.getAll) {
+                    deferred.resolve(_this.dataStore.getAll);
+                    return deferred.promise;
+                }
+                ;
+                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                    deferred.resolve(results);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            this.$rootScope.$on("$locationChangeStart", function () {
+                _this.clearDataStore();
+            });
+        }
+        TenantService.serviceId = "tenantService";
+        TenantService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
+        return TenantService;
+    })();
+    TenantModule.TenantService = TenantService;
+    angular.module("tenant").service(TenantService.serviceId, function ($http, $q, $rootScope, configurationService) { return new TenantService($http, $q, $rootScope, configurationService); });
+})(TenantModule || (TenantModule = {}));
+//# sourceMappingURL=tenantService.js.map
 var UserModule;
 (function (UserModule) {
     var app = angular.module("user", [

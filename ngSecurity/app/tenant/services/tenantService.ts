@@ -1,10 +1,10 @@
-﻿module RoleModule {
+﻿module TenantModule {
 
     "use strict";
 
-    export class RoleService implements IRoleService {
+    export class TenantService implements ITenantService {
 
-        public static serviceId: string = "roleService";
+        public static serviceId: string = "tenantService";
 
         public static $inject = ["$http", "$q", "$rootScope", "configurationService"];
 
@@ -30,9 +30,9 @@
 
         private getBaseUri = () => {
             if (this.$rootScope.configuration && this.$rootScope.configuration.apiVersion) {
-                return "api/" + this.$rootScope.configuration.apiVersion + "/role/";
+                return "api/" + this.$rootScope.configuration.apiVersion + "/tenant/";
             } else {
-                return "api/role/";
+                return "api/tenant/";
             }
         };
 
@@ -53,7 +53,7 @@
 
             var deferred = this.$q.defer();
 
-            this.$http({ method: "DELETE", url: this.getBaseUri() + "remove?id=" + options.id  }).then((results) => {
+            this.$http({ method: "DELETE", url: this.getBaseUri() + "remove?id=" + options.id }).then((results) => {
                 deferred.resolve(results);
             }).catch((error) => {
                 deferred.reject(error);
@@ -119,7 +119,7 @@
     }
 
 
-    angular.module("role").service(RoleService.serviceId,($http: ng.IHttpService, $q: ng.IQService, $rootScope: ICoreRootScope, configurationService: any) => new RoleService($http, $q, $rootScope, configurationService));
+    angular.module("tenant").service(TenantService.serviceId,($http: ng.IHttpService, $q: ng.IQService, $rootScope: ICoreRootScope, configurationService: any) => new TenantService($http, $q, $rootScope, configurationService));
 
 
 }

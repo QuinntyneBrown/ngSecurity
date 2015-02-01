@@ -1,8 +1,8 @@
-﻿module RoleModule {
+﻿module AccountModule {
 
     "use strict";
 
-    export class RoleService implements IRoleService {
+    export class AccountService implements IAccountService {
 
         public static serviceId: string = "roleService";
 
@@ -53,7 +53,7 @@
 
             var deferred = this.$q.defer();
 
-            this.$http({ method: "DELETE", url: this.getBaseUri() + "remove?id=" + options.id  }).then((results) => {
+            this.$http({ method: "DELETE", url: this.getBaseUri() + "remove?id=" + options.id }).then((results) => {
                 deferred.resolve(results);
             }).catch((error) => {
                 deferred.reject(error);
@@ -119,7 +119,7 @@
     }
 
 
-    angular.module("role").service(RoleService.serviceId,($http: ng.IHttpService, $q: ng.IQService, $rootScope: ICoreRootScope, configurationService: any) => new RoleService($http, $q, $rootScope, configurationService));
+    angular.module("role").service(AccountService.serviceId,($http: ng.IHttpService, $q: ng.IQService, $rootScope: ICoreRootScope, configurationService: any) => new AccountService($http, $q, $rootScope, configurationService));
 
 
-}
+} 

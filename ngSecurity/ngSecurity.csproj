@@ -138,6 +138,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\account\components\accountEditor\accountEditor.html" />
+    <Content Include="app\account\components\accountEditor\accountEditorSpec.js">
+      <DependentUpon>accountEditor.ts</DependentUpon>
+    </Content>
+    <Content Include="app\account\components\accountList\accountList.html" />
+    <Content Include="app\account\components\accountList\accountListSpec.js">
+      <DependentUpon>accountList.ts</DependentUpon>
+    </Content>
     <Content Include="app\common\components\entityAdminMenu\entityAdminMenu.html" />
     <Content Include="app\common\components\entityAdminMenu\entityAdminMenu.js" />
     <Content Include="app\common\components\entityAdminMenu\entityAdminMenu.js.map" />
@@ -293,6 +301,14 @@
     <Content Include="app\group\module.js.map" />
     <Content Include="app\group\services\groupService.js" />
     <Content Include="app\group\services\groupService.js.map" />
+    <Content Include="app\profile\components\profileEditor\profileEditor.html" />
+    <Content Include="app\profile\components\profileEditor\profileEditorSpec.js">
+      <DependentUpon>profileEditor.ts</DependentUpon>
+    </Content>
+    <Content Include="app\profile\components\profileList\profileList.html" />
+    <Content Include="app\profile\components\profileList\profileListSpec.js">
+      <DependentUpon>profileList.ts</DependentUpon>
+    </Content>
     <Content Include="app\security\default.html" />
     <Content Include="app\layout.less" />
     <Content Include="app\media-queries-variables.less" />
@@ -313,9 +329,9 @@
     <Content Include="app\role\components\roleList\roleList.html" />
     <Content Include="app\role\components\roleList\roleList.js" />
     <Content Include="app\role\components\roleList\roleList.js.map" />
-    <Content Include="app\role\components\roleList\roleList.spec.js" />
-    <Content Include="app\role\interfaces\IRoleService.js" />
-    <Content Include="app\role\interfaces\IRoleService.js.map" />
+    <Content Include="app\role\components\roleList\roleListSpec.js">
+      <DependentUpon>roleList.ts</DependentUpon>
+    </Content>
     <Content Include="app\role\services\roleService.js" />
     <Content Include="app\role\services\roleService.js.map" />
     <Content Include="app\security\components\securityMenu\responsive less\securityMenu.css">
@@ -373,6 +389,14 @@
     <Content Include="app\session\interfaces\ISession.js.map" />
     <Content Include="app\session\model\session.js" />
     <Content Include="app\session\model\session.js.map" />
+    <Content Include="app\tenant\components\tenantEditor\tenantEditor.html" />
+    <Content Include="app\tenant\components\tenantEditor\tenantEditorSpec.js">
+      <DependentUpon>tenantEditor.ts</DependentUpon>
+    </Content>
+    <Content Include="app\tenant\components\tenantList\tenantList.html" />
+    <Content Include="app\tenant\components\tenantList\tenantListSpec.js">
+      <DependentUpon>tenantList.ts</DependentUpon>
+    </Content>
     <Content Include="app\user\components\changePasswordForm\changePasswordForm.html" />
     <Content Include="app\user\components\changePasswordForm\changePasswordFormSpec.js">
       <DependentUpon>changePasswordForm.ts</DependentUpon>
@@ -471,6 +495,36 @@
     <Content Include="scripts\jasmine\jasmine_favicon.png" />
     <Content Include="scripts\jquery.signalR-2.2.0.js" />
     <Content Include="scripts\jquery.signalR-2.2.0.min.js" />
+    <Content Include="app\account\components\accountEditor\responsive less\accountEditor.less" />
+    <Content Include="app\account\components\accountEditor\responsive less\accountEditor.lg.less" />
+    <Content Include="app\account\components\accountEditor\responsive less\accountEditor.md.less" />
+    <Content Include="app\account\components\accountEditor\responsive less\accountEditor.sm.less" />
+    <Content Include="app\account\components\accountEditor\responsive less\accountEditor.xs.less" />
+    <Content Include="app\account\components\accountList\responsive less\accountList.less" />
+    <Content Include="app\account\components\accountList\responsive less\accountList.lg.less" />
+    <Content Include="app\account\components\accountList\responsive less\accountList.md.less" />
+    <Content Include="app\account\components\accountList\responsive less\accountList.sm.less" />
+    <Content Include="app\account\components\accountList\responsive less\accountList.xs.less" />
+    <Content Include="app\profile\components\profileEditor\responsive less\profileEditor.less" />
+    <Content Include="app\profile\components\profileEditor\responsive less\profileEditor.lg.less" />
+    <Content Include="app\profile\components\profileEditor\responsive less\profileEditor.md.less" />
+    <Content Include="app\profile\components\profileEditor\responsive less\profileEditor.sm.less" />
+    <Content Include="app\profile\components\profileEditor\responsive less\profileEditor.xs.less" />
+    <Content Include="app\profile\components\profileList\responsive less\profileList.less" />
+    <Content Include="app\profile\components\profileList\responsive less\profileList.lg.less" />
+    <Content Include="app\profile\components\profileList\responsive less\profileList.md.less" />
+    <Content Include="app\profile\components\profileList\responsive less\profileList.sm.less" />
+    <Content Include="app\profile\components\profileList\responsive less\profileList.xs.less" />
+    <Content Include="app\tenant\components\tenantEditor\responsive less\tenantEditor.less" />
+    <Content Include="app\tenant\components\tenantEditor\responsive less\tenantEditor.lg.less" />
+    <Content Include="app\tenant\components\tenantEditor\responsive less\tenantEditor.md.less" />
+    <Content Include="app\tenant\components\tenantEditor\responsive less\tenantEditor.sm.less" />
+    <Content Include="app\tenant\components\tenantEditor\responsive less\tenantEditor.xs.less" />
+    <Content Include="app\tenant\components\tenantList\responsive less\tenantList.less" />
+    <Content Include="app\tenant\components\tenantList\responsive less\tenantList.lg.less" />
+    <Content Include="app\tenant\components\tenantList\responsive less\tenantList.md.less" />
+    <Content Include="app\tenant\components\tenantList\responsive less\tenantList.sm.less" />
+    <Content Include="app\tenant\components\tenantList\responsive less\tenantList.xs.less" />
     <None Include="scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
@@ -501,10 +555,6 @@
     <Compile Include="Server\Auth\OAuthProvider.cs" />
     <Compile Include="Server\Config\AppConfiguration.cs" />
     <Compile Include="Server\Dto\v1\ChangePasswordDto.cs" />
-    <Compile Include="Server\Dto\v1\ConfigurationDto.cs" />
-    <Compile Include="Server\Dto\v1\DevelopmentProgramDto.cs" />
-    <Compile Include="Server\Dto\v1\ModuleDto.cs" />
-    <Compile Include="Server\Dto\v1\PhaseDto.cs" />
     <Compile Include="Server\Dto\v1\RegistrationRequestDto.cs" />
     <Compile Include="Server\Dto\v1\GroupDto.cs" />
     <Compile Include="Server\Dto\v1\RoleDto.cs" />
@@ -566,7 +616,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\account\components\accountEditor\accountEditor.ts" />
+    <TypeScriptCompile Include="app\account\components\accountList\accountList.ts" />
+    <TypeScriptCompile Include="app\account\interfaces\IAccountService.ts" />
     <TypeScriptCompile Include="app\account\module.ts" />
+    <TypeScriptCompile Include="app\account\services\accountService.ts" />
     <TypeScriptCompile Include="app\common\components\entityAdminMenu\entityAdminMenu.ts" />
     <TypeScriptCompile Include="app\common\components\identityMenu\identityMenu.ts" />
     <TypeScriptCompile Include="app\common\components\multiEntitySelect\multiEntitySelect.ts" />
@@ -594,7 +648,11 @@
     <TypeScriptCompile Include="app\group\interfaces\IGroupService.ts" />
     <TypeScriptCompile Include="app\group\module.ts" />
     <TypeScriptCompile Include="app\group\services\groupService.ts" />
+    <TypeScriptCompile Include="app\profile\components\profileEditor\profileEditor.ts" />
+    <TypeScriptCompile Include="app\profile\components\profileList\profileList.ts" />
+    <TypeScriptCompile Include="app\profile\interfaces\IProfileService.ts" />
     <TypeScriptCompile Include="app\profile\module.ts" />
+    <TypeScriptCompile Include="app\profile\services\profileService.ts" />
     <TypeScriptCompile Include="app\role\components\roleEditor\roleEditor.ts" />
     <TypeScriptCompile Include="app\role\components\roleList\roleList.ts" />
     <TypeScriptCompile Include="app\role\interfaces\IRoleService.ts" />
@@ -611,7 +669,11 @@
     <TypeScriptCompile Include="app\session\properties\configuration.ts" />
     <TypeScriptCompile Include="app\session\properties\currentUser.ts" />
     <TypeScriptCompile Include="app\session\properties\token.ts" />
+    <TypeScriptCompile Include="app\tenant\components\tenantEditor\tenantEditor.ts" />
+    <TypeScriptCompile Include="app\tenant\components\tenantList\tenantList.ts" />
+    <TypeScriptCompile Include="app\tenant\interfaces\ITenantService.ts" />
     <TypeScriptCompile Include="app\tenant\module.ts" />
+    <TypeScriptCompile Include="app\tenant\services\tenantService.ts" />
     <TypeScriptCompile Include="app\user\components\changePasswordForm\changePasswordForm.ts" />
     <TypeScriptCompile Include="app\user\components\preferences\preferences.ts" />
     <TypeScriptCompile Include="app\user\components\registrationForm\registrationForm.ts" />
@@ -636,8 +698,8 @@
     <TypeScriptCompile Include="scripts\typings\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\account\components\" />
-    <Folder Include="app\account\services\" />
+    <Folder Include="app\account\components\accountEditor\interfaces\" />
+    <Folder Include="app\account\components\accountList\interfaces\" />
     <Folder Include="app\account\templates\" />
     <Folder Include="app\common\components\entityAdminMenu\interfaces\" />
     <Folder Include="app\common\components\identityMenu\interfaces\" />
@@ -645,16 +707,16 @@
     <Folder Include="app\common\components\workSpinner\interfaces\" />
     <Folder Include="app\group\components\groupEditor\interfaces\" />
     <Folder Include="app\group\components\groupList\interfaces\" />
-    <Folder Include="app\profile\components\" />
-    <Folder Include="app\profile\services\" />
+    <Folder Include="app\profile\components\profileEditor\interfaces\" />
+    <Folder Include="app\profile\components\profileList\interfaces\" />
     <Folder Include="app\profile\templates\" />
     <Folder Include="app\role\components\roleEditor\interfaces\" />
     <Folder Include="app\role\components\roleList\interfaces\" />
     <Folder Include="app\security\components\securityMenu\interfaces\" />
     <Folder Include="app\security\components\userEditor\interfaces\" />
     <Folder Include="app\session\model\interfaces\" />
-    <Folder Include="app\tenant\components\" />
-    <Folder Include="app\tenant\services\" />
+    <Folder Include="app\tenant\components\tenantEditor\interfaces\" />
+    <Folder Include="app\tenant\components\tenantList\interfaces\" />
     <Folder Include="app\tenant\templates\" />
     <Folder Include="app\user\components\changePasswordForm\interfaces\" />
     <Folder Include="app\user\components\preferences\interfaces\" />
