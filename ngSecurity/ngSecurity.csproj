@@ -147,9 +147,9 @@
       <DependentUpon>accountList.ts</DependentUpon>
     </Content>
     <Content Include="app\common\components\entityAdminMenu\entityAdminMenu.html" />
-    <Content Include="app\common\components\entityAdminMenu\entityAdminMenu.js" />
-    <Content Include="app\common\components\entityAdminMenu\entityAdminMenu.js.map" />
-    <Content Include="app\common\components\entityAdminMenu\entityAdminMenuSpec.js" />
+    <Content Include="app\common\components\entityAdminMenu\entityAdminMenuSpec.js">
+      <DependentUpon>entityAdminMenu.ts</DependentUpon>
+    </Content>
     <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.less" />
     <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.lg.less" />
     <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.md.less" />
@@ -157,8 +157,6 @@
     <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.xs.less" />
     <Content Include="app\common\components\identityMenu\identityMenu.css" />
     <Content Include="app\common\components\identityMenu\identityMenu.html" />
-    <Content Include="app\common\components\identityMenu\identityMenu.js" />
-    <Content Include="app\common\components\identityMenu\identityMenu.js.map" />
     <Content Include="app\common\components\multiEntitySelect\multiEntitySelect.html" />
     <Content Include="app\common\components\multiEntitySelect\multiEntitySelect.js" />
     <Content Include="app\common\components\multiEntitySelect\multiEntitySelect.js.map" />
@@ -188,28 +186,8 @@
     <Content Include="app\configuration\services\configurationService.js.map" />
     <Content Include="app\configuration\services\interfaces\IConfigurationService.js" />
     <Content Include="app\configuration\services\interfaces\IConfigurationService.js.map" />
-    <Content Include="app\core\interfaces\IApiEndpointConfig.js" />
-    <Content Include="app\core\interfaces\IApiEndpointConfig.js.map" />
-    <Content Include="app\core\interfaces\IApiEndpointProvider.js" />
-    <Content Include="app\core\interfaces\IApiEndpointProvider.js.map" />
-    <Content Include="app\core\interfaces\ICoreRootScope.js" />
-    <Content Include="app\core\interfaces\ICoreRootScope.js.map" />
-    <Content Include="app\core\interfaces\IDataService.js" />
-    <Content Include="app\core\interfaces\IDataService.js.map" />
-    <Content Include="app\core\interfaces\IRouteProvider.js" />
-    <Content Include="app\core\interfaces\IRouteProvider.js.map" />
-    <Content Include="app\core\interfaces\IRouteResolver.js" />
-    <Content Include="app\core\interfaces\IRouteResolver.js.map" />
-    <Content Include="app\core\intreceptors\authorizationInterceptor.js" />
-    <Content Include="app\core\intreceptors\authorizationInterceptor.js.map" />
-    <Content Include="app\core\intreceptors\requestCounter.js" />
-    <Content Include="app\core\intreceptors\requestCounter.js.map" />
-    <Content Include="app\core\jQuery\jQuery.js" />
-    <Content Include="app\core\jQuery\jQuery.js.map" />
     <Content Include="app\core\module.js" />
     <Content Include="app\core\module.js.map" />
-    <Content Include="app\core\providers\ApiEndpointProvider.js" />
-    <Content Include="app\core\providers\ApiEndpointProvider.js.map" />
     <Content Include="app\core\storage\items\configuration.js" />
     <Content Include="app\core\storage\items\configuration.js.map" />
     <Content Include="app\core\storage\storage.js" />
@@ -309,6 +287,7 @@
     <Content Include="app\profile\components\profileList\profileListSpec.js">
       <DependentUpon>profileList.ts</DependentUpon>
     </Content>
+    <Content Include="app\security\templates\addaccount.html" />
     <Content Include="app\security\default.html" />
     <Content Include="app\layout.less" />
     <Content Include="app\media-queries-variables.less" />
@@ -375,6 +354,7 @@
     <Content Include="app\security\styles\security-sub-view.min.css">
       <DependentUpon>security-sub-view.css</DependentUpon>
     </Content>
+    <Content Include="app\security\templates\accounts.html" />
     <Content Include="app\security\templates\addgroup.html" />
     <Content Include="app\security\templates\addrole.html" />
     <Content Include="app\security\templates\adduser.html" />

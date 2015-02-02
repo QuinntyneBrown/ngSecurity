@@ -4,7 +4,7 @@
 
     export class AccountService implements IAccountService {
 
-        public static serviceId: string = "roleService";
+        public static serviceId: string = "accountService";
 
         public static $inject = ["$http", "$q", "$rootScope", "configurationService"];
 
@@ -30,9 +30,9 @@
 
         private getBaseUri = () => {
             if (this.$rootScope.configuration && this.$rootScope.configuration.apiVersion) {
-                return "api/" + this.$rootScope.configuration.apiVersion + "/role/";
+                return "api/" + this.$rootScope.configuration.apiVersion + "/account/";
             } else {
-                return "api/role/";
+                return "api/account/";
             }
         };
 

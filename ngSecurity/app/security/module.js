@@ -93,6 +93,45 @@ var SecurityModule;
             authorizationRequired: true,
             caseInsensitiveMatch: true
         });
+        $routeProvider.when("/account/add", {
+            templateUrl: "/app/security/templates/addaccount.html",
+            resolve: {
+                routeData: [
+                    "securityRouteResolver",
+                    function (securityRouteResolver) {
+                        return securityRouteResolver.resolveRoute();
+                    }
+                ]
+            },
+            authorizationRequired: true,
+            caseInsensitiveMatch: true
+        });
+        $routeProvider.when("/account/edit/:accountid", {
+            templateUrl: "/app/security/templates/addaccount.html",
+            resolve: {
+                routeData: [
+                    "securityRouteResolver",
+                    function (securityRouteResolver) {
+                        return securityRouteResolver.resolveRoute();
+                    }
+                ]
+            },
+            authorizationRequired: true,
+            caseInsensitiveMatch: true
+        });
+        $routeProvider.when("/account/list", {
+            templateUrl: "/app/security/templates/accounts.html",
+            resolve: {
+                routeData: [
+                    "securityRouteResolver",
+                    function (securityRouteResolver) {
+                        return securityRouteResolver.resolveRoute();
+                    }
+                ]
+            },
+            authorizationRequired: true,
+            caseInsensitiveMatch: true
+        });
         $routeProvider.when("/user/changepassword/:changepasswordid", {
             templateUrl: "/app/security/templates/changepassword.html",
             resolve: {

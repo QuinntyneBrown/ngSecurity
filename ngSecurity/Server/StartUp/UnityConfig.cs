@@ -19,6 +19,7 @@ namespace ngSecurity
             var container = GetContainer();
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
+
         }
 
         public static UnityContainer GetContainer()

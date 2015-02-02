@@ -12,9 +12,11 @@ angular.module("common").run(["$templateCache", ($templateCache) => {
 		""+
 		"    <ul class=\"menu-bar\" data-ng-if=\"session.isLoggedIn()\">"+
 		""+
-		"        <li><a>Hi {{ session.getCurrentUser().username }}!</a></li>"+
+		"        <li><a class=\"link\" href=\"#/security\">ADMIN</a></li>"+
 		""+
 		"        <li><a class=\"link\" href=\"#/signin\">SIGN OUT</a></li>"+
+		"        "+
+		"        <li><a>Hi {{ session.getCurrentUser().username }}!</a></li>"+
 		""+
 		"    </ul>"+
 		""+

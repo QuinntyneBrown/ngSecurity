@@ -14,9 +14,9 @@ namespace ngSecurity.Server.Auth
 {
     public class OAuthProvider : OAuthAuthorizationServerProvider
     {
-        public OAuthProvider()
+        public OAuthProvider(IIdentityService identityService)
         {
-            this.identityService = UnityConfig.GetContainer().Resolve<IIdentityService>();
+            this.identityService = identityService;
         }
 
         public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)

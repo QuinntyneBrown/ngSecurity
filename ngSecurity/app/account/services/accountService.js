@@ -22,10 +22,10 @@ var AccountModule;
             };
             this.getBaseUri = function () {
                 if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
-                    return "api/" + _this.$rootScope.configuration.apiVersion + "/role/";
+                    return "api/" + _this.$rootScope.configuration.apiVersion + "/account/";
                 }
                 else {
-                    return "api/role/";
+                    return "api/account/";
                 }
             };
             this.add = function (options) {
@@ -91,7 +91,7 @@ var AccountModule;
                 _this.clearDataStore();
             });
         }
-        AccountService.serviceId = "roleService";
+        AccountService.serviceId = "accountService";
         AccountService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
         return AccountService;
     })();
