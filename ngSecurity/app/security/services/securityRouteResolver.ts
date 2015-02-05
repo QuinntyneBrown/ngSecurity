@@ -12,7 +12,7 @@
                 return this.securityUow.identity.getCurrentUser().then(() => {
 
                     if (this.$route.current.params.userid) {
-                        console.log("edit user");
+                        
                         return this.$q.all([
                             this.securityUow.roles.getAll(),
                             this.securityUow.groups.getAll(),

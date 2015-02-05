@@ -1,7 +1,7 @@
-﻿(function (module) {
+﻿module CommonModule {
 
-    var formEncode = function () {
-        return function (data) {
+    var formEncode = () => {
+        return (data) => {
             var pairs = [];
             for (var name in data) {
                 pairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
@@ -10,6 +10,6 @@
         };
     };
 
-    module.factory("formEncode", formEncode);
+    angular.module("core").factory("formEncode", formEncode);
 
-} (angular.module("core")));
+}

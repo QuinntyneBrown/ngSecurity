@@ -156,6 +156,97 @@
             });
 
         $routeProvider
+            .when("/profile/add",
+            {
+                templateUrl: "/app/security/templates/addprofile.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver", (securityRouteResolver) => {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+
+        $routeProvider
+            .when("/profile/edit/:profileid",
+            {
+                templateUrl: "/app/security/templates/addprofile.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver", (securityRouteResolver) => {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+
+        $routeProvider
+            .when("/profile/list",
+            {
+                templateUrl: "/app/security/templates/profiles.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver", (securityRouteResolver) => {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+
+
+        $routeProvider
+            .when("/tenant/add",
+            {
+                templateUrl: "/app/security/templates/addtenant.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver", (securityRouteResolver) => {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+
+        $routeProvider
+            .when("/tenant/edit/:tenantid",
+            {
+                templateUrl: "/app/security/templates/addtenant.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver", (securityRouteResolver) => {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+
+        $routeProvider
+            .when("/tenant/list",
+            {
+                templateUrl: "/app/security/templates/tenants.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver", (securityRouteResolver) => {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+
+        $routeProvider
             .when("/user/changepassword/:changepasswordid",
             {
                 templateUrl: "/app/security/templates/changepassword.html",

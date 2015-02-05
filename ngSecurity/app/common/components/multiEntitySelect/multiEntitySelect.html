@@ -1,7 +1,10 @@
 <div class="form-group">
-    <label>
-        {{ entityNamePlural }}
-    </label>
+    <div>
+        <label>
+            {{ entityNamePlural }}
+        </label>
+    </div>
+
     <select ng-model="selectedId"
             data-ng-options="e.id as e.name for e in vm.entities"></select>
 

@@ -21,7 +21,6 @@ namespace ngSecurity.Server.Services
             this.encryptionService = encryptionService;
         }
 
-
         public void TryToUpdateUser(UserDto dto)
         {
             var user = uow.Users.GetAll()
@@ -66,7 +65,6 @@ namespace ngSecurity.Server.Services
 
             user.Roles.Clear();
             user.Groups.Clear();
-
 
             // TODO: Implementation Activation workflow
             user.IsActive = true;

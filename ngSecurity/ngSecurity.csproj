@@ -93,6 +93,12 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="SendGrid.SmtpApi">
+      <HintPath>..\packages\SendGrid.SmtpApi.1.2.1\lib\net40\SendGrid.SmtpApi.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGridMail">
+      <HintPath>..\packages\Sendgrid.5.1.0\lib\SendGridMail.dll</HintPath>
+    </Reference>
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -146,6 +152,14 @@
     <Content Include="app\account\components\accountList\accountListSpec.js">
       <DependentUpon>accountList.ts</DependentUpon>
     </Content>
+    <Content Include="app\common\components\alertItem\alertItem.html" />
+    <Content Include="app\common\components\alertItem\alertItemSpec.js">
+      <DependentUpon>alertItem.ts</DependentUpon>
+    </Content>
+    <Content Include="app\common\components\alerts\alerts.html" />
+    <Content Include="app\common\components\alerts\alertsSpec.js">
+      <DependentUpon>alerts.ts</DependentUpon>
+    </Content>
     <Content Include="app\common\components\entityAdminMenu\entityAdminMenu.html" />
     <Content Include="app\common\components\entityAdminMenu\entityAdminMenuSpec.js">
       <DependentUpon>entityAdminMenu.ts</DependentUpon>
@@ -188,8 +202,6 @@
     <Content Include="app\configuration\services\interfaces\IConfigurationService.js.map" />
     <Content Include="app\core\module.js" />
     <Content Include="app\core\module.js.map" />
-    <Content Include="app\core\storage\items\configuration.js" />
-    <Content Include="app\core\storage\items\configuration.js.map" />
     <Content Include="app\core\storage\storage.js" />
     <Content Include="app\core\styles\a.less" />
     <Content Include="app\core\styles\app.css" />
@@ -356,10 +368,13 @@
     </Content>
     <Content Include="app\security\templates\accounts.html" />
     <Content Include="app\security\templates\addgroup.html" />
+    <Content Include="app\security\templates\addprofile.html" />
     <Content Include="app\security\templates\addrole.html" />
+    <Content Include="app\security\templates\addtenant.html" />
     <Content Include="app\security\templates\adduser.html" />
     <Content Include="app\security\templates\changepassword.html" />
     <Content Include="app\security\templates\groups.html" />
+    <Content Include="app\security\templates\profiles.html" />
     <Content Include="app\security\templates\roles.html" />
     <Content Include="app\security\templates\security.html" />
     <Content Include="app\security\templates\signin.html" />
@@ -505,6 +520,17 @@
     <Content Include="app\tenant\components\tenantList\responsive less\tenantList.md.less" />
     <Content Include="app\tenant\components\tenantList\responsive less\tenantList.sm.less" />
     <Content Include="app\tenant\components\tenantList\responsive less\tenantList.xs.less" />
+    <Content Include="app\core\styles\_select.less" />
+    <Content Include="app\common\components\alerts\responsive less\alerts.less" />
+    <Content Include="app\common\components\alerts\responsive less\alerts.lg.less" />
+    <Content Include="app\common\components\alerts\responsive less\alerts.md.less" />
+    <Content Include="app\common\components\alerts\responsive less\alerts.sm.less" />
+    <Content Include="app\common\components\alerts\responsive less\alerts.xs.less" />
+    <Content Include="app\common\components\alertItem\responsive less\alertItem.less" />
+    <Content Include="app\common\components\alertItem\responsive less\alertItem.lg.less" />
+    <Content Include="app\common\components\alertItem\responsive less\alertItem.md.less" />
+    <Content Include="app\common\components\alertItem\responsive less\alertItem.sm.less" />
+    <Content Include="app\common\components\alertItem\responsive less\alertItem.xs.less" />
     <None Include="scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
@@ -534,6 +560,7 @@
     <Compile Include="Server\Auth\OAuthOptions.cs" />
     <Compile Include="Server\Auth\OAuthProvider.cs" />
     <Compile Include="Server\Config\AppConfiguration.cs" />
+    <Compile Include="Server\Config\SmtpConfiguration.cs" />
     <Compile Include="Server\Dto\v1\ChangePasswordDto.cs" />
     <Compile Include="Server\Dto\v1\RegistrationRequestDto.cs" />
     <Compile Include="Server\Dto\v1\GroupDto.cs" />
@@ -556,10 +583,18 @@
     <Compile Include="Server\Services\CacheProvider.cs" />
     <Compile Include="Server\Services\Contracts\ICache.cs" />
     <Compile Include="Server\Services\Contracts\ICacheProvider.cs" />
+    <Compile Include="Server\Services\Contracts\ICredential.cs" />
+    <Compile Include="Server\Services\Contracts\IEmailBuilder.cs" />
+    <Compile Include="Server\Services\Contracts\IEmailDeliveryService.cs" />
+    <Compile Include="Server\Services\Contracts\IEmailDistributionService.cs" />
+    <Compile Include="Server\Services\Contracts\IEmailService.cs" />
     <Compile Include="Server\Services\Contracts\IEncryptionService.cs" />
     <Compile Include="Server\Services\Contracts\IIdentityService.cs" />
     <Compile Include="Server\Services\Contracts\ISecurityService.cs" />
     <Compile Include="Server\Services\Contracts\ISessionService.cs" />
+    <Compile Include="Server\Services\EmailBuilder.cs" />
+    <Compile Include="Server\Services\EmailDeliveryService.cs" />
+    <Compile Include="Server\Services\EmailService.cs" />
     <Compile Include="Server\Services\EncryptionService.cs" />
     <Compile Include="Server\Services\IdentityService.cs" />
     <Compile Include="Server\Services\MemoryCache.cs" />
@@ -601,11 +636,16 @@
     <TypeScriptCompile Include="app\account\interfaces\IAccountService.ts" />
     <TypeScriptCompile Include="app\account\module.ts" />
     <TypeScriptCompile Include="app\account\services\accountService.ts" />
+    <TypeScriptCompile Include="app\common\components\alertItem\alertItem.ts" />
+    <TypeScriptCompile Include="app\common\components\alerts\alerts.ts" />
     <TypeScriptCompile Include="app\common\components\entityAdminMenu\entityAdminMenu.ts" />
     <TypeScriptCompile Include="app\common\components\identityMenu\identityMenu.ts" />
     <TypeScriptCompile Include="app\common\components\multiEntitySelect\multiEntitySelect.ts" />
     <TypeScriptCompile Include="app\common\components\workSpinner\workSpinner.ts" />
     <TypeScriptCompile Include="app\common\module.ts" />
+    <TypeScriptCompile Include="app\common\services\alerting.ts" />
+    <TypeScriptCompile Include="app\common\services\exceptionHandler.ts" />
+    <TypeScriptCompile Include="app\common\services\interfaces\IAlerting.ts" />
     <TypeScriptCompile Include="app\configuration\module.ts" />
     <TypeScriptCompile Include="app\configuration\services\configurationService.ts" />
     <TypeScriptCompile Include="app\configuration\services\interfaces\IConfigurationService.ts" />
@@ -681,6 +721,8 @@
     <Folder Include="app\account\components\accountEditor\interfaces\" />
     <Folder Include="app\account\components\accountList\interfaces\" />
     <Folder Include="app\account\templates\" />
+    <Folder Include="app\common\components\alertItem\interfaces\" />
+    <Folder Include="app\common\components\alerts\interfaces\" />
     <Folder Include="app\common\components\entityAdminMenu\interfaces\" />
     <Folder Include="app\common\components\identityMenu\interfaces\" />
     <Folder Include="app\common\components\multiEntitySelect\interfaces\" />

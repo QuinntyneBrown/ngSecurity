@@ -1,8 +1,8 @@
 var UserModule;
 (function (UserModule) {
     var serviceId = "identityService";
-    angular.module("user").service(serviceId, ["$http", "currentUser", "formEncode", service]);
-    function service($http, currentUser, formEncode) {
+    angular.module("user").service(serviceId, ["$http", "alerting", "currentUser", "formEncode", service]);
+    function service($http, alerting, currentUser, formEncode) {
         var self = this;
         self.signIn = function (params) {
             var configuration = {
@@ -30,8 +30,7 @@ var UserModule;
             return $http({ method: "GET", url: "api/user/getCurrentUser" }).then(function (results) {
                 currentUser.set({ data: results.data });
                 return currentUser.get();
-            }).catch(function () {
-            });
+            }).catch(alerting.errorHandler("get user error"));
         };
         return self;
     }

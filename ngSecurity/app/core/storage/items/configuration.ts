@@ -10,37 +10,30 @@
         var data = null;
         var name = "configuration";
 
-        self.get = function get() {
+        self.get = () => {
             if (data) {
                 return data;
             };
 
             try {
-
                 data = storage.getByName({ name: name }).value;
-
             } catch (error) {
-
 
             }
 
             return data;
         };
 
-        self.set = function set(params) {
+        self.set = (params) => {
             data = params.data;
             storage.put({ name: name, value: params.data });
         };
 
-        $rootScope.$on("$routeChangeStart", function routeChange(event, newUrl, oldUrl) {
-
+        $rootScope.$on("$routeChangeStart", (event, newUrl, oldUrl) => {
             if (newUrl.originalPath == "/signin") {
-
                 data = null;
-
                 self.set({ data: null });
             }
-
         });
 
         return self;

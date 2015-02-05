@@ -21,6 +21,7 @@ var UserModule;
                         _this.token.set({ data: results });
                         _this.$location.path("/");
                     }).catch(function (error) {
+                        console.log("what what?");
                     });
                 };
             };

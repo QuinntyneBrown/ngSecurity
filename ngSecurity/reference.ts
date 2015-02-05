@@ -8,6 +8,11 @@
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\account\interfaces\IAccountService.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\account\services\accountService.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\module.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\alertItem\alertItem.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\alertItem\_Chutzpah.39db5784c1b89248de2bea1f0b983478.test.html.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\alerts\alerts.html.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\alerts\alerts.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\alerts\_Chutzpah.cf99d870bdfb98b18f312dcebef19427.test.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\entityAdminMenu\entityAdminMenu.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\entityAdminMenu\entityAdminMenu.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\entityAdminMenu\_Chutzpah.33798c2dac8baa759d949f7fb55c7ebc.test.html.ts'/>
@@ -16,6 +21,9 @@
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\multiEntitySelect\multiEntitySelect.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\multiEntitySelect\multiEntitySelect.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\components\workSpinner\workSpinner.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\services\alerting.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\services\exceptionHandler.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\common\services\interfaces\IAlerting.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\configuration\module.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\configuration\services\configurationService.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\configuration\services\interfaces\IConfigurationService.ts'/>
@@ -66,10 +74,13 @@
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\security\templates\accounts.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\security\templates\addaccount.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\security\templates\addgroup.html.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\security\templates\addprofile.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\security\templates\addrole.html.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\security\templates\addtenant.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\security\templates\adduser.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\security\templates\changepassword.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\security\templates\groups.html.ts'/>
+/// <reference path='C:\projects\ngSecurity\ngSecurity\app\security\templates\profiles.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\security\templates\roles.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\security\templates\security.html.ts'/>
 /// <reference path='C:\projects\ngSecurity\ngSecurity\app\security\templates\signin.html.ts'/>

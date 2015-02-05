@@ -30,7 +30,7 @@
                     this.$location.path("/");
 
                 }).catch((error) => {
-
+                    console.log("what what?");
 
                 });
 

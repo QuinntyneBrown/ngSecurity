@@ -2,9 +2,9 @@
 
     var serviceId = "identityService";
 
-    angular.module("user").service(serviceId, ["$http", "currentUser", "formEncode", service]);
+    angular.module("user").service(serviceId, ["$http", "alerting", "currentUser", "formEncode", service]);
 
-    function service($http, currentUser, formEncode) {
+    function service($http, alerting, currentUser, formEncode) {
 
         var self = this;
 
@@ -43,9 +43,7 @@
             return $http({ method: "GET", url: "api/user/getCurrentUser" }).then((results) => {
                 currentUser.set({ data: results.data });
                 return currentUser.get();
-            }).catch(() => {
-
-            });
+            }).catch(alerting.errorHandler("get user error"));
         };
 
         return self;

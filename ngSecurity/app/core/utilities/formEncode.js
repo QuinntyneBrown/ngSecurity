@@ -1,4 +1,5 @@
-(function (module) {
+var CommonModule;
+(function (CommonModule) {
     var formEncode = function () {
         return function (data) {
             var pairs = [];
@@ -8,6 +9,6 @@
             return pairs.join('&').replace(/%20/g, '+');
         };
     };
-    module.factory("formEncode", formEncode);
-}(angular.module("core")));
+    angular.module("core").factory("formEncode", formEncode);
+})(CommonModule || (CommonModule = {}));
 //# sourceMappingURL=formEncode.js.map

@@ -11,7 +11,6 @@ var SecurityModule;
                 return _this.configurationService.get().then(function () {
                     return _this.securityUow.identity.getCurrentUser().then(function () {
                         if (_this.$route.current.params.userid) {
-                            console.log("edit user");
                             return _this.$q.all([
                                 _this.securityUow.roles.getAll(),
                                 _this.securityUow.groups.getAll(),

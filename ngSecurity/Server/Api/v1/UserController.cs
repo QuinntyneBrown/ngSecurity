@@ -26,7 +26,6 @@ namespace ngSecurity.Server.Api.v1
         public async Task<IHttpActionResult> GetCurrentUser()
         {
             var user = await sessionService.GetCurrentUser(User.Identity.Name);
-
             return Ok(user);
         }
 

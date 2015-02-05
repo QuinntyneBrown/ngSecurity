@@ -193,6 +193,36 @@ var CommonModule;
 var CommonModule;
 (function (CommonModule) {
     "use strict";
+    var Alerts = (function () {
+        function Alerts(alerting) {
+            var _this = this;
+            this.alerting = alerting;
+            this.$inject = ["alerting"];
+            this.restrict = "E";
+            this.replace = true;
+            this.scope = {};
+            this.templateUrl = "/app/common/components/alerts/alerts.html";
+            this.link = function (scope, element, attributes) {
+
+                //scope.wtf = function() {
+                //    alert("wtf");
+                //};
+
+                scope.removeAlert = function (alert) {
+                    this.alerting.removeAlert(alert);
+                };
+                scope.currentAlerts = _this.alerting.currentAlerts;
+            };
+        }
+        Alerts.componentId = "alerts";
+        return Alerts;
+    })();
+    angular.module("common").directive(Alerts.componentId, function (alerting) { return new Alerts(alerting); });
+})(CommonModule || (CommonModule = {}));
+//# sourceMappingURL=alerts.js.map
+var CommonModule;
+(function (CommonModule) {
+    "use strict";
     var EntityAdminMenu = (function () {
         function EntityAdminMenu() {
             this.$inject = [];
@@ -298,6 +328,68 @@ var CommonModule;
     angular.module("common").directive(componentId, workSpinner);
 })(CommonModule || (CommonModule = {}));
 //# sourceMappingURL=workSpinner.js.map
+var CommonModule;
+(function (CommonModule) {
+    var Alerting = (function () {
+        function Alerting($timeout) {
+            var _this = this;
+            this.$timeout = $timeout;
+            this.$inject = ["$timeout"];
+            this.alertTypes = ["warning", "info", "danger", "success"];
+            this.currentAlerts = [];
+            this.addWarning = function (message) {
+                _this.addAlert("warning", message);
+            };
+            this.addInfo = function (message) {
+                _this.addAlert("info", message);
+            };
+            this.addDanger = function (message) {
+                _this.addAlert("danger", message);
+            };
+            this.addSuccess = function (message) {
+                _this.addAlert("success", message);
+            };
+            this.errorHandler = function (description) {
+                return function () {
+                    _this.addDanger(description);
+                };
+            };
+            this.removeAlert = function (alert) {
+                for (var i = 0; i < _this.currentAlerts.length; i++) {
+                    if (_this.currentAlerts[i] == alert) {
+                        _this.currentAlerts.splice(i, 1);
+                        break;
+                    }
+                }
+            };
+            this.addAlert = function (type, message) {
+                var alert = { type: type, message: message };
+                _this.currentAlerts.push(alert);
+                _this.$timeout(function () {
+                    _this.removeAlert(alert);
+                }, 10000);
+            };
+        }
+        Alerting.serviceId = "alerting";
+        return Alerting;
+    })();
+    angular.module("common").factory(Alerting.serviceId, function ($timeout) { return new Alerting($timeout); });
+})(CommonModule || (CommonModule = {}));
+//# sourceMappingURL=alerting.js.map
+var CommonModule;
+(function (CommonModule) {
+    angular.module("common").config(function ($provide) {
+        $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
+            return function (exception, cause) {
+                $delegate(exception, cause);
+                var alerting = $injector.get("alerting");
+                alerting.addDanger(exception.message);
+            };
+        });
+    });
+})(CommonModule || (CommonModule = {}));
+//# sourceMappingURL=exceptionHandler.js.map
+//# sourceMappingURL=IAlerting.js.map
 var ConfigurationModule;
 (function (ConfigurationModule) {
     var app = angular.module("configuration", []);
@@ -468,7 +560,7 @@ var CoreModule;
 
     function factory() {
 
-        var STORAGE_ID = 'ngBlogStorage';
+        var STORAGE_ID = 'ngSecurityStorage';
 
         return {
             get: function () {
@@ -517,7 +609,7 @@ var CoreModule;
         var self = this;
         var data = null;
         var name = "configuration";
-        self.get = function get() {
+        self.get = function () {
             if (data) {
                 return data;
             }
@@ -529,11 +621,11 @@ var CoreModule;
             }
             return data;
         };
-        self.set = function set(params) {
+        self.set = function (params) {
             data = params.data;
             storage.put({ name: name, value: params.data });
         };
-        $rootScope.$on("$routeChangeStart", function routeChange(event, newUrl, oldUrl) {
+        $rootScope.$on("$routeChangeStart", function (event, newUrl, oldUrl) {
             if (newUrl.originalPath == "/signin") {
                 data = null;
                 self.set({ data: null });
@@ -544,7 +636,8 @@ var CoreModule;
     ;
 })();
 //# sourceMappingURL=configuration.js.map
-(function (module) {
+var CommonModule;
+(function (CommonModule) {
     var formEncode = function () {
         return function (data) {
             var pairs = [];
@@ -554,8 +647,8 @@ var CoreModule;
             return pairs.join('&').replace(/%20/g, '+');
         };
     };
-    module.factory("formEncode", formEncode);
-}(angular.module("core")));
+    angular.module("core").factory("formEncode", formEncode);
+})(CommonModule || (CommonModule = {}));
 //# sourceMappingURL=formEncode.js.map
 var CoreModule;
 (function (CoreModule) {
@@ -1272,6 +1365,84 @@ var SecurityModule;
             authorizationRequired: true,
             caseInsensitiveMatch: true
         });
+        $routeProvider.when("/profile/add", {
+            templateUrl: "/app/security/templates/addprofile.html",
+            resolve: {
+                routeData: [
+                    "securityRouteResolver",
+                    function (securityRouteResolver) {
+                        return securityRouteResolver.resolveRoute();
+                    }
+                ]
+            },
+            authorizationRequired: true,
+            caseInsensitiveMatch: true
+        });
+        $routeProvider.when("/profile/edit/:profileid", {
+            templateUrl: "/app/security/templates/addprofile.html",
+            resolve: {
+                routeData: [
+                    "securityRouteResolver",
+                    function (securityRouteResolver) {
+                        return securityRouteResolver.resolveRoute();
+                    }
+                ]
+            },
+            authorizationRequired: true,
+            caseInsensitiveMatch: true
+        });
+        $routeProvider.when("/profile/list", {
+            templateUrl: "/app/security/templates/profiles.html",
+            resolve: {
+                routeData: [
+                    "securityRouteResolver",
+                    function (securityRouteResolver) {
+                        return securityRouteResolver.resolveRoute();
+                    }
+                ]
+            },
+            authorizationRequired: true,
+            caseInsensitiveMatch: true
+        });
+        $routeProvider.when("/tenant/add", {
+            templateUrl: "/app/security/templates/addtenant.html",
+            resolve: {
+                routeData: [
+                    "securityRouteResolver",
+                    function (securityRouteResolver) {
+                        return securityRouteResolver.resolveRoute();
+                    }
+                ]
+            },
+            authorizationRequired: true,
+            caseInsensitiveMatch: true
+        });
+        $routeProvider.when("/tenant/edit/:tenantid", {
+            templateUrl: "/app/security/templates/addtenant.html",
+            resolve: {
+                routeData: [
+                    "securityRouteResolver",
+                    function (securityRouteResolver) {
+                        return securityRouteResolver.resolveRoute();
+                    }
+                ]
+            },
+            authorizationRequired: true,
+            caseInsensitiveMatch: true
+        });
+        $routeProvider.when("/tenant/list", {
+            templateUrl: "/app/security/templates/tenants.html",
+            resolve: {
+                routeData: [
+                    "securityRouteResolver",
+                    function (securityRouteResolver) {
+                        return securityRouteResolver.resolveRoute();
+                    }
+                ]
+            },
+            authorizationRequired: true,
+            caseInsensitiveMatch: true
+        });
         $routeProvider.when("/user/changepassword/:changepasswordid", {
             templateUrl: "/app/security/templates/changepassword.html",
             resolve: {
@@ -1464,7 +1635,6 @@ var SecurityModule;
                 return _this.configurationService.get().then(function () {
                     return _this.securityUow.identity.getCurrentUser().then(function () {
                         if (_this.$route.current.params.userid) {
-                            console.log("edit user");
                             return _this.$q.all([
                                 _this.securityUow.roles.getAll(),
                                 _this.securityUow.groups.getAll(),
@@ -2050,6 +2220,7 @@ var UserModule;
                         _this.token.set({ data: results });
                         _this.$location.path("/");
                     }).catch(function (error) {
+                        console.log("what what?");
                     });
                 };
             };
@@ -2140,8 +2311,8 @@ var UserModule;
 var UserModule;
 (function (UserModule) {
     var serviceId = "identityService";
-    angular.module("user").service(serviceId, ["$http", "currentUser", "formEncode", service]);
-    function service($http, currentUser, formEncode) {
+    angular.module("user").service(serviceId, ["$http", "alerting", "currentUser", "formEncode", service]);
+    function service($http, alerting, currentUser, formEncode) {
         var self = this;
         self.signIn = function (params) {
             var configuration = {
@@ -2169,8 +2340,7 @@ var UserModule;
             return $http({ method: "GET", url: "api/user/getCurrentUser" }).then(function (results) {
                 currentUser.set({ data: results.data });
                 return currentUser.get();
-            }).catch(function () {
-            });
+            }).catch(alerting.errorHandler("get user error"));
         };
         return self;
     }

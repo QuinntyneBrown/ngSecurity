@@ -6,7 +6,7 @@
         var self = this;
         var data = null;
         var name = "configuration";
-        self.get = function get() {
+        self.get = function () {
             if (data) {
                 return data;
             }
@@ -18,11 +18,11 @@
             }
             return data;
         };
-        self.set = function set(params) {
+        self.set = function (params) {
             data = params.data;
             storage.put({ name: name, value: params.data });
         };
-        $rootScope.$on("$routeChangeStart", function routeChange(event, newUrl, oldUrl) {
+        $rootScope.$on("$routeChangeStart", function (event, newUrl, oldUrl) {
             if (newUrl.originalPath == "/signin") {
                 data = null;
                 self.set({ data: null });
