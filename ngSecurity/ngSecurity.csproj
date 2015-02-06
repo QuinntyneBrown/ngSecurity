@@ -541,7 +541,9 @@
     <Content Include="scripts\moment.js" />
     <Content Include="scripts\moment.min.js" />
     <Content Include="scripts\npm.js" />
-    <None Include="Web.config" />
+    <None Include="Web.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="scripts\jquery-1.9.0.min.map" />
   </ItemGroup>
   <ItemGroup>
@@ -560,6 +562,7 @@
     <Compile Include="Server\Auth\OAuthOptions.cs" />
     <Compile Include="Server\Auth\OAuthProvider.cs" />
     <Compile Include="Server\Config\AppConfiguration.cs" />
+    <Compile Include="Server\Config\AuthConfiguration.cs" />
     <Compile Include="Server\Config\SmtpConfiguration.cs" />
     <Compile Include="Server\Dto\v1\ChangePasswordDto.cs" />
     <Compile Include="Server\Dto\v1\RegistrationRequestDto.cs" />
@@ -592,8 +595,10 @@
     <Compile Include="Server\Services\Contracts\IIdentityService.cs" />
     <Compile Include="Server\Services\Contracts\ISecurityService.cs" />
     <Compile Include="Server\Services\Contracts\ISessionService.cs" />
+    <Compile Include="Server\Services\Credential.cs" />
     <Compile Include="Server\Services\EmailBuilder.cs" />
     <Compile Include="Server\Services\EmailDeliveryService.cs" />
+    <Compile Include="Server\Services\EmailDistributionService.cs" />
     <Compile Include="Server\Services\EmailService.cs" />
     <Compile Include="Server\Services\EncryptionService.cs" />
     <Compile Include="Server\Services\IdentityService.cs" />
