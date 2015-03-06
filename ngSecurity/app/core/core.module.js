@@ -2,7 +2,7 @@ var app;
 (function (_app) {
     var core;
     (function (core) {
-        var app = angular.module("core", ["configuration", "session"]).config(config).run(run);
+        var app = angular.module("app.core", ["app.configuration", "app.session"]).config(config).run(run);
         config.$inject = ["$httpProvider"];
         function config($httpProvider) {
             $httpProvider.interceptors.push("authorizationInterceptor");

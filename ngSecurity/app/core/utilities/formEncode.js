@@ -11,7 +11,7 @@ var app;
                 return pairs.join('&').replace(/%20/g, '+');
             };
         };
-        angular.module("core").factory("formEncode", formEncode);
+        angular.module("app.core").factory("formEncode", formEncode);
     })(common = app.common || (app.common = {}));
 })(app || (app = {}));
 //# sourceMappingURL=formEncode.js.map

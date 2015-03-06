@@ -34,7 +34,7 @@ var app;
         }
         var interceptorId = "requestCounter";
         requestCounter.$inject = ["$q"];
-        angular.module("core").factory(interceptorId, requestCounter);
+        angular.module("app.core").factory(interceptorId, requestCounter);
     })(core = app.core || (app.core = {}));
 })(app || (app = {}));
 //# sourceMappingURL=requestCounter.js.map

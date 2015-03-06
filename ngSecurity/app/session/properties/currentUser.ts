@@ -1,6 +1,6 @@
 ﻿module app.session {
 
-    angular.module("session")
+    angular.module("app.session")
         .service("currentUser",($rootScope, storage) => new CurrentUser($rootScope, storage) );
 
     class CurrentUser {

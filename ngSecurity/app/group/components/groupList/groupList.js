@@ -31,7 +31,7 @@ var app;
             GroupList.componentId = "groupList";
             return GroupList;
         })();
-        angular.module("group").directive(GroupList.componentId, function (groupService) { return new GroupList(groupService); });
+        angular.module("app.group").directive(GroupList.componentId, function (groupService) { return new GroupList(groupService); });
     })(group = app.group || (app.group = {}));
 })(app || (app = {}));
 //# sourceMappingURL=groupList.js.map

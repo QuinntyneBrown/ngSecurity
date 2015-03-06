@@ -1,6 +1,6 @@
 ﻿module app.core {
 
-    var app = angular.module("core", ["configuration", "session"])
+    var app = angular.module("app.core", ["app.configuration", "app.session"])
         .config(config)
         .run(run);
 

@@ -2,7 +2,7 @@ var app;
 (function (app) {
     var profile;
     (function (profile) {
-        angular.module("profile", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
+        angular.module("app.profile", ["app.configuration", "app.common", "app.core", "app.session", "ngRoute"]).config(config);
         config.$inject = ["$routeProvider"];
         function config($routeProvider) {
             $routeProvider.when("/profile/add", {

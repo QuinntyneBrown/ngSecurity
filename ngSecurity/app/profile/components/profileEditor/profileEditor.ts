@@ -45,6 +45,6 @@ module app.profile {
 
     }
 
-    angular.module("profile").directive(ProfileEditor.componentId,($location, profileService) => new ProfileEditor($location, profileService));
+    angular.module("app.profile").directive(ProfileEditor.componentId,($location, profileService) => new ProfileEditor($location, profileService));
 
 }

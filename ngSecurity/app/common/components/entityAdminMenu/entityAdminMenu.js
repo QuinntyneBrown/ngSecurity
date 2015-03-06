@@ -19,7 +19,7 @@ var app;
             EntityAdminMenu.componentId = "entityAdminMenu";
             return EntityAdminMenu;
         })();
-        angular.module("common").directive(EntityAdminMenu.componentId, function () { return new EntityAdminMenu(); });
+        angular.module("app.common").directive(EntityAdminMenu.componentId, function () { return new EntityAdminMenu(); });
     })(common = app.common || (app.common = {}));
 })(app || (app = {}));
 //# sourceMappingURL=entityAdminMenu.js.map

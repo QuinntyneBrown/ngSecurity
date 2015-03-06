@@ -22,7 +22,7 @@ var app;
             return UserDropDownList;
         })();
         user.UserDropDownList = UserDropDownList;
-        angular.module("user").directive(UserDropDownList.componentId, [function () { return new UserDropDownList(); }]);
+        angular.module("app.user").directive(UserDropDownList.componentId, [function () { return new UserDropDownList(); }]);
     })(user = app.user || (app.user = {}));
 })(app || (app = {}));
 //# sourceMappingURL=userDropDownList.js.map

@@ -42,6 +42,6 @@ module app.group {
         }
     }
 
-    angular.module("group").directive(GroupList.componentId,(groupService) => new GroupList(groupService));
+    angular.module("app.group").directive(GroupList.componentId,(groupService) => new GroupList(groupService));
 
 }

@@ -2,7 +2,7 @@ var app;
 (function (app) {
     var tenant;
     (function (tenant) {
-        angular.module("app.tenant", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
+        angular.module("app.tenant", ["app.configuration", "app.common", "app.core", "app.session", "ngRoute"]).config(config);
         config.$inject = ["$routeProvider"];
         function config($routeProvider) {
             $routeProvider.when("/tenant/add", {

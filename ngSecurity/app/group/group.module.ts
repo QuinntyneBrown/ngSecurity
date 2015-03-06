@@ -1,6 +1,11 @@
 ﻿module app.group {
 
-    angular.module("group", ["configuration", "common", "core", "session", "ngRoute"])
+    angular.module("app.group", [
+        "app.configuration",
+        "app.common",
+        "app.core",
+        "app.session",
+        "ngRoute"])
         .config(config);
 
     config.$inject = ["$routeProvider"];

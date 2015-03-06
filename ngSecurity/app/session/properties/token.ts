@@ -2,7 +2,7 @@
 
     var serviceId = "token";
 
-    angular.module("session").service(serviceId, ["$rootScope", "storage", service]);
+    angular.module("app.session").service(serviceId, ["$rootScope", "storage", service]);
 
     function service($rootScope: ng.IRootScopeService, storage) {
         var self = this;

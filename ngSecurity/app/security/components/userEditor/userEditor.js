@@ -37,12 +37,10 @@ var app;
                         });
                     }
                 };
-                this.$inject = ["$location", "userService"];
             }
-            UserEditor.componentId = "userEditor";
             return UserEditor;
         })();
-        angular.module("app.security").directive(UserEditor.componentId, function ($location, $routeParams, securityUow) { return new UserEditor($location, $routeParams, securityUow); });
+        angular.module("app.security").directive("userEditor", ["$location", "$routeParams", "securityUow", function ($location, $routeParams, securityUow) { return new UserEditor($location, $routeParams, securityUow); }]);
     })(security = app.security || (app.security = {}));
 })(app || (app = {}));
 //# sourceMappingURL=userEditor.js.map

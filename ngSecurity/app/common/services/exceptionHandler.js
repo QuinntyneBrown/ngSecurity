@@ -2,7 +2,7 @@ var app;
 (function (app) {
     var common;
     (function (common) {
-        angular.module("common").config(function ($provide) {
+        angular.module("app.common").config(function ($provide) {
             $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
                 return function (exception, cause) {
                     $delegate(exception, cause);

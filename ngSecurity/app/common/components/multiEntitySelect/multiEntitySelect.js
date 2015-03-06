@@ -40,10 +40,9 @@ var app;
                     });
                 };
             }
-            MultiEntitySelect.componentId = "multiEntitySelect";
             return MultiEntitySelect;
         })();
-        angular.module("common").directive(MultiEntitySelect.componentId, function () { return new MultiEntitySelect(); });
+        angular.module("app.common").directive("multiEntitySelect", [function () { return new MultiEntitySelect(); }]);
     })(common = app.common || (app.common = {}));
 })(app || (app = {}));
 //# sourceMappingURL=multiEntitySelect.js.map

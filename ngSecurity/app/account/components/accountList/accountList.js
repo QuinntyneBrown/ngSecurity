@@ -7,7 +7,6 @@ var app;
             function AccountList(accountService) {
                 var _this = this;
                 this.accountService = accountService;
-                this.$inject = ["accountService"];
                 this.restrict = "E";
                 this.replace = true;
                 this.scope = {};
@@ -29,10 +28,9 @@ var app;
                     });
                 };
             }
-            AccountList.componentId = "accountList";
             return AccountList;
         })();
-        angular.module("account").directive(AccountList.componentId, function (accountService) { return new AccountList(accountService); });
+        angular.module("app.account").directive("accountList", ["accountService", function (accountService) { return new AccountList(accountService); }]);
     })(account = app.account || (app.account = {}));
 })(app || (app = {}));
 //# sourceMappingURL=accountList.js.map

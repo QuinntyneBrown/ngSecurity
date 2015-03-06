@@ -1,6 +1,9 @@
 ﻿module app.core {
+
     class ApiEndpointProvider implements ng.IServiceProvider, IApiEndpointProvider {
-        config: IApiEndpointConfig;
+        config: IApiEndpointConfig = {
+            baseUrl:"/api/"
+        };
 
         configure(baseUrl: string): void {
             this.config = {
@@ -13,6 +16,6 @@
         }
     }
 
-    angular.module("core").provider("apiEndpointProvider", ApiEndpointProvider);
+    angular.module("app.core").provider("apiEndpoint", ApiEndpointProvider);
 
 } 

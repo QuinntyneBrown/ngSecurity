@@ -32,7 +32,7 @@ var app;
             SignInForm.componentId = "signInForm";
             return SignInForm;
         })();
-        angular.module("user").directive(SignInForm.componentId, function (identityService, token, $location) { return new SignInForm(identityService, token, $location); });
+        angular.module("app.user").directive(SignInForm.componentId, function (identityService, token, $location) { return new SignInForm(identityService, token, $location); });
     })(user = app.user || (app.user = {}));
 })(app || (app = {}));
 //# sourceMappingURL=signinForm.js.map

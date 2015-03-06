@@ -16,7 +16,7 @@ var app;
         ;
         var interceptorId = "authorizationInterceptor";
         authorizationInterceptor.$inject = ["$q", "$rootScope", "token"];
-        angular.module("core").factory(interceptorId, authorizationInterceptor);
+        angular.module("app.core").factory(interceptorId, authorizationInterceptor);
     })(core = app.core || (app.core = {}));
 })(app || (app = {}));
 //# sourceMappingURL=authorizationInterceptor.js.map

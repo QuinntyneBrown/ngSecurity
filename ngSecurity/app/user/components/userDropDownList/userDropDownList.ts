@@ -29,5 +29,5 @@ module app.user {
 
     }
 
-    angular.module("user").directive(UserDropDownList.componentId, [() => new UserDropDownList()]);
+    angular.module("app.user").directive(UserDropDownList.componentId, [() => new UserDropDownList()]);
 }

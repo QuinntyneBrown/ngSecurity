@@ -46,6 +46,6 @@
         
     }
 
-    angular.module("user").directive(SignInForm.componentId,(identityService, token, $location) => new SignInForm(identityService, token, $location));
+    angular.module("app.user").directive(SignInForm.componentId,(identityService, token, $location) => new SignInForm(identityService, token, $location));
 
 }

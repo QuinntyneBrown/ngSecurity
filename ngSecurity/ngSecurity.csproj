@@ -170,12 +170,12 @@
     <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.md.less" />
     <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.sm.less" />
     <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.xs.less" />
-    <Content Include="app\common\components\identityMenu\identityMenu.css" />
+    <None Include="app\common\components\identityMenu\identityMenu.less" />
     <Content Include="app\common\components\identityMenu\identityMenu.html" />
     <Content Include="app\common\components\multiEntitySelect\multiEntitySelect.html" />
-    <Content Include="app\common\components\multiEntitySelect\multiEntitySelect.js" />
-    <Content Include="app\common\components\multiEntitySelect\multiEntitySelect.js.map" />
-    <Content Include="app\common\components\multiEntitySelect\multiEntitySelectSpec.js" />
+    <Content Include="app\common\components\multiEntitySelect\multiEntitySelectSpec.js">
+      <DependentUpon>multiEntitySelect.ts</DependentUpon>
+    </Content>
     <Content Include="app\common\components\multiEntitySelect\responsive less\multiEntitySelect.less" />
     <Content Include="app\common\components\multiEntitySelect\responsive less\multiEntitySelect.lg.less" />
     <Content Include="app\common\components\multiEntitySelect\responsive less\multiEntitySelect.md.less" />
@@ -190,13 +190,9 @@
     <Content Include="app\common\components\workSpinner\responsive less\workSpinner.sm.less" />
     <Content Include="app\common\components\workSpinner\responsive less\workSpinner.xs.less" />
     <Content Include="app\common\components\workSpinner\workSpinner.html" />
-    <Content Include="app\common\components\workSpinner\workSpinner.js" />
-    <Content Include="app\common\components\workSpinner\workSpinner.js.map" />
-    <Content Include="app\common\components\workSpinner\workSpinner.spec.js" />
-    <Content Include="app\configuration\services\configurationService.js" />
-    <Content Include="app\configuration\services\configurationService.js.map" />
-    <Content Include="app\configuration\services\interfaces\IConfigurationService.js" />
-    <Content Include="app\configuration\services\interfaces\IConfigurationService.js.map" />
+    <Content Include="app\common\components\workSpinner\workSpinner.spec.js">
+      <DependentUpon>workSpinner.ts</DependentUpon>
+    </Content>
     <Content Include="app\core\storage\storage.js" />
     <Content Include="app\core\styles\a.less" />
     <Content Include="app\core\styles\app.css" />
@@ -282,8 +278,6 @@
     <Content Include="app\group\components\groupList\responsive less\groupList.xs.less" />
     <Content Include="app\group\interfaces\IGroupService.js" />
     <Content Include="app\group\interfaces\IGroupService.js.map" />
-    <Content Include="app\group\services\groupService.js" />
-    <Content Include="app\group\services\groupService.js.map" />
     <Content Include="app\profile\components\profileEditor\profileEditor.html" />
     <Content Include="app\profile\components\profileEditor\profileEditorSpec.js">
       <DependentUpon>profileEditor.ts</DependentUpon>
@@ -338,7 +332,9 @@
     <Content Include="app\security\components\userEditor\responsive less\userEditor.sm.less" />
     <Content Include="app\security\components\userEditor\responsive less\userEditor.xs.less" />
     <Content Include="app\security\components\userEditor\userEditor.html" />
-    <Content Include="app\security\components\userEditor\userEditorSpec.js" />
+    <Content Include="app\security\components\userEditor\userEditorSpec.js">
+      <DependentUpon>userEditor.ts</DependentUpon>
+    </Content>
     <Content Include="app\security\styles\security-sub-view.css">
       <DependentUpon>security-sub-view.less</DependentUpon>
     </Content>
@@ -363,8 +359,6 @@
     <Content Include="app\security\templates\signin.html" />
     <Content Include="app\security\templates\splash.html" />
     <Content Include="app\security\templates\users.html" />
-    <Content Include="app\session\model\session.js" />
-    <Content Include="app\session\model\session.js.map" />
     <Content Include="app\tenant\components\tenantEditor\tenantEditor.html" />
     <Content Include="app\tenant\components\tenantEditor\tenantEditorSpec.js">
       <DependentUpon>tenantEditor.ts</DependentUpon>
@@ -619,9 +613,10 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\account\components\accountEditor\accountEditor.ts" />
     <TypeScriptCompile Include="app\account\components\accountList\accountList.ts" />
-    <TypeScriptCompile Include="app\account\interfaces\IAccountService.ts" />
+    <TypeScriptCompile Include="app\baseData.service.ts" />
+    <TypeScriptCompile Include="app\shared\IAccountService.d.ts" />
     <TypeScriptCompile Include="app\account\account.module.ts" />
-    <TypeScriptCompile Include="app\account\services\accountService.ts" />
+    <TypeScriptCompile Include="app\account\services\account.service.ts" />
     <TypeScriptCompile Include="app\common\components\alertItem\alertItem.ts" />
     <TypeScriptCompile Include="app\common\components\alerts\alerts.ts" />
     <TypeScriptCompile Include="app\common\components\entityAdminMenu\entityAdminMenu.ts" />
@@ -631,16 +626,16 @@
     <TypeScriptCompile Include="app\common\common.module.ts" />
     <TypeScriptCompile Include="app\common\services\alerting.ts" />
     <TypeScriptCompile Include="app\common\services\exceptionHandler.ts" />
-    <TypeScriptCompile Include="app\common\services\interfaces\IAlerting.ts" />
+    <TypeScriptCompile Include="app\shared\IAlerting.d.ts" />
     <TypeScriptCompile Include="app\configuration\configuration.module.ts" />
-    <TypeScriptCompile Include="app\configuration\services\configurationService.ts" />
-    <TypeScriptCompile Include="app\configuration\services\interfaces\IConfigurationService.ts" />
-    <TypeScriptCompile Include="app\core\interfaces\IApiEndpointConfig.ts" />
-    <TypeScriptCompile Include="app\core\interfaces\IApiEndpointProvider.ts" />
-    <TypeScriptCompile Include="app\core\interfaces\ICoreRootScope.ts" />
-    <TypeScriptCompile Include="app\core\interfaces\IDataService.ts" />
-    <TypeScriptCompile Include="app\core\interfaces\IRouteProvider.ts" />
-    <TypeScriptCompile Include="app\core\interfaces\IRouteResolver.ts" />
+    <TypeScriptCompile Include="app\configuration\services\configuration.service.ts" />
+    <TypeScriptCompile Include="app\configuration\services\interfaces\IConfigurationService.d.ts" />
+    <TypeScriptCompile Include="app\shared\IApiEndpointConfig.d.ts" />
+    <TypeScriptCompile Include="app\shared\IApiEndpointProvider.d.ts" />
+    <TypeScriptCompile Include="app\shared\ICoreRootScope.d.ts" />
+    <TypeScriptCompile Include="app\shared\IDataService.d.ts" />
+    <TypeScriptCompile Include="app\shared\IRouteProvider.ts" />
+    <TypeScriptCompile Include="app\shared\IRouteResolver.ts" />
     <TypeScriptCompile Include="app\core\intreceptors\authorizationInterceptor.ts" />
     <TypeScriptCompile Include="app\core\intreceptors\requestCounter.ts" />
     <TypeScriptCompile Include="app\core\jQuery\jQuery.ts" />
@@ -656,7 +651,7 @@
     <TypeScriptCompile Include="app\group\services\groupService.ts" />
     <TypeScriptCompile Include="app\profile\components\profileEditor\profileEditor.ts" />
     <TypeScriptCompile Include="app\profile\components\profileList\profileList.ts" />
-    <TypeScriptCompile Include="app\profile\interfaces\IProfileService.ts" />
+    <TypeScriptCompile Include="app\shared\IProfileService.d.ts" />
     <TypeScriptCompile Include="app\profile\profile.module.ts" />
     <TypeScriptCompile Include="app\profile\services\profileService.ts" />
     <TypeScriptCompile Include="app\role\components\roleEditor\roleEditor.ts" />
@@ -666,12 +661,13 @@
     <TypeScriptCompile Include="app\role\services\roleService.ts" />
     <TypeScriptCompile Include="app\security\components\securityMenu\securityMenu.ts" />
     <TypeScriptCompile Include="app\security\components\userEditor\userEditor.ts" />
-    <TypeScriptCompile Include="app\security\data\uow.ts" />
+    <TypeScriptCompile Include="app\security\data\security.uow.ts" />
     <TypeScriptCompile Include="app\security\security.module.ts" />
     <TypeScriptCompile Include="app\security\services\securityRouteResolver.ts" />
-    <TypeScriptCompile Include="app\shared\ISession.ts" />
+    <TypeScriptCompile Include="app\shared\IHttpAction.d.ts" />
+    <TypeScriptCompile Include="app\shared\ISession.d.ts" />
     <TypeScriptCompile Include="app\session\model\session.ts" />
-    <TypeScriptCompile Include="app\session\module.ts" />
+    <TypeScriptCompile Include="app\session\session.module.ts" />
     <TypeScriptCompile Include="app\session\properties\configuration.ts" />
     <TypeScriptCompile Include="app\session\properties\currentUser.ts" />
     <TypeScriptCompile Include="app\session\properties\token.ts" />
@@ -704,25 +700,16 @@
     <TypeScriptCompile Include="scripts\typings\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\account\components\accountEditor\interfaces\" />
-    <Folder Include="app\account\components\accountList\interfaces\" />
-    <Folder Include="app\account\templates\" />
-    <Folder Include="app\common\components\alertItem\interfaces\" />
-    <Folder Include="app\common\components\alerts\interfaces\" />
-    <Folder Include="app\common\components\entityAdminMenu\interfaces\" />
-    <Folder Include="app\common\components\identityMenu\interfaces\" />
-    <Folder Include="app\common\components\multiEntitySelect\interfaces\" />
-    <Folder Include="app\common\components\workSpinner\interfaces\" />
+    <Folder Include="app\core\interfaces\" />
+    <Folder Include="app\core\services\" />
     <Folder Include="app\group\components\groupEditor\interfaces\" />
     <Folder Include="app\group\components\groupList\interfaces\" />
     <Folder Include="app\profile\components\profileEditor\interfaces\" />
     <Folder Include="app\profile\components\profileList\interfaces\" />
-    <Folder Include="app\profile\templates\" />
     <Folder Include="app\role\components\roleEditor\interfaces\" />
     <Folder Include="app\role\components\roleList\interfaces\" />
     <Folder Include="app\security\components\securityMenu\interfaces\" />
     <Folder Include="app\security\components\userEditor\interfaces\" />
-    <Folder Include="app\session\model\interfaces\" />
     <Folder Include="app\tenant\components\tenantEditor\interfaces\" />
     <Folder Include="app\tenant\components\tenantList\interfaces\" />
     <Folder Include="app\user\components\changePasswordForm\interfaces\" />

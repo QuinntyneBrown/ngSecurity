@@ -3,7 +3,7 @@
 
     var factoryId = "storage";
 
-    angular.module("core").factory(factoryId, [factory]);
+    angular.module("app.core").factory(factoryId, [factory]);
 
     function factory() {
 

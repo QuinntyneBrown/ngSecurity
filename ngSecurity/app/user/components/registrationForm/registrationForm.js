@@ -1,7 +1,7 @@
 (function () {
     "use strict";
     var componentId = "registrationForm";
-    angular.module("user").directive(componentId, ["$location", "identityService", component]);
+    angular.module("app.user").directive(componentId, ["$location", "identityService", component]);
     function component($location, identityService) {
         return {
             templateUrl: "/app/user/components/registrationForm/registrationForm.html",

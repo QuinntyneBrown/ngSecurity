@@ -4,13 +4,9 @@ module app.account {
 
     class AccountEditor {
 
-        public $inject: string[] = ["$location", "accountService"];
-
         constructor(private $location, private accountService) {
 
         }
-
-        public static componentId: string = "accountEditor";
 
         public restrict: string = "E";
 
@@ -45,6 +41,6 @@ module app.account {
 
     }
 
-    angular.module("account").directive(AccountEditor.componentId,($location, accountService) => new AccountEditor($location, accountService));
+    angular.module("app.account").directive("accountEditor", ["$location", "accountService",($location, accountService) => new AccountEditor($location, accountService)]);
 
 }

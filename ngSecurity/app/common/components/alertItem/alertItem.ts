@@ -4,13 +4,9 @@ module app.common {
 
     class AlertItem {
 
-        public $inject: string[] = [];
-
         constructor() {
 
         }
-
-        public static componentId: string = "alertItem";
 
         public restrict: string = "E";
 
@@ -31,6 +27,6 @@ module app.common {
 
     }
 
-    angular.module("common").directive(AlertItem.componentId,() => new AlertItem());
+    angular.module("app.common").directive("alertItem",[() => new AlertItem()]);
 
 }

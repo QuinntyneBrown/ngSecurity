@@ -3,7 +3,7 @@ var app;
     var session;
     (function (session) {
         var serviceId = "session";
-        angular.module("session").service(serviceId, ["$location", "$http", "$q", "configuration", "configurationService", "currentUser", "token", service]);
+        angular.module("app.session").service(serviceId, ["$location", "$http", "$q", "configuration", "configurationService", "currentUser", "token", service]);
         function service($location, $http, $q, configuration, configurationService, currentUser, token) {
             var self = this;
             self.isLoggedIn = function () {

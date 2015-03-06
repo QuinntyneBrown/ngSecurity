@@ -32,7 +32,7 @@ var app;
             ProfileList.componentId = "profileList";
             return ProfileList;
         })();
-        angular.module("profile").directive(ProfileList.componentId, function (profileService) { return new ProfileList(profileService); });
+        angular.module("app.profile").directive(ProfileList.componentId, function (profileService) { return new ProfileList(profileService); });
     })(profile = app.profile || (app.profile = {}));
 })(app || (app = {}));
 //# sourceMappingURL=profileList.js.map

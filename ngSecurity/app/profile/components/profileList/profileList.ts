@@ -46,6 +46,6 @@ module app.profile {
 
     }
 
-    angular.module("profile").directive(ProfileList.componentId,(profileService) => new ProfileList(profileService));
+    angular.module("app.profile").directive(ProfileList.componentId,(profileService) => new ProfileList(profileService));
 
 }

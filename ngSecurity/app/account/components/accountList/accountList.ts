@@ -4,13 +4,9 @@ module app.account {
 
     class AccountList {
 
-        public $inject: string[] = ["accountService"];
-
         constructor(private accountService) {
 
         }
-
-        public static componentId: string = "accountList";
 
         public restrict: string = "E";
 
@@ -45,6 +41,6 @@ module app.account {
 
     }
 
-    angular.module("account").directive(AccountList.componentId,(accountService) => new AccountList(accountService));
+    angular.module("app.account").directive("accountList",["accountService",(accountService) => new AccountList(accountService)]);
 
 }

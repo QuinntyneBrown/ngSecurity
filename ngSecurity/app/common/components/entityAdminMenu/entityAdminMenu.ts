@@ -29,6 +29,6 @@ module app.common {
 
     }
 
-    angular.module("common").directive(EntityAdminMenu.componentId,() => new EntityAdminMenu());
+    angular.module("app.common").directive(EntityAdminMenu.componentId,() => new EntityAdminMenu());
 
 }

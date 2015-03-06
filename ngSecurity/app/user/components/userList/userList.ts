@@ -42,6 +42,6 @@ module app.user {
         }
     }
 
-    angular.module("user").directive(UserList.componentId,(userService) => new UserList(userService));
+    angular.module("app.user").directive(UserList.componentId,(userService) => new UserList(userService));
 
 }

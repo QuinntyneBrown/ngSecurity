@@ -2,7 +2,9 @@ module app.common {
 
     class MultiEntitySelect {
 
-        public static componentId: string = "multiEntitySelect";
+        constructor() {
+
+        }
 
         public restrict: string = "E";
 
@@ -50,13 +52,7 @@ module app.common {
 
             });
         }
-
-
-        constructor() {
-
-        }
-
     }
 
-    angular.module("common").directive(MultiEntitySelect.componentId,() => new MultiEntitySelect());
+    angular.module("app.common").directive("multiEntitySelect",[() => new MultiEntitySelect()]);
 }

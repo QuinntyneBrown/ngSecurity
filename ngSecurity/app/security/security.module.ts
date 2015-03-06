@@ -1,26 +1,26 @@
 ﻿module app.security {
 
     angular.module("app.security", [
-        "account",
-        "configuration",
-        "common",
-        "core",
-        "group",
-        "profile",
+        "app.account",
+        "app.configuration",
+        "app.common",
+        "app.core",
+        "app.group",
+        "app.profile",
         "app.role",
-        "session",               
+        "app.session",               
         "app.tenant",
-        "user",
+        "app.user",
 
         "ngRoute"
 
         ])
-        .config(config);
+        .config(["$routeProvider","apiEndpointProvider",config]);
 
+    
+    function config($routeProvider, apiEndpointProvider) {
 
-    config.$inject = ["$routeProvider"];
-
-    function config($routeProvider) {
+        apiEndpointProvider.configure("/api/");
 
         $routeProvider
             .when("/",

@@ -46,6 +46,6 @@ module app.user {
 
     }
 
-    angular.module("user").directive(ChangePasswordForm.componentId,(identityService, userService, $location, $routeParams) => new ChangePasswordForm(identityService, userService, $location, $routeParams));
+    angular.module("app.user").directive(ChangePasswordForm.componentId,(identityService, userService, $location, $routeParams) => new ChangePasswordForm(identityService, userService, $location, $routeParams));
 
 }

@@ -1,4 +1,4 @@
 ﻿module app.core {
 
-    angular.module("core").value("$", $);
+    angular.module("app.core").value("$", $);
 } 

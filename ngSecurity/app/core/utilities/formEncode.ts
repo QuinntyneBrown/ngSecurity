@@ -10,6 +10,6 @@
         };
     };
 
-    angular.module("core").factory("formEncode", formEncode);
+    angular.module("app.core").factory("formEncode", formEncode);
 
 }

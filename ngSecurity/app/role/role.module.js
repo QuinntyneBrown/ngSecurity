@@ -2,7 +2,7 @@ var app;
 (function (app) {
     var role;
     (function (role) {
-        angular.module("app.role", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
+        angular.module("app.role", ["app.configuration", "app.common", "app.core", "app.session", "ngRoute"]).config(config);
         config.$inject = ["$routeProvider"];
         function config($routeProvider) {
             $routeProvider.when("/role/add", {

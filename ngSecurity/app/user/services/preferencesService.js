@@ -12,6 +12,6 @@
         return self;
     }
     preferencesService.$inject = ["$http", "$q", "configuration"];
-    angular.module("user").service("preferencesService", preferencesService);
+    angular.module("app.user").service("preferencesService", preferencesService);
 })();
 //# sourceMappingURL=preferencesService.js.map

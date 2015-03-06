@@ -3,20 +3,20 @@ var app;
     var security;
     (function (security) {
         angular.module("app.security", [
-            "account",
-            "configuration",
-            "common",
-            "core",
-            "group",
-            "profile",
+            "app.account",
+            "app.configuration",
+            "app.common",
+            "app.core",
+            "app.group",
+            "app.profile",
             "app.role",
-            "session",
+            "app.session",
             "app.tenant",
-            "user",
+            "app.user",
             "ngRoute"
-        ]).config(config);
-        config.$inject = ["$routeProvider"];
-        function config($routeProvider) {
+        ]).config(["$routeProvider", "apiEndpointProvider", config]);
+        function config($routeProvider, apiEndpointProvider) {
+            apiEndpointProvider.configure("/api/");
             $routeProvider.when("/", {
                 templateUrl: "/app/security/templates/splash.html",
                 resolve: {

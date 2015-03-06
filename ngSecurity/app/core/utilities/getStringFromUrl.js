@@ -17,7 +17,7 @@ var app;
             request.send(null);
             return response;
         }
-        angular.module("core").value("getStringFromUrl", getStringFromUrl);
+        angular.module("app.core").value("getStringFromUrl", getStringFromUrl);
     })(core = app.core || (app.core = {}));
 })(app || (app = {}));
 //# sourceMappingURL=getStringFromUrl.js.map

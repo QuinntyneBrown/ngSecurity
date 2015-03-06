@@ -3,7 +3,7 @@ var app;
     var session;
     (function (session) {
         var serviceId = "token";
-        angular.module("session").service(serviceId, ["$rootScope", "storage", service]);
+        angular.module("app.session").service(serviceId, ["$rootScope", "storage", service]);
         function service($rootScope, storage) {
             var self = this;
             var data = null;

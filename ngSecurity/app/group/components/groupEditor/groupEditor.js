@@ -34,7 +34,7 @@ var app;
             GroupEditor.componentId = "groupEditor";
             return GroupEditor;
         })();
-        angular.module("group").directive(GroupEditor.componentId, function ($location, groupService) { return new GroupEditor($location, groupService); });
+        angular.module("app.group").directive(GroupEditor.componentId, function ($location, groupService) { return new GroupEditor($location, groupService); });
     })(group = app.group || (app.group = {}));
 })(app || (app = {}));
 //# sourceMappingURL=groupEditor.js.map

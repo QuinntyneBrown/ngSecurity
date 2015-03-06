@@ -2,7 +2,7 @@
 
     var serviceId = "userRouteResolver";
 
-    angular.module("user").service(serviceId, ["$q", "$route", "configurationService", "userService", service]);
+    angular.module("app.user").service(serviceId, ["$q", "$route", "configurationService", "userService", service]);
 
     function service($q, $route, configurationService, userService) {
 

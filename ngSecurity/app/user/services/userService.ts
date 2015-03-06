@@ -2,7 +2,7 @@
 
     var dataServiceId = "userService";
 
-    angular.module("user").service(dataServiceId, ["$http", "$q", "$rootScope", dataService]);
+    angular.module("app.user").service(dataServiceId, ["$http", "$q", "$rootScope", dataService]);
 
     function dataService($http, $q, $rootScope) {
         var self = this;

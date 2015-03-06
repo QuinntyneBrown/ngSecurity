@@ -1,12 +1,12 @@
 ﻿module app.user {
 
-    var app = angular.module("user", [
-        "configuration",
-        "common",
-        "core",
-        "group",
+    var app = angular.module("app.user", [
+        "app.configuration",
+        "app.common",
+        "app.core",
+        "app.group",
         "app.role",
-        "session",
+        "app.session",
         "ngRoute"])
         .config(config);
 

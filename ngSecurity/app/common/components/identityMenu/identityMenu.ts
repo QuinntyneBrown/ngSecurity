@@ -1,20 +1,25 @@
 ﻿module app.common {
+    
+    class IdentityMenu {
 
-    var componentId = "identityMenu";
+        constructor(private session) {
+            
+        }
 
-    angular.module("common").directive(componentId, ["session", component]);
+        public templateUrl = "/app/common/components/identityMenu/identityMenu.html";
 
-    function component(session) {
+        public restrict = "E";
 
-        return {
-            templateUrl: "/app/common/components/identityMenu/identityMenu.html",
-            restrict: "EA",
-            replace: true,
-            scope: {},
-            link: (scope) => {
+        public replace = true;
 
-                scope.session = session;
-            }
-        };
+        public scope = {};
+
+        link = (scope, element, attributes) => {
+
+                scope.session = this.session;
+        }
     }
+
+    angular.module("app.common").directive("identityMenu", ["session", (session) => new IdentityMenu(session)]);
+
 }

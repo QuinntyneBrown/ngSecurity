@@ -1,7 +1,7 @@
 (function () {
     "use strict";
     var serviceId = "configuration";
-    angular.module("core").service(serviceId, ["$rootScope", "storage", service]);
+    angular.module("app.core").service(serviceId, ["$rootScope", "storage", service]);
     function service($rootScope, storage) {
         var self = this;
         var data = null;

@@ -6,7 +6,6 @@ var app;
             function Alerting($timeout) {
                 var _this = this;
                 this.$timeout = $timeout;
-                this.$inject = ["$timeout"];
                 this.alertTypes = ["warning", "info", "danger", "success"];
                 this.currentAlerts = [];
                 this.addWarning = function (message) {
@@ -42,10 +41,9 @@ var app;
                     }, 10000);
                 };
             }
-            Alerting.serviceId = "alerting";
             return Alerting;
         })();
-        angular.module("common").factory(Alerting.serviceId, function ($timeout) { return new Alerting($timeout); });
+        angular.module("app.common").factory("alerting", ["$timeout", function ($timeout) { return new Alerting($timeout); }]);
     })(common = app.common || (app.common = {}));
 })(app || (app = {}));
 //# sourceMappingURL=alerting.js.map

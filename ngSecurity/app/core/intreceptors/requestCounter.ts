@@ -44,6 +44,6 @@
 
     requestCounter.$inject = ["$q"];
 
-    angular.module("core").factory(interceptorId, requestCounter);
+    angular.module("app.core").factory(interceptorId, requestCounter);
 
 }

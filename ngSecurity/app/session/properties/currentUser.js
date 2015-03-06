@@ -2,7 +2,7 @@ var app;
 (function (app) {
     var session;
     (function (session) {
-        angular.module("session").service("currentUser", function ($rootScope, storage) { return new CurrentUser($rootScope, storage); });
+        angular.module("app.session").service("currentUser", function ($rootScope, storage) { return new CurrentUser($rootScope, storage); });
         var CurrentUser = (function () {
             function CurrentUser($rootScope, storage) {
                 var _this = this;

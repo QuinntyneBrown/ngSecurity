@@ -4,6 +4,9 @@ var app;
     (function (core) {
         var ApiEndpointProvider = (function () {
             function ApiEndpointProvider() {
+                this.config = {
+                    baseUrl: "/api/"
+                };
             }
             ApiEndpointProvider.prototype.configure = function (baseUrl) {
                 this.config = {
@@ -15,7 +18,7 @@ var app;
             };
             return ApiEndpointProvider;
         })();
-        angular.module("core").provider("apiEndpointProvider", ApiEndpointProvider);
+        angular.module("app.core").provider("apiEndpoint", ApiEndpointProvider);
     })(core = app.core || (app.core = {}));
 })(app || (app = {}));
 //# sourceMappingURL=ApiEndpointProvider.js.map

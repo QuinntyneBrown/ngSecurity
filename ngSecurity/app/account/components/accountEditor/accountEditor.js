@@ -8,7 +8,6 @@ var app;
                 var _this = this;
                 this.$location = $location;
                 this.accountService = accountService;
-                this.$inject = ["$location", "accountService"];
                 this.restrict = "E";
                 this.replace = true;
                 this.scope = {};
@@ -30,10 +29,9 @@ var app;
                     };
                 };
             }
-            AccountEditor.componentId = "accountEditor";
             return AccountEditor;
         })();
-        angular.module("account").directive(AccountEditor.componentId, function ($location, accountService) { return new AccountEditor($location, accountService); });
+        angular.module("app.account").directive("accountEditor", ["$location", "accountService", function ($location, accountService) { return new AccountEditor($location, accountService); }]);
     })(account = app.account || (app.account = {}));
 })(app || (app = {}));
 //# sourceMappingURL=accountEditor.js.map

@@ -5,7 +5,6 @@ var app;
         "use strict";
         var AlertItem = (function () {
             function AlertItem() {
-                this.$inject = [];
                 this.restrict = "E";
                 this.replace = true;
                 this.scope = {
@@ -18,10 +17,9 @@ var app;
                     };
                 };
             }
-            AlertItem.componentId = "alertItem";
             return AlertItem;
         })();
-        angular.module("common").directive(AlertItem.componentId, function () { return new AlertItem(); });
+        angular.module("app.common").directive("alertItem", [function () { return new AlertItem(); }]);
     })(common = app.common || (app.common = {}));
 })(app || (app = {}));
 //# sourceMappingURL=alertItem.js.map

@@ -5,7 +5,7 @@ describe("AccountEditor Tests", function () {
     var rootScope = null;
 
     beforeEach(function () {
-        module("account");
+        module("app.account");
     });
 
     beforeEach(inject(function ($rootScope, $compile, $templateCache, getStringFromUrl) {
@@ -29,7 +29,7 @@ describe("AccountList Tests", function () {
     var rootScope = null;
 
     beforeEach(function () {
-        module("account");
+        module("app.account");
     });
 
     beforeEach(inject(function ($rootScope, $compile, $templateCache, getStringFromUrl) {

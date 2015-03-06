@@ -7,10 +7,6 @@
             
         }
 
-        public static serviceId = "alerting";
-
-        public $inject = ["$timeout"];
-
         public alertTypes = ["warning", "info", "danger", "success"];
 
         public currentAlerts = [];
@@ -57,5 +53,6 @@
 
     }
 
-    angular.module("common").factory(Alerting.serviceId,($timeout) => new Alerting($timeout));
+    angular.module("app.common").factory("alerting", ["$timeout", ($timeout) => new Alerting($timeout)]);
+
 } 

@@ -1,6 +1,6 @@
 ﻿module app.tenant {
 
-    angular.module("app.tenant", ["configuration", "common", "core", "session", "ngRoute"])
+    angular.module("app.tenant", ["app.configuration", "app.common", "app.core", "app.session", "ngRoute"])
         .config(config);
 
     config.$inject = ["$routeProvider"];

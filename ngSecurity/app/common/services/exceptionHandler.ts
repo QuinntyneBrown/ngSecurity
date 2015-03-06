@@ -1,6 +1,6 @@
 ﻿module app.common {
 
-    angular.module("common").config(($provide) => {
+    angular.module("app.common").config(($provide) => {
 
         $provide.decorator("$exceptionHandler", ($delegate, $injector) => {
             return (exception, cause) => {

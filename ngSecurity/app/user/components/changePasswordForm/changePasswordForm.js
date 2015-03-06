@@ -38,7 +38,7 @@ var app;
             ChangePasswordForm.componentId = "changePasswordForm";
             return ChangePasswordForm;
         })();
-        angular.module("user").directive(ChangePasswordForm.componentId, function (identityService, userService, $location, $routeParams) { return new ChangePasswordForm(identityService, userService, $location, $routeParams); });
+        angular.module("app.user").directive(ChangePasswordForm.componentId, function (identityService, userService, $location, $routeParams) { return new ChangePasswordForm(identityService, userService, $location, $routeParams); });
     })(user = app.user || (app.user = {}));
 })(app || (app = {}));
 //# sourceMappingURL=changePasswordForm.js.map

@@ -4,7 +4,7 @@
 
     var componentId = "userAdminMenu";
 
-    angular.module("user").directive(componentId, ["$location", "$routeParams", "session", component]);
+    angular.module("app.user").directive(componentId, ["$location", "$routeParams", "app.session", component]);
 
     function component($location, $routeParams, session) {
         return {

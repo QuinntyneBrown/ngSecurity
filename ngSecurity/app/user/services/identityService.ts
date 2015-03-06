@@ -2,7 +2,7 @@
 
     var serviceId = "identityService";
 
-    angular.module("user").service(serviceId, ["$http", "alerting", "currentUser", "formEncode", service]);
+    angular.module("app.user").service(serviceId, ["$http", "alerting", "currentUser", "formEncode", service]);
 
     function service($http, alerting, currentUser, formEncode) {
 

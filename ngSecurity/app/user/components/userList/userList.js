@@ -31,7 +31,7 @@ var app;
             UserList.componentId = "userList";
             return UserList;
         })();
-        angular.module("user").directive(UserList.componentId, function (userService) { return new UserList(userService); });
+        angular.module("app.user").directive(UserList.componentId, function (userService) { return new UserList(userService); });
     })(user = app.user || (app.user = {}));
 })(app || (app = {}));
 //# sourceMappingURL=userList.js.map

@@ -24,6 +24,6 @@
 
     }
     
-    angular.module("core").value("getStringFromUrl", getStringFromUrl);
+    angular.module("app.core").value("getStringFromUrl", getStringFromUrl);
     
 } 

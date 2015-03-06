@@ -33,7 +33,7 @@ var app;
             ProfileEditor.componentId = "profileEditor";
             return ProfileEditor;
         })();
-        angular.module("profile").directive(ProfileEditor.componentId, function ($location, profileService) { return new ProfileEditor($location, profileService); });
+        angular.module("app.profile").directive(ProfileEditor.componentId, function ($location, profileService) { return new ProfileEditor($location, profileService); });
     })(profile = app.profile || (app.profile = {}));
 })(app || (app = {}));
 //# sourceMappingURL=profileEditor.js.map

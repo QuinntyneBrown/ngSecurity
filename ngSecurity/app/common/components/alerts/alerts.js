@@ -7,7 +7,6 @@ var app;
             function Alerts(alerting) {
                 var _this = this;
                 this.alerting = alerting;
-                this.$inject = ["alerting"];
                 this.restrict = "E";
                 this.replace = true;
                 this.scope = {};
@@ -19,10 +18,9 @@ var app;
                     scope.currentAlerts = _this.alerting.currentAlerts;
                 };
             }
-            Alerts.componentId = "alerts";
             return Alerts;
         })();
-        angular.module("common").directive(Alerts.componentId, function (alerting) { return new Alerts(alerting); });
+        angular.module("app.common").directive("alerts", ["alerting", function (alerting) { return new Alerts(alerting); }]);
     })(common = app.common || (app.common = {}));
 })(app || (app = {}));
 //# sourceMappingURL=alerts.js.map

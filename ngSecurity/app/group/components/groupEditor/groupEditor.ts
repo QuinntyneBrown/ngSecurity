@@ -44,6 +44,6 @@ module app.group {
         }
     }
 
-    angular.module("group").directive(GroupEditor.componentId,($location, groupService) => new GroupEditor($location, groupService));
+    angular.module("app.group").directive(GroupEditor.componentId,($location, groupService) => new GroupEditor($location, groupService));
 
 }

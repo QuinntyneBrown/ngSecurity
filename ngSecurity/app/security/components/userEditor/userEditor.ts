@@ -2,7 +2,9 @@ module app.security {
 
     class UserEditor {
 
-        public static componentId: string = "userEditor";
+        constructor(private $location, private $routeParams, private securityUow) {
+
+        }
 
         public replace: boolean = true;
 
@@ -45,13 +47,8 @@ module app.security {
             }
         }
 
-        public $inject: string[] = ["$location", "userService"];
-
-        constructor(private $location, private $routeParams, private securityUow) {
-
-        }
     }
 
-    angular.module("app.security").directive(UserEditor.componentId,($location, $routeParams, securityUow) => new UserEditor($location, $routeParams, securityUow));
+    angular.module("app.security").directive("userEditor", ["$location", "$routeParams", "securityUow",($location, $routeParams, securityUow) => new UserEditor($location, $routeParams, securityUow)]);
 
 }
