@@ -1,5 +1,8 @@
-var CoreModule;
-(function (CoreModule) {
-    "use strict";
-})(CoreModule || (CoreModule = {}));
+var app;
+(function (app) {
+    var core;
+    (function (core) {
+        "use strict";
+    })(core = app.core || (app.core = {}));
+})(app || (app = {}));
 //# sourceMappingURL=IApiEndpointConfig.js.map

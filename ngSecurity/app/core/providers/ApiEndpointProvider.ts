@@ -1,4 +1,4 @@
-﻿module CoreModule {
+﻿module app.core {
     class ApiEndpointProvider implements ng.IServiceProvider, IApiEndpointProvider {
         config: IApiEndpointConfig;
 

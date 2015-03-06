@@ -1,4 +1,4 @@
-﻿module GroupModule {
+﻿module app.group {
 
     angular.module("group", ["configuration", "common", "core", "session", "ngRoute"])
         .config(config);

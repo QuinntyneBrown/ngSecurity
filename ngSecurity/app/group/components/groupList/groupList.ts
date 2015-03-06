@@ -1,4 +1,4 @@
-module GroupModule {
+module app.group {
 
     class GroupList {
 

@@ -1,4 +1,4 @@
-﻿module CommonModule {
+﻿module app.common {
     
     export interface IAlerting {
         

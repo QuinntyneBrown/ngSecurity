@@ -1,4 +1,4 @@
-﻿module UserModule {
+﻿module app.user {
 
     "use strict";
 

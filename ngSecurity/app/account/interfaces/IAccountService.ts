@@ -1,4 +1,4 @@
-﻿ module AccountModule {
+﻿ module app.account {
      
      export interface IAccountService extends  IDataService {
          

@@ -1,4 +1,4 @@
-﻿module CommonModule {
+﻿module app.common {
 
     angular.module("common").config(($provide) => {
 

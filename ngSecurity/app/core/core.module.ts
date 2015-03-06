@@ -1,4 +1,4 @@
-﻿module CoreModule {
+﻿module app.core {
 
     var app = angular.module("core", ["configuration", "session"])
         .config(config)

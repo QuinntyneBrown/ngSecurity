@@ -1,4 +1,4 @@
-﻿module ProfileModule {
+﻿module app.profile {
 
     angular.module("profile", ["configuration", "common", "core", "session", "ngRoute"])
         .config(config);

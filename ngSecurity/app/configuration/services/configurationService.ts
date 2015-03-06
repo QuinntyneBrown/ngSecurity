@@ -1,4 +1,4 @@
-﻿module ConfigurationModule {
+﻿module app.configuration {
 
     export class ConfigurationService implements IConfigurationService {
         

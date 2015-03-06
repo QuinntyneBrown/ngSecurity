@@ -1,1 +1,1 @@
-{"version":3,"file":"IApiEndpointConfig.js","sourceRoot":"","sources":["IApiEndpointConfig.ts"],"names":["CoreModule"],"mappings":"AAAC,IAAO,UAAU,CAOhB;AAPD,WAAO,UAAU,EAAC,CAAC;IAEfA,YAAYA,CAACA;IAIZA,JACLA,CAACA,EAPM,UAAU,KAAV,UAAU,QAOhB"}
+{"version":3,"file":"IApiEndpointConfig.js","sourceRoot":"","sources":["IApiEndpointConfig.ts"],"names":["app","app.core"],"mappings":"AAAC,IAAO,GAAG,CAOT;AAPD,WAAO,GAAG;IAACA,IAAAA,IAAIA,CAOdA;IAPUA,WAAAA,IAAIA,EAACA,CAACA;QAEbC,YAAYA,CAACA;QAIZA,JACLA,CAACA,EAPUD,IAAIA,GAAJA,QAAIA,KAAJA,QAAIA,QAOdA;AAADA,CAACA,EAPM,GAAG,KAAH,GAAG,QAOT"}

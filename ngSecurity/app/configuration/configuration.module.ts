@@ -1,4 +1,4 @@
-﻿module ConfigurationModule {
+﻿module app.configuration {
 
     var app = angular.module("configuration", []);
 }

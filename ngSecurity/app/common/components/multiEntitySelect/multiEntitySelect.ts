@@ -1,4 +1,4 @@
-module CommonModule {
+module app.common {
 
     class MultiEntitySelect {
 

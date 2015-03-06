@@ -1,4 +1,4 @@
-module UserModule {
+module app.user {
 
     export class UserDropDownList {
 

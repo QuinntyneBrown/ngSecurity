@@ -1,4 +1,4 @@
-﻿module UserModule {
+﻿module app.user {
 
     export interface IPreferencesService {
 

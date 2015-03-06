@@ -1,4 +1,4 @@
-﻿module AccountModule {
+﻿module app.account {
 
     angular.module("account", ["configuration", "common", "core", "session", "ngRoute"])
         .config(config);

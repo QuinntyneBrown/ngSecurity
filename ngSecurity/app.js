@@ -1,574 +1,640 @@
-var AccountModule;
-(function (AccountModule) {
-    angular.module("account", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
-    config.$inject = ["$routeProvider"];
-    function config($routeProvider) {
-        $routeProvider.when("/account/add", {
-            templateUrl: ""
-        });
-        $routeProvider.when("/account/list", {
-            templateUrl: ""
-        });
-    }
-})(AccountModule || (AccountModule = {}));
-//# sourceMappingURL=account.module.js.map
-var AccountModule;
-(function (AccountModule) {
-    "use strict";
-    var AccountEditor = (function () {
-        function AccountEditor($location, accountService) {
-            var _this = this;
-            this.$location = $location;
-            this.accountService = accountService;
-            this.$inject = ["$location", "accountService"];
-            this.restrict = "E";
-            this.replace = true;
-            this.scope = {};
-            this.templateUrl = "/app/account/components/accountEditor/accountEditor.html";
-            this.link = function (scope, element, attributes) {
-                scope.vm = {};
-                scope.vm.entity = scope.entity;
-                scope.tryToSave = function (form) {
-                    if (scope.vm.entity.id) {
-                        return _this.accountService.update({ entity: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/account/list");
-                        });
-                    }
-                    else {
-                        return _this.accountService.add({ entity: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/account/list");
-                        });
-                    }
-                };
-            };
+var app;
+(function (app) {
+    var account;
+    (function (account) {
+        angular.module("account", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
+        config.$inject = ["$routeProvider"];
+        function config($routeProvider) {
+            $routeProvider.when("/account/add", {
+                templateUrl: ""
+            });
+            $routeProvider.when("/account/list", {
+                templateUrl: ""
+            });
         }
-        AccountEditor.componentId = "accountEditor";
-        return AccountEditor;
-    })();
-    angular.module("account").directive(AccountEditor.componentId, function ($location, accountService) { return new AccountEditor($location, accountService); });
-})(AccountModule || (AccountModule = {}));
-//# sourceMappingURL=accountEditor.js.map
-var AccountModule;
-(function (AccountModule) {
-    "use strict";
-    var AccountList = (function () {
-        function AccountList(accountService) {
-            var _this = this;
-            this.accountService = accountService;
-            this.$inject = ["accountService"];
-            this.restrict = "E";
-            this.replace = true;
-            this.scope = {};
-            this.templateUrl = "/app/account/components/accountList/accountList.html";
-            this.link = function (scope, element, attributes) {
-                scope.vm = {};
-                scope.vm.remove = function (entity) {
-                    return _this.accountService.remove({ id: entity.id }).then(function () {
-                        for (var i = 0; i < scope.vm.entities.length; i++) {
-                            if (scope.vm.entities[i].id == entity.id) {
-                                scope.vm.entities.splice(i, 1);
-                            }
+    })(account = app.account || (app.account = {}));
+})(app || (app = {}));
+//# sourceMappingURL=account.module.js.map
+var app;
+(function (app) {
+    var account;
+    (function (account) {
+        "use strict";
+        var AccountEditor = (function () {
+            function AccountEditor($location, accountService) {
+                var _this = this;
+                this.$location = $location;
+                this.accountService = accountService;
+                this.$inject = ["$location", "accountService"];
+                this.restrict = "E";
+                this.replace = true;
+                this.scope = {};
+                this.templateUrl = "/app/account/components/accountEditor/accountEditor.html";
+                this.link = function (scope, element, attributes) {
+                    scope.vm = {};
+                    scope.vm.entity = scope.entity;
+                    scope.tryToSave = function (form) {
+                        if (scope.vm.entity.id) {
+                            return _this.accountService.update({ entity: scope.vm.entity }).then(function (results) {
+                                _this.$location.path("/account/list");
+                            });
                         }
-                    }).catch(function (error) {
+                        else {
+                            return _this.accountService.add({ entity: scope.vm.entity }).then(function (results) {
+                                _this.$location.path("/account/list");
+                            });
+                        }
+                    };
+                };
+            }
+            AccountEditor.componentId = "accountEditor";
+            return AccountEditor;
+        })();
+        angular.module("account").directive(AccountEditor.componentId, function ($location, accountService) { return new AccountEditor($location, accountService); });
+    })(account = app.account || (app.account = {}));
+})(app || (app = {}));
+//# sourceMappingURL=accountEditor.js.map
+var app;
+(function (app) {
+    var account;
+    (function (account) {
+        "use strict";
+        var AccountList = (function () {
+            function AccountList(accountService) {
+                var _this = this;
+                this.accountService = accountService;
+                this.$inject = ["accountService"];
+                this.restrict = "E";
+                this.replace = true;
+                this.scope = {};
+                this.templateUrl = "/app/account/components/accountList/accountList.html";
+                this.link = function (scope, element, attributes) {
+                    scope.vm = {};
+                    scope.vm.remove = function (entity) {
+                        return _this.accountService.remove({ id: entity.id }).then(function () {
+                            for (var i = 0; i < scope.vm.entities.length; i++) {
+                                if (scope.vm.entities[i].id == entity.id) {
+                                    scope.vm.entities.splice(i, 1);
+                                }
+                            }
+                        }).catch(function (error) {
+                        });
+                    };
+                    return _this.accountService.getAll().then(function (results) {
+                        return scope.vm.entities = results;
                     });
                 };
-                return _this.accountService.getAll().then(function (results) {
-                    return scope.vm.entities = results;
-                });
-            };
-        }
-        AccountList.componentId = "accountList";
-        return AccountList;
-    })();
-    angular.module("account").directive(AccountList.componentId, function (accountService) { return new AccountList(accountService); });
-})(AccountModule || (AccountModule = {}));
+            }
+            AccountList.componentId = "accountList";
+            return AccountList;
+        })();
+        angular.module("account").directive(AccountList.componentId, function (accountService) { return new AccountList(accountService); });
+    })(account = app.account || (app.account = {}));
+})(app || (app = {}));
 //# sourceMappingURL=accountList.js.map
 //# sourceMappingURL=IAccountService.js.map
-var AccountModule;
-(function (AccountModule) {
-    "use strict";
-    var AccountService = (function () {
-        function AccountService($http, $q, $rootScope, configurationService) {
-            var _this = this;
-            this.$http = $http;
-            this.$q = $q;
-            this.$rootScope = $rootScope;
-            this.configurationService = configurationService;
-            this.dataStore = {
-                getAll: null,
-                getById: null,
-                pages: []
-            };
-            this.clearDataStore = function () {
-                _this.dataStore = {
+var app;
+(function (app) {
+    var account;
+    (function (account) {
+        "use strict";
+        var AccountService = (function () {
+            function AccountService($http, $q, $rootScope, configurationService) {
+                var _this = this;
+                this.$http = $http;
+                this.$q = $q;
+                this.$rootScope = $rootScope;
+                this.configurationService = configurationService;
+                this.dataStore = {
                     getAll: null,
                     getById: null,
                     pages: []
                 };
-            };
-            this.getBaseUri = function () {
-                if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
-                    return "api/" + _this.$rootScope.configuration.apiVersion + "/account/";
-                }
-                else {
-                    return "api/account/";
-                }
-            };
-            this.add = function (options) {
-                var deferred = _this.$q.defer();
-                _this.$http({ method: "POST", url: _this.getBaseUri() + "add", data: options.entity }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.remove = function (options) {
-                var deferred = _this.$q.defer();
-                _this.$http({ method: "DELETE", url: _this.getBaseUri() + "remove?id=" + options.id }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getAll = function () {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getAll) {
-                    deferred.resolve(_this.dataStore.getAll);
-                    return deferred.promise;
-                }
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
-                    _this.dataStore.getAll = results.data;
-                    deferred.resolve(results.data);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getById = function (id) {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getById && _this.dataStore.getById.id == id) {
-                    deferred.resolve(_this.dataStore.getById);
-                    return deferred.promise;
-                }
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getbyid?id=" + id }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getPage = function (offset, setSize) {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getAll) {
-                    deferred.resolve(_this.dataStore.getAll);
-                    return deferred.promise;
-                }
-                ;
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.$rootScope.$on("$locationChangeStart", function () {
-                _this.clearDataStore();
-            });
-        }
-        AccountService.serviceId = "accountService";
-        AccountService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
-        return AccountService;
-    })();
-    AccountModule.AccountService = AccountService;
-    angular.module("account").service(AccountService.serviceId, function ($http, $q, $rootScope, configurationService) { return new AccountService($http, $q, $rootScope, configurationService); });
-})(AccountModule || (AccountModule = {}));
-//# sourceMappingURL=accountService.js.map
-var CommonModule;
-(function (CommonModule) {
-    var app = angular.module("common", ["configuration", "core", "session"]);
-})(CommonModule || (CommonModule = {}));
-//# sourceMappingURL=common.module.js.map
-var CommonModule;
-(function (CommonModule) {
-    "use strict";
-    var AlertItem = (function () {
-        function AlertItem() {
-            this.$inject = [];
-            this.restrict = "E";
-            this.replace = true;
-            this.scope = {
-                alert: "="
-            };
-            this.templateUrl = "/app/common/components/alertItem/alertItem.html";
-            this.link = function (scope, element, attributes) {
-                scope.removeAlert = function (alert) {
-                    this.alerting.removeAlert(alert);
-                };
-            };
-        }
-        AlertItem.componentId = "alertItem";
-        return AlertItem;
-    })();
-    angular.module("common").directive(AlertItem.componentId, function () { return new AlertItem(); });
-})(CommonModule || (CommonModule = {}));
-//# sourceMappingURL=alertItem.js.map
-var CommonModule;
-(function (CommonModule) {
-    "use strict";
-    var Alerts = (function () {
-        function Alerts(alerting) {
-            var _this = this;
-            this.alerting = alerting;
-            this.$inject = ["alerting"];
-            this.restrict = "E";
-            this.replace = true;
-            this.scope = {};
-            this.templateUrl = "/app/common/components/alerts/alerts.html";
-            this.link = function (scope, element, attributes) {
-                scope.removeAlert = function (alert) {
-                    this.alerting.removeAlert(alert);
-                };
-                scope.currentAlerts = _this.alerting.currentAlerts;
-            };
-        }
-        Alerts.componentId = "alerts";
-        return Alerts;
-    })();
-    angular.module("common").directive(Alerts.componentId, function (alerting) { return new Alerts(alerting); });
-})(CommonModule || (CommonModule = {}));
-//# sourceMappingURL=alerts.js.map
-var CommonModule;
-(function (CommonModule) {
-    "use strict";
-    var EntityAdminMenu = (function () {
-        function EntityAdminMenu() {
-            this.$inject = [];
-            this.restrict = "E";
-            this.replace = true;
-            this.scope = {};
-            this.templateUrl = "/app/common/components/entityAdminMenu/entityAdminMenu.html";
-            this.link = function (scope, element, attributes) {
-                scope.entityNameLowerCase = attributes.entityName.toLowerCase().replace(" ", "");
-                scope.entityName = attributes.entityName;
-                scope.entityNamePluralized = attributes.entityNamePluralized;
-            };
-        }
-        EntityAdminMenu.componentId = "entityAdminMenu";
-        return EntityAdminMenu;
-    })();
-    angular.module("common").directive(EntityAdminMenu.componentId, function () { return new EntityAdminMenu(); });
-})(CommonModule || (CommonModule = {}));
-//# sourceMappingURL=entityAdminMenu.js.map
-var CommonModule;
-(function (CommonModule) {
-    var componentId = "identityMenu";
-    angular.module("common").directive(componentId, ["session", component]);
-    function component(session) {
-        return {
-            templateUrl: "/app/common/components/identityMenu/identityMenu.html",
-            restrict: "EA",
-            replace: true,
-            scope: {},
-            link: function (scope) {
-                scope.session = session;
-            }
-        };
-    }
-})(CommonModule || (CommonModule = {}));
-//# sourceMappingURL=identityMenu.js.map
-var CommonModule;
-(function (CommonModule) {
-    var MultiEntitySelect = (function () {
-        function MultiEntitySelect() {
-            this.restrict = "E";
-            this.replace = true;
-            this.templateUrl = "/app/common/components/multiEntitySelect/multiEntitySelect.html";
-            this.scope = {
-                parentEntities: "=",
-                entityService: "="
-            };
-            this.link = function (scope, element, attributes) {
-                scope.parentEntities = scope.parentEntities || [];
-                scope.entityNamePlural = attributes.entityNamePlural;
-                scope.$watch("selectedId", function () {
-                    scope.processSelectedIdChange();
-                    scope.selectedId = null;
-                });
-                scope.processSelectedIdChange = function () {
-                    if (scope.selectedId) {
-                        for (var i = 0; i < scope.parentEntities.length; i++) {
-                            if (scope.parentEntities[i].id == scope.selectedId) {
-                                scope.parentEntities.splice(i, 1);
-                                return;
-                            }
-                        }
-                        for (var i = 0; i < scope.vm.entities.length; i++) {
-                            if (scope.vm.entities[i].id == scope.selectedId) {
-                                scope.parentEntities.push(scope.vm.entities[i]);
-                            }
-                        }
-                    }
-                };
-                return scope.entityService.getAll().then(function (results) {
-                    scope.vm = {
-                        entities: results
+                this.clearDataStore = function () {
+                    _this.dataStore = {
+                        getAll: null,
+                        getById: null,
+                        pages: []
                     };
-                });
-            };
-        }
-        MultiEntitySelect.componentId = "multiEntitySelect";
-        return MultiEntitySelect;
-    })();
-    angular.module("common").directive(MultiEntitySelect.componentId, function () { return new MultiEntitySelect(); });
-})(CommonModule || (CommonModule = {}));
-//# sourceMappingURL=multiEntitySelect.js.map
-var CommonModule;
-(function (CommonModule) {
-    "use strict";
-    var workSpinner = function ($rootScope, requestCounter) {
-        return {
-            restrict: "E",
-            scope: {},
-            //template: "<div ng-show='requestCount' class='work-spinner'><img src='images/common/ajax-loader.gif' /></div>",
-            template: "<div ng-show='requestCount' class='work-spinner'><i class='fa fa-spinner fa-spin fade'></i></div>",
-            link: function (scope) {
-                scope.$watch(function () {
-                    return requestCounter.getRequestCount();
-                }, function (requestCount) {
-                    scope.requestCount = requestCount;
+                };
+                this.getBaseUri = function () {
+                    if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
+                        return "api/" + _this.$rootScope.configuration.apiVersion + "/account/";
+                    }
+                    else {
+                        return "api/account/";
+                    }
+                };
+                this.add = function (options) {
+                    var deferred = _this.$q.defer();
+                    _this.$http({ method: "POST", url: _this.getBaseUri() + "add", data: options.entity }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.remove = function (options) {
+                    var deferred = _this.$q.defer();
+                    _this.$http({ method: "DELETE", url: _this.getBaseUri() + "remove?id=" + options.id }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.getAll = function () {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getAll) {
+                        deferred.resolve(_this.dataStore.getAll);
+                        return deferred.promise;
+                    }
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                        _this.dataStore.getAll = results.data;
+                        deferred.resolve(results.data);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.getById = function (id) {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getById && _this.dataStore.getById.id == id) {
+                        deferred.resolve(_this.dataStore.getById);
+                        return deferred.promise;
+                    }
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getbyid?id=" + id }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.getPage = function (offset, setSize) {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getAll) {
+                        deferred.resolve(_this.dataStore.getAll);
+                        return deferred.promise;
+                    }
+                    ;
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.$rootScope.$on("$locationChangeStart", function () {
+                    _this.clearDataStore();
                 });
             }
-        };
-    };
-    var componentId = "workSpinner";
-    workSpinner.$inject = ["$rootScope", "requestCounter"];
-    angular.module("common").directive(componentId, workSpinner);
-})(CommonModule || (CommonModule = {}));
-//# sourceMappingURL=workSpinner.js.map
-var CommonModule;
-(function (CommonModule) {
-    var Alerting = (function () {
-        function Alerting($timeout) {
-            var _this = this;
-            this.$timeout = $timeout;
-            this.$inject = ["$timeout"];
-            this.alertTypes = ["warning", "info", "danger", "success"];
-            this.currentAlerts = [];
-            this.addWarning = function (message) {
-                _this.addAlert("warning", message);
-            };
-            this.addInfo = function (message) {
-                _this.addAlert("info", message);
-            };
-            this.addDanger = function (message) {
-                _this.addAlert("danger", message);
-            };
-            this.addSuccess = function (message) {
-                _this.addAlert("success", message);
-            };
-            this.errorHandler = function (description) {
-                return function () {
-                    _this.addDanger(description);
+            AccountService.serviceId = "accountService";
+            AccountService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
+            return AccountService;
+        })();
+        account.AccountService = AccountService;
+        angular.module("account").service(AccountService.serviceId, function ($http, $q, $rootScope, configurationService) { return new AccountService($http, $q, $rootScope, configurationService); });
+    })(account = app.account || (app.account = {}));
+})(app || (app = {}));
+//# sourceMappingURL=accountService.js.map
+var app;
+(function (_app) {
+    var common;
+    (function (common) {
+        var app = angular.module("common", ["configuration", "core", "session"]);
+    })(common = _app.common || (_app.common = {}));
+})(app || (app = {}));
+//# sourceMappingURL=common.module.js.map
+var app;
+(function (app) {
+    var common;
+    (function (common) {
+        "use strict";
+        var AlertItem = (function () {
+            function AlertItem() {
+                this.$inject = [];
+                this.restrict = "E";
+                this.replace = true;
+                this.scope = {
+                    alert: "="
                 };
-            };
-            this.removeAlert = function (alert) {
-                for (var i = 0; i < _this.currentAlerts.length; i++) {
-                    if (_this.currentAlerts[i] == alert) {
-                        _this.currentAlerts.splice(i, 1);
-                        break;
-                    }
+                this.templateUrl = "/app/common/components/alertItem/alertItem.html";
+                this.link = function (scope, element, attributes) {
+                    scope.removeAlert = function (alert) {
+                        this.alerting.removeAlert(alert);
+                    };
+                };
+            }
+            AlertItem.componentId = "alertItem";
+            return AlertItem;
+        })();
+        angular.module("common").directive(AlertItem.componentId, function () { return new AlertItem(); });
+    })(common = app.common || (app.common = {}));
+})(app || (app = {}));
+//# sourceMappingURL=alertItem.js.map
+var app;
+(function (app) {
+    var common;
+    (function (common) {
+        "use strict";
+        var Alerts = (function () {
+            function Alerts(alerting) {
+                var _this = this;
+                this.alerting = alerting;
+                this.$inject = ["alerting"];
+                this.restrict = "E";
+                this.replace = true;
+                this.scope = {};
+                this.templateUrl = "/app/common/components/alerts/alerts.html";
+                this.link = function (scope, element, attributes) {
+                    scope.removeAlert = function (alert) {
+                        this.alerting.removeAlert(alert);
+                    };
+                    scope.currentAlerts = _this.alerting.currentAlerts;
+                };
+            }
+            Alerts.componentId = "alerts";
+            return Alerts;
+        })();
+        angular.module("common").directive(Alerts.componentId, function (alerting) { return new Alerts(alerting); });
+    })(common = app.common || (app.common = {}));
+})(app || (app = {}));
+//# sourceMappingURL=alerts.js.map
+var app;
+(function (app) {
+    var common;
+    (function (common) {
+        "use strict";
+        var EntityAdminMenu = (function () {
+            function EntityAdminMenu() {
+                this.$inject = [];
+                this.restrict = "E";
+                this.replace = true;
+                this.scope = {};
+                this.templateUrl = "/app/common/components/entityAdminMenu/entityAdminMenu.html";
+                this.link = function (scope, element, attributes) {
+                    scope.entityNameLowerCase = attributes.entityName.toLowerCase().replace(" ", "");
+                    scope.entityName = attributes.entityName;
+                    scope.entityNamePluralized = attributes.entityNamePluralized;
+                };
+            }
+            EntityAdminMenu.componentId = "entityAdminMenu";
+            return EntityAdminMenu;
+        })();
+        angular.module("common").directive(EntityAdminMenu.componentId, function () { return new EntityAdminMenu(); });
+    })(common = app.common || (app.common = {}));
+})(app || (app = {}));
+//# sourceMappingURL=entityAdminMenu.js.map
+var app;
+(function (app) {
+    var common;
+    (function (common) {
+        var componentId = "identityMenu";
+        angular.module("common").directive(componentId, ["session", component]);
+        function component(session) {
+            return {
+                templateUrl: "/app/common/components/identityMenu/identityMenu.html",
+                restrict: "EA",
+                replace: true,
+                scope: {},
+                link: function (scope) {
+                    scope.session = session;
                 }
             };
-            this.addAlert = function (type, message) {
-                var alert = { type: type, message: message };
-                _this.currentAlerts.push(alert);
-                _this.$timeout(function () {
-                    _this.removeAlert(alert);
-                }, 10000);
-            };
         }
-        Alerting.serviceId = "alerting";
-        return Alerting;
-    })();
-    angular.module("common").factory(Alerting.serviceId, function ($timeout) { return new Alerting($timeout); });
-})(CommonModule || (CommonModule = {}));
-//# sourceMappingURL=alerting.js.map
-var CommonModule;
-(function (CommonModule) {
-    angular.module("common").config(function ($provide) {
-        $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
-            return function (exception, cause) {
-                $delegate(exception, cause);
-                var alerting = $injector.get("alerting");
-                alerting.addDanger(exception.message);
-            };
-        });
-    });
-})(CommonModule || (CommonModule = {}));
-//# sourceMappingURL=exceptionHandler.js.map
-//# sourceMappingURL=IAlerting.js.map
-var ConfigurationModule;
-(function (ConfigurationModule) {
-    var app = angular.module("configuration", []);
-})(ConfigurationModule || (ConfigurationModule = {}));
-//# sourceMappingURL=configuration.module.js.map
-var ConfigurationModule;
-(function (ConfigurationModule) {
-    var ConfigurationService = (function () {
-        function ConfigurationService($http, $q, $rootScope) {
-            this.$http = $http;
-            this.$q = $q;
-            this.$rootScope = $rootScope;
-            this.baseUri = "api/configuration/";
-        }
-        ConfigurationService.prototype.get = function () {
-            var _this = this;
-            var deferred = this.$q.defer();
-            this.$http({ method: "GET", url: this.baseUri + "get" }).then(function (results) {
-                deferred.resolve(_this.$rootScope.configuration = results.data);
-            }).catch(function (error) {
-                deferred.reject(error);
-            });
-            return deferred.promise;
-        };
-        ConfigurationService.serviceId = "configurationService";
-        return ConfigurationService;
-    })();
-    ConfigurationModule.ConfigurationService = ConfigurationService;
-    angular.module("configuration").service(ConfigurationService.serviceId, ["$http", "$q", "$rootScope", function ($http, $q, $rootScope) { return new ConfigurationService($http, $q, $rootScope); }]);
-})(ConfigurationModule || (ConfigurationModule = {}));
-//# sourceMappingURL=configurationService.js.map
-//# sourceMappingURL=IConfigurationService.js.map
-var CoreModule;
-(function (CoreModule) {
-    var app = angular.module("core", ["configuration", "session"]).config(config).run(run);
-    config.$inject = ["$httpProvider"];
-    function config($httpProvider) {
-        $httpProvider.interceptors.push("authorizationInterceptor");
-        $httpProvider.interceptors.push("requestCounter");
-    }
-    run.$inject = ["$http", "$location", "$rootScope", "$route", "$templateCache", "currentUser", "token"];
-    function run($http, $location, $rootScope, $route, $templateCache, currentUser, token) {
-        $rootScope.$on("$routeChangeStart", function (event, newUrl) {
-            $rootScope.inViewTransition = true;
-            if (newUrl.originalPath == "/signin") {
-                token.set({ data: null });
+    })(common = app.common || (app.common = {}));
+})(app || (app = {}));
+//# sourceMappingURL=identityMenu.js.map
+var app;
+(function (app) {
+    var common;
+    (function (common) {
+        var MultiEntitySelect = (function () {
+            function MultiEntitySelect() {
+                this.restrict = "E";
+                this.replace = true;
+                this.templateUrl = "/app/common/components/multiEntitySelect/multiEntitySelect.html";
+                this.scope = {
+                    parentEntities: "=",
+                    entityService: "="
+                };
+                this.link = function (scope, element, attributes) {
+                    scope.parentEntities = scope.parentEntities || [];
+                    scope.entityNamePlural = attributes.entityNamePlural;
+                    scope.$watch("selectedId", function () {
+                        scope.processSelectedIdChange();
+                        scope.selectedId = null;
+                    });
+                    scope.processSelectedIdChange = function () {
+                        if (scope.selectedId) {
+                            for (var i = 0; i < scope.parentEntities.length; i++) {
+                                if (scope.parentEntities[i].id == scope.selectedId) {
+                                    scope.parentEntities.splice(i, 1);
+                                    return;
+                                }
+                            }
+                            for (var i = 0; i < scope.vm.entities.length; i++) {
+                                if (scope.vm.entities[i].id == scope.selectedId) {
+                                    scope.parentEntities.push(scope.vm.entities[i]);
+                                }
+                            }
+                        }
+                    };
+                    return scope.entityService.getAll().then(function (results) {
+                        scope.vm = {
+                            entities: results
+                        };
+                    });
+                };
             }
-            ;
-            if (newUrl.$$route && newUrl.$$route.authorizationRequired) {
-                if (token.get() == null) {
-                    $rootScope.$evalAsync(function () {
-                        $location.path("/signin");
+            MultiEntitySelect.componentId = "multiEntitySelect";
+            return MultiEntitySelect;
+        })();
+        angular.module("common").directive(MultiEntitySelect.componentId, function () { return new MultiEntitySelect(); });
+    })(common = app.common || (app.common = {}));
+})(app || (app = {}));
+//# sourceMappingURL=multiEntitySelect.js.map
+var app;
+(function (app) {
+    var common;
+    (function (common) {
+        "use strict";
+        var workSpinner = function ($rootScope, requestCounter) {
+            return {
+                restrict: "E",
+                scope: {},
+                //template: "<div ng-show='requestCount' class='work-spinner'><img src='images/common/ajax-loader.gif' /></div>",
+                template: "<div ng-show='requestCount' class='work-spinner'><i class='fa fa-spinner fa-spin fade'></i></div>",
+                link: function (scope) {
+                    scope.$watch(function () {
+                        return requestCounter.getRequestCount();
+                    }, function (requestCount) {
+                        scope.requestCount = requestCount;
                     });
                 }
+            };
+        };
+        var componentId = "workSpinner";
+        workSpinner.$inject = ["$rootScope", "requestCounter"];
+        angular.module("common").directive(componentId, workSpinner);
+    })(common = app.common || (app.common = {}));
+})(app || (app = {}));
+//# sourceMappingURL=workSpinner.js.map
+var app;
+(function (app) {
+    var common;
+    (function (common) {
+        var Alerting = (function () {
+            function Alerting($timeout) {
+                var _this = this;
+                this.$timeout = $timeout;
+                this.$inject = ["$timeout"];
+                this.alertTypes = ["warning", "info", "danger", "success"];
+                this.currentAlerts = [];
+                this.addWarning = function (message) {
+                    _this.addAlert("warning", message);
+                };
+                this.addInfo = function (message) {
+                    _this.addAlert("info", message);
+                };
+                this.addDanger = function (message) {
+                    _this.addAlert("danger", message);
+                };
+                this.addSuccess = function (message) {
+                    _this.addAlert("success", message);
+                };
+                this.errorHandler = function (description) {
+                    return function () {
+                        _this.addDanger(description);
+                    };
+                };
+                this.removeAlert = function (alert) {
+                    for (var i = 0; i < _this.currentAlerts.length; i++) {
+                        if (_this.currentAlerts[i] == alert) {
+                            _this.currentAlerts.splice(i, 1);
+                            break;
+                        }
+                    }
+                };
+                this.addAlert = function (type, message) {
+                    var alert = { type: type, message: message };
+                    _this.currentAlerts.push(alert);
+                    _this.$timeout(function () {
+                        _this.removeAlert(alert);
+                    }, 10000);
+                };
+            }
+            Alerting.serviceId = "alerting";
+            return Alerting;
+        })();
+        angular.module("common").factory(Alerting.serviceId, function ($timeout) { return new Alerting($timeout); });
+    })(common = app.common || (app.common = {}));
+})(app || (app = {}));
+//# sourceMappingURL=alerting.js.map
+var app;
+(function (app) {
+    var common;
+    (function (common) {
+        angular.module("common").config(function ($provide) {
+            $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
+                return function (exception, cause) {
+                    $delegate(exception, cause);
+                    var alerting = $injector.get("alerting");
+                    alerting.addDanger(exception.message);
+                };
+            });
+        });
+    })(common = app.common || (app.common = {}));
+})(app || (app = {}));
+//# sourceMappingURL=exceptionHandler.js.map
+//# sourceMappingURL=IAlerting.js.map
+var app;
+(function (_app) {
+    var configuration;
+    (function (configuration) {
+        var app = angular.module("configuration", []);
+    })(configuration = _app.configuration || (_app.configuration = {}));
+})(app || (app = {}));
+//# sourceMappingURL=configuration.module.js.map
+var app;
+(function (app) {
+    var configuration;
+    (function (configuration) {
+        var ConfigurationService = (function () {
+            function ConfigurationService($http, $q, $rootScope) {
+                this.$http = $http;
+                this.$q = $q;
+                this.$rootScope = $rootScope;
+                this.baseUri = "api/configuration/";
+            }
+            ConfigurationService.prototype.get = function () {
+                var _this = this;
+                var deferred = this.$q.defer();
+                this.$http({ method: "GET", url: this.baseUri + "get" }).then(function (results) {
+                    deferred.resolve(_this.$rootScope.configuration = results.data);
+                }).catch(function (error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            };
+            ConfigurationService.serviceId = "configurationService";
+            return ConfigurationService;
+        })();
+        configuration.ConfigurationService = ConfigurationService;
+        angular.module("configuration").service(ConfigurationService.serviceId, ["$http", "$q", "$rootScope", function ($http, $q, $rootScope) { return new ConfigurationService($http, $q, $rootScope); }]);
+    })(configuration = app.configuration || (app.configuration = {}));
+})(app || (app = {}));
+//# sourceMappingURL=configurationService.js.map
+//# sourceMappingURL=IConfigurationService.js.map
+var app;
+(function (_app) {
+    var core;
+    (function (core) {
+        var app = angular.module("core", ["configuration", "session"]).config(config).run(run);
+        config.$inject = ["$httpProvider"];
+        function config($httpProvider) {
+            $httpProvider.interceptors.push("authorizationInterceptor");
+            $httpProvider.interceptors.push("requestCounter");
+        }
+        run.$inject = ["$http", "$location", "$rootScope", "$route", "$templateCache", "currentUser", "token"];
+        function run($http, $location, $rootScope, $route, $templateCache, currentUser, token) {
+            $rootScope.$on("$routeChangeStart", function (event, newUrl) {
+                $rootScope.inViewTransition = true;
+                if (newUrl.originalPath == "/signin") {
+                    token.set({ data: null });
+                }
                 ;
-            }
-            ;
-        });
-        $rootScope.$on("$viewContentLoaded", function () {
-            $rootScope.inViewTransition = false;
-            if ($route.current.$$route.authorizationRequired && (currentUser.get() == null || currentUser.get() == "")) {
-                $location.path("/signin");
-            }
-            ;
-        });
-    }
-})(CoreModule || (CoreModule = {}));
+                if (newUrl.$$route && newUrl.$$route.authorizationRequired) {
+                    if (token.get() == null) {
+                        $rootScope.$evalAsync(function () {
+                            $location.path("/signin");
+                        });
+                    }
+                    ;
+                }
+                ;
+            });
+            $rootScope.$on("$viewContentLoaded", function () {
+                $rootScope.inViewTransition = false;
+                if ($route.current.$$route.authorizationRequired && (currentUser.get() == null || currentUser.get() == "")) {
+                    $location.path("/signin");
+                }
+                ;
+            });
+        }
+    })(core = _app.core || (_app.core = {}));
+})(app || (app = {}));
 //# sourceMappingURL=core.module.js.map
-var CoreModule;
-(function (CoreModule) {
-    "use strict";
-})(CoreModule || (CoreModule = {}));
+var app;
+(function (app) {
+    var core;
+    (function (core) {
+        "use strict";
+    })(core = app.core || (app.core = {}));
+})(app || (app = {}));
 //# sourceMappingURL=IApiEndpointConfig.js.map
-var CoreModule;
-(function (CoreModule) {
-    "use strict";
-})(CoreModule || (CoreModule = {}));
+var app;
+(function (app) {
+    var core;
+    (function (core) {
+        "use strict";
+    })(core = app.core || (app.core = {}));
+})(app || (app = {}));
 //# sourceMappingURL=IApiEndpointProvider.js.map
 //# sourceMappingURL=ICoreRootScope.js.map
 //# sourceMappingURL=IDataService.js.map
 //# sourceMappingURL=IRouteProvider.js.map
 //# sourceMappingURL=IRouteResolver.js.map
-var CoreModule;
-(function (CoreModule) {
-    "use strict";
-    function authorizationInterceptor($q, $rootScope, token) {
-        var self = this;
-        self.request = function (config) {
-            if (token.get()) {
-                config.headers.Authorization = "Bearer " + token.get();
-            }
-            return config;
-        };
-        return self;
-    }
-    ;
-    var interceptorId = "authorizationInterceptor";
-    authorizationInterceptor.$inject = ["$q", "$rootScope", "token"];
-    angular.module("core").factory(interceptorId, authorizationInterceptor);
-})(CoreModule || (CoreModule = {}));
-//# sourceMappingURL=authorizationInterceptor.js.map
-var CoreModule;
-(function (CoreModule) {
-    "use strict";
-    function requestCounter($q) {
-        var requests = 0;
-        var request = function (config) {
-            requests += 1;
-            return $q.when(config);
-        };
-        var requestError = function (error) {
-            requests -= 1;
-            return $q.reject(error);
-        };
-        var response = function (response) {
-            requests -= 1;
-            return $q.when(response);
-        };
-        var responseError = function (error) {
-            requests -= 1;
-            return $q.reject(error);
-        };
-        var getRequestCount = function () {
-            return requests;
-        };
-        return {
-            request: request,
-            response: response,
-            requestError: requestError,
-            responseError: responseError,
-            getRequestCount: getRequestCount
-        };
-    }
-    var interceptorId = "requestCounter";
-    requestCounter.$inject = ["$q"];
-    angular.module("core").factory(interceptorId, requestCounter);
-})(CoreModule || (CoreModule = {}));
-//# sourceMappingURL=requestCounter.js.map
-var CoreModule;
-(function (CoreModule) {
-    angular.module("core").value("$", $);
-})(CoreModule || (CoreModule = {}));
-//# sourceMappingURL=jQuery.js.map
-var CoreModule;
-(function (CoreModule) {
-    var ApiEndpointProvider = (function () {
-        function ApiEndpointProvider() {
-        }
-        ApiEndpointProvider.prototype.configure = function (baseUrl) {
-            this.config = {
-                baseUrl: baseUrl
+var app;
+(function (app) {
+    var core;
+    (function (core) {
+        "use strict";
+        function authorizationInterceptor($q, $rootScope, token) {
+            var self = this;
+            self.request = function (config) {
+                if (token.get()) {
+                    config.headers.Authorization = "Bearer " + token.get();
+                }
+                return config;
             };
-        };
-        ApiEndpointProvider.prototype.$get = function () {
-            return this.config;
-        };
-        return ApiEndpointProvider;
-    })();
-    angular.module("core").provider("apiEndpointProvider", ApiEndpointProvider);
-})(CoreModule || (CoreModule = {}));
+            return self;
+        }
+        ;
+        var interceptorId = "authorizationInterceptor";
+        authorizationInterceptor.$inject = ["$q", "$rootScope", "token"];
+        angular.module("core").factory(interceptorId, authorizationInterceptor);
+    })(core = app.core || (app.core = {}));
+})(app || (app = {}));
+//# sourceMappingURL=authorizationInterceptor.js.map
+var app;
+(function (app) {
+    var core;
+    (function (core) {
+        "use strict";
+        function requestCounter($q) {
+            var requests = 0;
+            var request = function (config) {
+                requests += 1;
+                return $q.when(config);
+            };
+            var requestError = function (error) {
+                requests -= 1;
+                return $q.reject(error);
+            };
+            var response = function (response) {
+                requests -= 1;
+                return $q.when(response);
+            };
+            var responseError = function (error) {
+                requests -= 1;
+                return $q.reject(error);
+            };
+            var getRequestCount = function () {
+                return requests;
+            };
+            return {
+                request: request,
+                response: response,
+                requestError: requestError,
+                responseError: responseError,
+                getRequestCount: getRequestCount
+            };
+        }
+        var interceptorId = "requestCounter";
+        requestCounter.$inject = ["$q"];
+        angular.module("core").factory(interceptorId, requestCounter);
+    })(core = app.core || (app.core = {}));
+})(app || (app = {}));
+//# sourceMappingURL=requestCounter.js.map
+var app;
+(function (app) {
+    var core;
+    (function (core) {
+        angular.module("core").value("$", $);
+    })(core = app.core || (app.core = {}));
+})(app || (app = {}));
+//# sourceMappingURL=jQuery.js.map
+var app;
+(function (app) {
+    var core;
+    (function (core) {
+        var ApiEndpointProvider = (function () {
+            function ApiEndpointProvider() {
+            }
+            ApiEndpointProvider.prototype.configure = function (baseUrl) {
+                this.config = {
+                    baseUrl: baseUrl
+                };
+            };
+            ApiEndpointProvider.prototype.$get = function () {
+                return this.config;
+            };
+            return ApiEndpointProvider;
+        })();
+        angular.module("core").provider("apiEndpointProvider", ApiEndpointProvider);
+    })(core = app.core || (app.core = {}));
+})(app || (app = {}));
 //# sourceMappingURL=ApiEndpointProvider.js.map
 (function () {
     "use strict";
@@ -655,413 +721,443 @@ var CoreModule;
     ;
 })();
 //# sourceMappingURL=configuration.js.map
-var CommonModule;
-(function (CommonModule) {
-    var formEncode = function () {
-        return function (data) {
-            var pairs = [];
-            for (var name in data) {
-                pairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
-            }
-            return pairs.join('&').replace(/%20/g, '+');
-        };
-    };
-    angular.module("core").factory("formEncode", formEncode);
-})(CommonModule || (CommonModule = {}));
-//# sourceMappingURL=formEncode.js.map
-var CoreModule;
-(function (CoreModule) {
-    "use strict";
-    function getStringFromUrl(url) {
-        var request = new XMLHttpRequest();
-        var response = null;
-        request.onreadystatechange = function () {
-            if (request.readyState == 4) {
-                if (request.status == 200) {
-                    response = request.responseText;
+var app;
+(function (app) {
+    var common;
+    (function (common) {
+        var formEncode = function () {
+            return function (data) {
+                var pairs = [];
+                for (var name in data) {
+                    pairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
                 }
-            }
+                return pairs.join('&').replace(/%20/g, '+');
+            };
         };
-        request.open("GET", url, false);
-        request.send(null);
-        return response;
-    }
-    angular.module("core").value("getStringFromUrl", getStringFromUrl);
-})(CoreModule || (CoreModule = {}));
-//# sourceMappingURL=getStringFromUrl.js.map
-var GroupModule;
-(function (GroupModule) {
-    angular.module("group", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
-    config.$inject = ["$routeProvider"];
-    function config($routeProvider) {
-        $routeProvider.when("/group/add", {
-            templateUrl: ""
-        });
-        $routeProvider.when("/group/list", {
-            templateUrl: ""
-        });
-    }
-})(GroupModule || (GroupModule = {}));
-//# sourceMappingURL=group.module.js.map
-var GroupModule;
-(function (GroupModule) {
-    var GroupEditor = (function () {
-        function GroupEditor($location, groupService) {
-            var _this = this;
-            this.$location = $location;
-            this.groupService = groupService;
-            this.replace = true;
-            this.restrict = "E";
-            this.templateUrl = "/app/group/components/groupEditor/groupEditor.html";
-            this.scope = {
-                entity: "="
-            };
-            this.link = function (scope, element, attributes) {
-                scope.vm = {};
-                scope.vm.entity = scope.entity;
-                scope.tryToSave = function (form) {
-                    if (scope.vm.entity.id) {
-                        return _this.groupService.update({ entity: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/group/list");
-                        });
+        angular.module("core").factory("formEncode", formEncode);
+    })(common = app.common || (app.common = {}));
+})(app || (app = {}));
+//# sourceMappingURL=formEncode.js.map
+var app;
+(function (app) {
+    var core;
+    (function (core) {
+        "use strict";
+        function getStringFromUrl(url) {
+            var request = new XMLHttpRequest();
+            var response = null;
+            request.onreadystatechange = function () {
+                if (request.readyState == 4) {
+                    if (request.status == 200) {
+                        response = request.responseText;
                     }
-                    else {
-                        return _this.groupService.add({ entity: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/group/list");
-                        });
-                    }
-                };
+                }
             };
-            this.$inject = ["$location", "groupService"];
+            request.open("GET", url, false);
+            request.send(null);
+            return response;
         }
-        GroupEditor.componentId = "groupEditor";
-        return GroupEditor;
-    })();
-    angular.module("group").directive(GroupEditor.componentId, function ($location, groupService) { return new GroupEditor($location, groupService); });
-})(GroupModule || (GroupModule = {}));
-//# sourceMappingURL=groupEditor.js.map
-var GroupModule;
-(function (GroupModule) {
-    var GroupList = (function () {
-        function GroupList(groupService) {
-            var _this = this;
-            this.groupService = groupService;
-            this.replace = true;
-            this.restrict = "E";
-            this.templateUrl = "/app/group/components/groupList/groupList.html";
-            this.scope = {};
-            this.link = function (scope, element, attributes) {
-                scope.vm = {};
-                scope.vm.remove = function (entity) {
-                    return _this.groupService.remove({ id: entity.id }).then(function () {
-                        for (var i = 0; i < scope.vm.entities.length; i++) {
-                            if (scope.vm.entities[i].id == entity.id) {
-                                scope.vm.entities.splice(i, 1);
-                            }
+        angular.module("core").value("getStringFromUrl", getStringFromUrl);
+    })(core = app.core || (app.core = {}));
+})(app || (app = {}));
+//# sourceMappingURL=getStringFromUrl.js.map
+var app;
+(function (app) {
+    var group;
+    (function (group) {
+        angular.module("group", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
+        config.$inject = ["$routeProvider"];
+        function config($routeProvider) {
+            $routeProvider.when("/group/add", {
+                templateUrl: ""
+            });
+            $routeProvider.when("/group/list", {
+                templateUrl: ""
+            });
+        }
+    })(group = app.group || (app.group = {}));
+})(app || (app = {}));
+//# sourceMappingURL=group.module.js.map
+var app;
+(function (app) {
+    var group;
+    (function (group) {
+        var GroupEditor = (function () {
+            function GroupEditor($location, groupService) {
+                var _this = this;
+                this.$location = $location;
+                this.groupService = groupService;
+                this.replace = true;
+                this.restrict = "E";
+                this.templateUrl = "/app/group/components/groupEditor/groupEditor.html";
+                this.scope = {
+                    entity: "="
+                };
+                this.link = function (scope, element, attributes) {
+                    scope.vm = {};
+                    scope.vm.entity = scope.entity;
+                    scope.tryToSave = function (form) {
+                        if (scope.vm.entity.id) {
+                            return _this.groupService.update({ entity: scope.vm.entity }).then(function (results) {
+                                _this.$location.path("/group/list");
+                            });
                         }
-                    }).catch(function (error) {
+                        else {
+                            return _this.groupService.add({ entity: scope.vm.entity }).then(function (results) {
+                                _this.$location.path("/group/list");
+                            });
+                        }
+                    };
+                };
+                this.$inject = ["$location", "groupService"];
+            }
+            GroupEditor.componentId = "groupEditor";
+            return GroupEditor;
+        })();
+        angular.module("group").directive(GroupEditor.componentId, function ($location, groupService) { return new GroupEditor($location, groupService); });
+    })(group = app.group || (app.group = {}));
+})(app || (app = {}));
+//# sourceMappingURL=groupEditor.js.map
+var app;
+(function (app) {
+    var group;
+    (function (group) {
+        var GroupList = (function () {
+            function GroupList(groupService) {
+                var _this = this;
+                this.groupService = groupService;
+                this.replace = true;
+                this.restrict = "E";
+                this.templateUrl = "/app/group/components/groupList/groupList.html";
+                this.scope = {};
+                this.link = function (scope, element, attributes) {
+                    scope.vm = {};
+                    scope.vm.remove = function (entity) {
+                        return _this.groupService.remove({ id: entity.id }).then(function () {
+                            for (var i = 0; i < scope.vm.entities.length; i++) {
+                                if (scope.vm.entities[i].id == entity.id) {
+                                    scope.vm.entities.splice(i, 1);
+                                }
+                            }
+                        }).catch(function (error) {
+                        });
+                    };
+                    return _this.groupService.getAll().then(function (results) {
+                        return scope.vm.entities = results;
                     });
                 };
-                return _this.groupService.getAll().then(function (results) {
-                    return scope.vm.entities = results;
-                });
-            };
-            this.$inject = ["groupService"];
-        }
-        GroupList.componentId = "groupList";
-        return GroupList;
-    })();
-    angular.module("group").directive(GroupList.componentId, function (groupService) { return new GroupList(groupService); });
-})(GroupModule || (GroupModule = {}));
+                this.$inject = ["groupService"];
+            }
+            GroupList.componentId = "groupList";
+            return GroupList;
+        })();
+        angular.module("group").directive(GroupList.componentId, function (groupService) { return new GroupList(groupService); });
+    })(group = app.group || (app.group = {}));
+})(app || (app = {}));
 //# sourceMappingURL=groupList.js.map
 //# sourceMappingURL=IGroupService.js.map
-var GroupModule;
-(function (GroupModule) {
-    "use strict";
-    var GroupService = (function () {
-        function GroupService($http, $q, $rootScope, configurationService) {
-            var _this = this;
-            this.$http = $http;
-            this.$q = $q;
-            this.$rootScope = $rootScope;
-            this.configurationService = configurationService;
-            this.dataStore = {
-                getAll: null,
-                getById: null,
-                pages: []
-            };
-            this.clearDataStore = function () {
-                _this.dataStore = {
+var app;
+(function (app) {
+    var group;
+    (function (group) {
+        "use strict";
+        var GroupService = (function () {
+            function GroupService($http, $q, $rootScope, configurationService) {
+                var _this = this;
+                this.$http = $http;
+                this.$q = $q;
+                this.$rootScope = $rootScope;
+                this.configurationService = configurationService;
+                this.dataStore = {
                     getAll: null,
                     getById: null,
                     pages: []
                 };
-            };
-            this.getBaseUri = function () {
-                if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
-                    return "api/" + _this.$rootScope.configuration.apiVersion + "/group/";
-                }
-                else {
-                    return "api/group/";
-                }
-            };
-            this.add = function (options) {
-                var deferred = _this.$q.defer();
-                _this.$http({ method: "POST", url: _this.getBaseUri() + "add", data: options.entity }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.remove = function (options) {
-                var deferred = _this.$q.defer();
-                _this.$http({ method: "DELETE", url: _this.getBaseUri() + "remove?id=" + options.id }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getAll = function () {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getAll) {
-                    deferred.resolve(_this.dataStore.getAll);
-                    return deferred.promise;
-                }
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
-                    _this.dataStore.getAll = results.data;
-                    deferred.resolve(results.data);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getById = function (id) {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getById && _this.dataStore.getById.id == id) {
-                    deferred.resolve(_this.dataStore.getById);
-                    return deferred.promise;
-                }
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getbyid?id=" + id }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getPage = function (offset, setSize) {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getAll) {
-                    deferred.resolve(_this.dataStore.getAll);
-                    return deferred.promise;
-                }
-                ;
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.$rootScope.$on("$locationChangeStart", function () {
-                _this.clearDataStore();
-            });
-        }
-        GroupService.serviceId = "groupService";
-        GroupService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
-        return GroupService;
-    })();
-    GroupModule.GroupService = GroupService;
-    angular.module("group").service(GroupService.serviceId, function ($http, $q, $rootScope, configurationService) { return new GroupService($http, $q, $rootScope, configurationService); });
-})(GroupModule || (GroupModule = {}));
-//# sourceMappingURL=groupService.js.map
-var ProfileModule;
-(function (ProfileModule) {
-    angular.module("profile", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
-    config.$inject = ["$routeProvider"];
-    function config($routeProvider) {
-        $routeProvider.when("/profile/add", {
-            templateUrl: ""
-        });
-        $routeProvider.when("/profile/list", {
-            templateUrl: ""
-        });
-    }
-})(ProfileModule || (ProfileModule = {}));
-//# sourceMappingURL=profile.module.js.map
-var ProfileModule;
-(function (ProfileModule) {
-    "use strict";
-    var ProfileEditor = (function () {
-        function ProfileEditor($location, profileService) {
-            var _this = this;
-            this.$location = $location;
-            this.profileService = profileService;
-            this.$inject = ["$location", "profileService"];
-            this.restrict = "E";
-            this.replace = true;
-            this.scope = {};
-            this.templateUrl = "/app/profile/components/profileEditor/profileEditor.html";
-            this.link = function (scope, element, attributes) {
-                scope.vm = {};
-                scope.vm.entity = scope.entity;
-                scope.tryToSave = function (form) {
-                    if (scope.vm.entity.id) {
-                        return _this.profileService.update({ entity: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/profile/list");
-                        });
+                this.clearDataStore = function () {
+                    _this.dataStore = {
+                        getAll: null,
+                        getById: null,
+                        pages: []
+                    };
+                };
+                this.getBaseUri = function () {
+                    if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
+                        return "api/" + _this.$rootScope.configuration.apiVersion + "/group/";
                     }
                     else {
-                        return _this.profileService.add({ entity: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/profile/list");
-                        });
+                        return "api/group/";
                     }
                 };
-            };
-        }
-        ProfileEditor.componentId = "profileEditor";
-        return ProfileEditor;
-    })();
-    angular.module("profile").directive(ProfileEditor.componentId, function ($location, profileService) { return new ProfileEditor($location, profileService); });
-})(ProfileModule || (ProfileModule = {}));
-//# sourceMappingURL=profileEditor.js.map
-var ProfileModule;
-(function (ProfileModule) {
-    "use strict";
-    var ProfileList = (function () {
-        function ProfileList(profileService) {
-            var _this = this;
-            this.profileService = profileService;
-            this.$inject = ["profileService"];
-            this.restrict = "E";
-            this.replace = true;
-            this.scope = {};
-            this.templateUrl = "/app/profile/components/profileList/profileList.html";
-            this.link = function (scope, element, attributes) {
-                scope.vm = {};
-                scope.vm.remove = function (entity) {
-                    return _this.profileService.remove({ id: entity.id }).then(function () {
-                        for (var i = 0; i < scope.vm.entities.length; i++) {
-                            if (scope.vm.entities[i].id == entity.id) {
-                                scope.vm.entities.splice(i, 1);
-                            }
-                        }
+                this.add = function (options) {
+                    var deferred = _this.$q.defer();
+                    _this.$http({ method: "POST", url: _this.getBaseUri() + "add", data: options.entity }).then(function (results) {
+                        deferred.resolve(results);
                     }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.remove = function (options) {
+                    var deferred = _this.$q.defer();
+                    _this.$http({ method: "DELETE", url: _this.getBaseUri() + "remove?id=" + options.id }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.getAll = function () {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getAll) {
+                        deferred.resolve(_this.dataStore.getAll);
+                        return deferred.promise;
+                    }
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                        _this.dataStore.getAll = results.data;
+                        deferred.resolve(results.data);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.getById = function (id) {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getById && _this.dataStore.getById.id == id) {
+                        deferred.resolve(_this.dataStore.getById);
+                        return deferred.promise;
+                    }
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getbyid?id=" + id }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.getPage = function (offset, setSize) {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getAll) {
+                        deferred.resolve(_this.dataStore.getAll);
+                        return deferred.promise;
+                    }
+                    ;
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.$rootScope.$on("$locationChangeStart", function () {
+                    _this.clearDataStore();
+                });
+            }
+            GroupService.serviceId = "groupService";
+            GroupService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
+            return GroupService;
+        })();
+        group.GroupService = GroupService;
+        angular.module("group").service(GroupService.serviceId, function ($http, $q, $rootScope, configurationService) { return new GroupService($http, $q, $rootScope, configurationService); });
+    })(group = app.group || (app.group = {}));
+})(app || (app = {}));
+//# sourceMappingURL=groupService.js.map
+var app;
+(function (app) {
+    var profile;
+    (function (profile) {
+        angular.module("profile", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
+        config.$inject = ["$routeProvider"];
+        function config($routeProvider) {
+            $routeProvider.when("/profile/add", {
+                templateUrl: ""
+            });
+            $routeProvider.when("/profile/list", {
+                templateUrl: ""
+            });
+        }
+    })(profile = app.profile || (app.profile = {}));
+})(app || (app = {}));
+//# sourceMappingURL=profile.module.js.map
+var app;
+(function (app) {
+    var profile;
+    (function (profile) {
+        "use strict";
+        var ProfileEditor = (function () {
+            function ProfileEditor($location, profileService) {
+                var _this = this;
+                this.$location = $location;
+                this.profileService = profileService;
+                this.$inject = ["$location", "profileService"];
+                this.restrict = "E";
+                this.replace = true;
+                this.scope = {};
+                this.templateUrl = "/app/profile/components/profileEditor/profileEditor.html";
+                this.link = function (scope, element, attributes) {
+                    scope.vm = {};
+                    scope.vm.entity = scope.entity;
+                    scope.tryToSave = function (form) {
+                        if (scope.vm.entity.id) {
+                            return _this.profileService.update({ entity: scope.vm.entity }).then(function (results) {
+                                _this.$location.path("/profile/list");
+                            });
+                        }
+                        else {
+                            return _this.profileService.add({ entity: scope.vm.entity }).then(function (results) {
+                                _this.$location.path("/profile/list");
+                            });
+                        }
+                    };
+                };
+            }
+            ProfileEditor.componentId = "profileEditor";
+            return ProfileEditor;
+        })();
+        angular.module("profile").directive(ProfileEditor.componentId, function ($location, profileService) { return new ProfileEditor($location, profileService); });
+    })(profile = app.profile || (app.profile = {}));
+})(app || (app = {}));
+//# sourceMappingURL=profileEditor.js.map
+var app;
+(function (app) {
+    var profile;
+    (function (profile) {
+        "use strict";
+        var ProfileList = (function () {
+            function ProfileList(profileService) {
+                var _this = this;
+                this.profileService = profileService;
+                this.$inject = ["profileService"];
+                this.restrict = "E";
+                this.replace = true;
+                this.scope = {};
+                this.templateUrl = "/app/profile/components/profileList/profileList.html";
+                this.link = function (scope, element, attributes) {
+                    scope.vm = {};
+                    scope.vm.remove = function (entity) {
+                        return _this.profileService.remove({ id: entity.id }).then(function () {
+                            for (var i = 0; i < scope.vm.entities.length; i++) {
+                                if (scope.vm.entities[i].id == entity.id) {
+                                    scope.vm.entities.splice(i, 1);
+                                }
+                            }
+                        }).catch(function (error) {
+                        });
+                    };
+                    return _this.profileService.getAll().then(function (results) {
+                        return scope.vm.entities = results;
                     });
                 };
-                return _this.profileService.getAll().then(function (results) {
-                    return scope.vm.entities = results;
-                });
-            };
-        }
-        ProfileList.componentId = "profileList";
-        return ProfileList;
-    })();
-    angular.module("profile").directive(ProfileList.componentId, function (profileService) { return new ProfileList(profileService); });
-})(ProfileModule || (ProfileModule = {}));
+            }
+            ProfileList.componentId = "profileList";
+            return ProfileList;
+        })();
+        angular.module("profile").directive(ProfileList.componentId, function (profileService) { return new ProfileList(profileService); });
+    })(profile = app.profile || (app.profile = {}));
+})(app || (app = {}));
 //# sourceMappingURL=profileList.js.map
 //# sourceMappingURL=IProfileService.js.map
-var ProfileModule;
-(function (ProfileModule) {
-    "use strict";
-    var ProfileService = (function () {
-        function ProfileService($http, $q, $rootScope, configurationService) {
-            var _this = this;
-            this.$http = $http;
-            this.$q = $q;
-            this.$rootScope = $rootScope;
-            this.configurationService = configurationService;
-            this.dataStore = {
-                getAll: null,
-                getById: null,
-                pages: []
-            };
-            this.clearDataStore = function () {
-                _this.dataStore = {
+var app;
+(function (app) {
+    var profile;
+    (function (profile) {
+        "use strict";
+        var ProfileService = (function () {
+            function ProfileService($http, $q, $rootScope, configurationService) {
+                var _this = this;
+                this.$http = $http;
+                this.$q = $q;
+                this.$rootScope = $rootScope;
+                this.configurationService = configurationService;
+                this.dataStore = {
                     getAll: null,
                     getById: null,
                     pages: []
                 };
-            };
-            this.getBaseUri = function () {
-                if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
-                    return "api/" + _this.$rootScope.configuration.apiVersion + "/role/";
-                }
-                else {
-                    return "api/role/";
-                }
-            };
-            this.add = function (options) {
-                var deferred = _this.$q.defer();
-                _this.$http({ method: "POST", url: _this.getBaseUri() + "add", data: options.entity }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.remove = function (options) {
-                var deferred = _this.$q.defer();
-                _this.$http({ method: "DELETE", url: _this.getBaseUri() + "remove?id=" + options.id }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getAll = function () {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getAll) {
-                    deferred.resolve(_this.dataStore.getAll);
+                this.clearDataStore = function () {
+                    _this.dataStore = {
+                        getAll: null,
+                        getById: null,
+                        pages: []
+                    };
+                };
+                this.getBaseUri = function () {
+                    if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
+                        return "api/" + _this.$rootScope.configuration.apiVersion + "/role/";
+                    }
+                    else {
+                        return "api/role/";
+                    }
+                };
+                this.add = function (options) {
+                    var deferred = _this.$q.defer();
+                    _this.$http({ method: "POST", url: _this.getBaseUri() + "add", data: options.entity }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
                     return deferred.promise;
-                }
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
-                    _this.dataStore.getAll = results.data;
-                    deferred.resolve(results.data);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getById = function (id) {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getById && _this.dataStore.getById.id == id) {
-                    deferred.resolve(_this.dataStore.getById);
+                };
+                this.remove = function (options) {
+                    var deferred = _this.$q.defer();
+                    _this.$http({ method: "DELETE", url: _this.getBaseUri() + "remove?id=" + options.id }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
                     return deferred.promise;
-                }
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getbyid?id=" + id }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getPage = function (offset, setSize) {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getAll) {
-                    deferred.resolve(_this.dataStore.getAll);
+                };
+                this.getAll = function () {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getAll) {
+                        deferred.resolve(_this.dataStore.getAll);
+                        return deferred.promise;
+                    }
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                        _this.dataStore.getAll = results.data;
+                        deferred.resolve(results.data);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
                     return deferred.promise;
-                }
-                ;
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
+                };
+                this.getById = function (id) {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getById && _this.dataStore.getById.id == id) {
+                        deferred.resolve(_this.dataStore.getById);
+                        return deferred.promise;
+                    }
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getbyid?id=" + id }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.getPage = function (offset, setSize) {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getAll) {
+                        deferred.resolve(_this.dataStore.getAll);
+                        return deferred.promise;
+                    }
+                    ;
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.$rootScope.$on("$locationChangeStart", function () {
+                    _this.clearDataStore();
                 });
-                return deferred.promise;
-            };
-            this.$rootScope.$on("$locationChangeStart", function () {
-                _this.clearDataStore();
-            });
-        }
-        ProfileService.serviceId = "roleService";
-        ProfileService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
-        return ProfileService;
-    })();
-    ProfileModule.ProfileService = ProfileService;
-    angular.module("profile").service(ProfileService.serviceId, function ($http, $q, $rootScope, configurationService) { return new ProfileService($http, $q, $rootScope, configurationService); });
-})(ProfileModule || (ProfileModule = {}));
+            }
+            ProfileService.serviceId = "roleService";
+            ProfileService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
+            return ProfileService;
+        })();
+        profile.ProfileService = ProfileService;
+        angular.module("profile").service(ProfileService.serviceId, function ($http, $q, $rootScope, configurationService) { return new ProfileService($http, $q, $rootScope, configurationService); });
+    })(profile = app.profile || (app.profile = {}));
+})(app || (app = {}));
 //# sourceMappingURL=profileService.js.map
 var app;
 (function (app) {
@@ -1719,187 +1815,199 @@ var app;
     var app = angular.module("session", ["configuration", "common", "core"]);
 })();
 //# sourceMappingURL=module.js.map
-var SessionModule;
-(function (SessionModule) {
-    var serviceId = "session";
-    angular.module("session").service(serviceId, ["$location", "$http", "$q", "configuration", "configurationService", "currentUser", "token", service]);
-    function service($location, $http, $q, configuration, configurationService, currentUser, token) {
-        var self = this;
-        self.isLoggedIn = function () {
-            if (self.getCurrentUser() != null && self.getCurrentUser() != "") {
-                return (self.getCurrentUser().username);
-            }
-        };
-        self.isUserInRole = function (roleName) {
-            if (self.isLoggedIn()) {
-                var user = self.getCurrentUser();
-                for (var i = 0; i < user.roles.length; i++) {
-                    if (roleName == user.roles[i].name) {
-                        return true;
+var app;
+(function (app) {
+    var session;
+    (function (session) {
+        var serviceId = "session";
+        angular.module("session").service(serviceId, ["$location", "$http", "$q", "configuration", "configurationService", "currentUser", "token", service]);
+        function service($location, $http, $q, configuration, configurationService, currentUser, token) {
+            var self = this;
+            self.isLoggedIn = function () {
+                if (self.getCurrentUser() != null && self.getCurrentUser() != "") {
+                    return (self.getCurrentUser().username);
+                }
+            };
+            self.isUserInRole = function (roleName) {
+                if (self.isLoggedIn()) {
+                    var user = self.getCurrentUser();
+                    for (var i = 0; i < user.roles.length; i++) {
+                        if (roleName == user.roles[i].name) {
+                            return true;
+                        }
                     }
                 }
-            }
-            return false;
-        };
-        self.getCurrentUser = function () {
-            return currentUser.get();
-        };
-        self.signOut = function () {
-            $http({ method: "GET", url: "api/identity/signout" }).then(function () {
-            });
-            token.set({ data: null });
-            currentUser.set({ data: null });
-            $location.path("/");
-        };
-        self.setConfigurationAsync = function () {
-            if (configuration.get()) {
-                return $q.when(configuration.get());
-            }
-            return configurationService.get().then(function (results) {
-                configuration.set({ data: results });
+                return false;
+            };
+            self.getCurrentUser = function () {
+                return currentUser.get();
+            };
+            self.signOut = function () {
+                $http({ method: "GET", url: "api/identity/signout" }).then(function () {
+                });
+                token.set({ data: null });
+                currentUser.set({ data: null });
+                $location.path("/");
+            };
+            self.setConfigurationAsync = function () {
+                if (configuration.get()) {
+                    return $q.when(configuration.get());
+                }
+                return configurationService.get().then(function (results) {
+                    configuration.set({ data: results });
+                    return configuration.get();
+                });
+            };
+            self.getConfiguration = function () {
                 return configuration.get();
-            });
-        };
-        self.getConfiguration = function () {
-            return configuration.get();
-        };
-        return self;
-    }
-    var Session = (function () {
-        function Session($location, $http, $q, configuration, configurationService, currentUser, token) {
-            this.$location = $location;
-            this.$http = $http;
-            this.$q = $q;
-            this.configuration = configuration;
-            this.configurationService = configurationService;
-            this.currentUser = currentUser;
-            this.token = token;
-            this.isLoggedIn = function () {
-                return true;
             };
-            this.isUserInRole = function (roleName) {
-                return true;
-            };
-            this.getCurrentUser = function () {
-                return {};
-            };
-            this.signOut = function () {
-            };
-            this.setConfigurationAsync = function () {
-            };
-            this.getConfiguration = function () {
-                return {};
-            };
+            return self;
         }
-        Session.ServiceId = "session";
-        return Session;
-    })();
-    SessionModule.Session = Session;
-})(SessionModule || (SessionModule = {}));
+        var Session = (function () {
+            function Session($location, $http, $q, configuration, configurationService, currentUser, token) {
+                this.$location = $location;
+                this.$http = $http;
+                this.$q = $q;
+                this.configuration = configuration;
+                this.configurationService = configurationService;
+                this.currentUser = currentUser;
+                this.token = token;
+                this.isLoggedIn = function () {
+                    return true;
+                };
+                this.isUserInRole = function (roleName) {
+                    return true;
+                };
+                this.getCurrentUser = function () {
+                    return {};
+                };
+                this.signOut = function () {
+                };
+                this.setConfigurationAsync = function () {
+                };
+                this.getConfiguration = function () {
+                    return {};
+                };
+            }
+            Session.ServiceId = "session";
+            return Session;
+        })();
+        session.Session = Session;
+    })(session = app.session || (app.session = {}));
+})(app || (app = {}));
 //# sourceMappingURL=session.js.map
-var SessionModule;
-(function (SessionModule) {
-    "use strict";
-    var serviceId = "configuration";
-    angular.module("session").service(serviceId, ["$rootScope", "storage", service]);
-    function service($rootScope, storage) {
-        var self = this;
-        var data = null;
-        var name = "configuration";
-        self.get = function get() {
-            if (data) {
-                return data;
-            }
-            try {
-                data = storage.getByName({ name: name }).value;
-            }
-            catch (error) {
-            }
-            return data;
-        };
-        self.set = function set(params) {
-            data = params.data;
-            storage.put({ name: name, value: params.data });
-        };
-        $rootScope.$on("$routeChangeStart", function routeChange(event, newUrl, oldUrl) {
-            if (newUrl.originalPath == "/signin") {
-                data = null;
-                self.set({ data: null });
-            }
-        });
-        return self;
-    }
-})(SessionModule || (SessionModule = {}));
-//# sourceMappingURL=configuration.js.map
-var SessionModule;
-(function (SessionModule) {
-    angular.module("session").service("currentUser", function ($rootScope, storage) { return new CurrentUser($rootScope, storage); });
-    var CurrentUser = (function () {
-        function CurrentUser($rootScope, storage) {
-            var _this = this;
-            this.$rootScope = $rootScope;
-            this.storage = storage;
-            this.name = "currentUser";
-            this.get = function () {
-                if (_this.data) {
-                    return _this.data;
+var app;
+(function (app) {
+    var session;
+    (function (session) {
+        "use strict";
+        var serviceId = "configuration";
+        angular.module("session").service(serviceId, ["$rootScope", "storage", service]);
+        function service($rootScope, storage) {
+            var self = this;
+            var data = null;
+            var name = "configuration";
+            self.get = function get() {
+                if (data) {
+                    return data;
                 }
                 try {
-                    _this.data = _this.storage.getByName({ name: name }).value;
+                    data = storage.getByName({ name: name }).value;
                 }
                 catch (error) {
                 }
-                return _this.data;
+                return data;
             };
-            this.set = function (value) {
-                _this.data = value.data;
-                _this.storage.put({ name: name, value: value.data });
+            self.set = function set(params) {
+                data = params.data;
+                storage.put({ name: name, value: params.data });
+            };
+            $rootScope.$on("$routeChangeStart", function routeChange(event, newUrl, oldUrl) {
+                if (newUrl.originalPath == "/signin") {
+                    data = null;
+                    self.set({ data: null });
+                }
+            });
+            return self;
+        }
+    })(session = app.session || (app.session = {}));
+})(app || (app = {}));
+//# sourceMappingURL=configuration.js.map
+var app;
+(function (app) {
+    var session;
+    (function (session) {
+        angular.module("session").service("currentUser", function ($rootScope, storage) { return new CurrentUser($rootScope, storage); });
+        var CurrentUser = (function () {
+            function CurrentUser($rootScope, storage) {
+                var _this = this;
+                this.$rootScope = $rootScope;
+                this.storage = storage;
+                this.name = "currentUser";
+                this.get = function () {
+                    if (_this.data) {
+                        return _this.data;
+                    }
+                    try {
+                        _this.data = _this.storage.getByName({ name: name }).value;
+                    }
+                    catch (error) {
+                    }
+                    return _this.data;
+                };
+                this.set = function (value) {
+                    _this.data = value.data;
+                    _this.storage.put({ name: name, value: value.data });
+                };
+                $rootScope.$on("$routeChangeStart", function (event, newUrl, oldUrl) {
+                    if (newUrl.originalPath == "/signin") {
+                        _this.data = null;
+                        _this.set({ data: null });
+                    }
+                });
+            }
+            CurrentUser.$inject = ["$rootScope", "storage"];
+            return CurrentUser;
+        })();
+    })(session = app.session || (app.session = {}));
+})(app || (app = {}));
+//# sourceMappingURL=currentUser.js.map
+var app;
+(function (app) {
+    var session;
+    (function (session) {
+        var serviceId = "token";
+        angular.module("session").service(serviceId, ["$rootScope", "storage", service]);
+        function service($rootScope, storage) {
+            var self = this;
+            var data = null;
+            var name = "token";
+            self.get = function () {
+                if (data) {
+                    return data;
+                }
+                try {
+                    data = storage.getByName({ name: name }).value;
+                }
+                catch (error) {
+                }
+                return data;
+            };
+            self.set = function (params) {
+                data = params.data;
+                storage.put({ name: name, value: params.data });
             };
             $rootScope.$on("$routeChangeStart", function (event, newUrl, oldUrl) {
                 if (newUrl.originalPath == "/signin") {
-                    _this.data = null;
-                    _this.set({ data: null });
+                    data = null;
+                    self.set({ data: null });
                 }
             });
+            return self;
         }
-        CurrentUser.$inject = ["$rootScope", "storage"];
-        return CurrentUser;
-    })();
-})(SessionModule || (SessionModule = {}));
-//# sourceMappingURL=currentUser.js.map
-var SessionModule;
-(function (SessionModule) {
-    var serviceId = "token";
-    angular.module("session").service(serviceId, ["$rootScope", "storage", service]);
-    function service($rootScope, storage) {
-        var self = this;
-        var data = null;
-        var name = "token";
-        self.get = function () {
-            if (data) {
-                return data;
-            }
-            try {
-                data = storage.getByName({ name: name }).value;
-            }
-            catch (error) {
-            }
-            return data;
-        };
-        self.set = function (params) {
-            data = params.data;
-            storage.put({ name: name, value: params.data });
-        };
-        $rootScope.$on("$routeChangeStart", function (event, newUrl, oldUrl) {
-            if (newUrl.originalPath == "/signin") {
-                data = null;
-                self.set({ data: null });
-            }
-        });
-        return self;
-    }
-    ;
-})(SessionModule || (SessionModule = {}));
+        ;
+    })(session = app.session || (app.session = {}));
+})(app || (app = {}));
 //# sourceMappingURL=token.js.map
 //# sourceMappingURL=ISession.js.map
 var app;
@@ -2094,137 +2202,143 @@ var app;
     })(tenant = app.tenant || (app.tenant = {}));
 })(app || (app = {}));
 //# sourceMappingURL=tenant.service.js.map
-var UserModule;
-(function (UserModule) {
-    var app = angular.module("user", [
-        "configuration",
-        "common",
-        "core",
-        "group",
-        "app.role",
-        "session",
-        "ngRoute"
-    ]).config(config);
-    config.$inject = ["$routeProvider"];
-    function config($routeProvider) {
-        $routeProvider.when("/signin", {
-            templateUrl: "/app/user/templates/signin.html",
-        }).when("/", {
-            templateUrl: "/app/user/templates/preferences.html",
-            controller: "preferencesController",
-            controllerAs: "vm",
-            resolve: {
-                preferencesData: [
-                    "preferencesService",
-                    function (preferencesService) {
-                        return preferencesService.getClientPreferences();
+var app;
+(function (_app) {
+    var user;
+    (function (user) {
+        var app = angular.module("user", [
+            "configuration",
+            "common",
+            "core",
+            "group",
+            "app.role",
+            "session",
+            "ngRoute"
+        ]).config(config);
+        config.$inject = ["$routeProvider"];
+        function config($routeProvider) {
+            $routeProvider.when("/signin", {
+                templateUrl: "/app/user/templates/signin.html",
+            }).when("/", {
+                templateUrl: "/app/user/templates/preferences.html",
+                controller: "preferencesController",
+                controllerAs: "vm",
+                resolve: {
+                    preferencesData: [
+                        "preferencesService",
+                        function (preferencesService) {
+                            return preferencesService.getClientPreferences();
+                        }
+                    ],
+                    routeData: [
+                        "userRouteResolver",
+                        function (userRouteResolver) {
+                            return userRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: false
+            }).when("/user/add", {
+                templateUrl: "/app/user/templates/edit.html",
+                resolve: {
+                    routeData: [
+                        "userRouteResolver",
+                        function (userRouteResolver) {
+                            return userRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true
+            }).when("/admin/user/edit/:id", {
+                templateUrl: "/app/user/templates/edit.html",
+                resolve: [
+                    "userRouteResolver",
+                    function (userRouteResolver) {
+                        return userRouteResolver.resolveRoute({ route: "/admin/user/edit/:id" });
                     }
                 ],
-                routeData: [
+                authorizationRequired: true
+            }).when("/admin/users", {
+                templateUrl: "/app/user/templates/list.html",
+                resolve: [
                     "userRouteResolver",
                     function (userRouteResolver) {
-                        return userRouteResolver.resolveRoute();
+                        return userRouteResolver.resolveRoute({ route: "/admin/users" });
                     }
-                ]
-            },
-            authorizationRequired: false
-        }).when("/user/add", {
-            templateUrl: "/app/user/templates/edit.html",
-            resolve: {
-                routeData: [
-                    "userRouteResolver",
-                    function (userRouteResolver) {
-                        return userRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true
-        }).when("/admin/user/edit/:id", {
-            templateUrl: "/app/user/templates/edit.html",
-            resolve: [
-                "userRouteResolver",
-                function (userRouteResolver) {
-                    return userRouteResolver.resolveRoute({ route: "/admin/user/edit/:id" });
-                }
-            ],
-            authorizationRequired: true
-        }).when("/admin/users", {
-            templateUrl: "/app/user/templates/list.html",
-            resolve: [
-                "userRouteResolver",
-                function (userRouteResolver) {
-                    return userRouteResolver.resolveRoute({ route: "/admin/users" });
-                }
-            ],
-            authorizationRequired: true
-        }).when("/register", {
-            templateUrl: "/app/user/templates/register.html",
-            resolve: {
-                routeData: [
-                    "userRouteResolver",
-                    function (userRouteResolver) {
-                        return userRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: false
-        }).when("/preferences", {
-            templateUrl: "/app/user/templates/preferences.html",
-            controller: "preferencesController",
-            controllerAs: "vm",
-            resolve: {
-                routeData: [
-                    "userRouteResolver",
-                    function (userRouteResolver) {
-                        return userRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true
-        });
-    }
-})(UserModule || (UserModule = {}));
-//# sourceMappingURL=user.module.js.map
-var UserModule;
-(function (UserModule) {
-    "use strict";
-    var ChangePasswordForm = (function () {
-        function ChangePasswordForm(identityService, userService, $location, $routeParams) {
-            var _this = this;
-            this.identityService = identityService;
-            this.userService = userService;
-            this.$location = $location;
-            this.$routeParams = $routeParams;
-            this.templateUrl = "/app/user/components/changePasswordForm/changePasswordForm.html";
-            this.restrict = "E";
-            this.scope = {};
-            this.replace = true;
-            this.link = function (scope) {
-                scope.vm = {};
-                scope.tryToChangePassword = function (form) {
-                    return _this.userService.changePassword({ model: scope.vm }).then(function (results) {
-                        _this.$location.path("/user/list");
-                    }).catch(function (error) {
-                    });
-                };
-                if (_this.$routeParams.changepasswordid) {
-                    return _this.userService.getById({ id: _this.$routeParams.changepasswordid }).then(function (results) {
-                        scope.vm = results;
-                    });
-                }
-                else {
-                    return _this.identityService.getCurrentUser().then(function (results) {
-                        scope.vm = results;
-                    });
-                }
-            };
-            this.$inject = ["identityService", "userService", "$location", "$routeParams"];
+                ],
+                authorizationRequired: true
+            }).when("/register", {
+                templateUrl: "/app/user/templates/register.html",
+                resolve: {
+                    routeData: [
+                        "userRouteResolver",
+                        function (userRouteResolver) {
+                            return userRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: false
+            }).when("/preferences", {
+                templateUrl: "/app/user/templates/preferences.html",
+                controller: "preferencesController",
+                controllerAs: "vm",
+                resolve: {
+                    routeData: [
+                        "userRouteResolver",
+                        function (userRouteResolver) {
+                            return userRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true
+            });
         }
-        ChangePasswordForm.componentId = "changePasswordForm";
-        return ChangePasswordForm;
-    })();
-    angular.module("user").directive(ChangePasswordForm.componentId, function (identityService, userService, $location, $routeParams) { return new ChangePasswordForm(identityService, userService, $location, $routeParams); });
-})(UserModule || (UserModule = {}));
+    })(user = _app.user || (_app.user = {}));
+})(app || (app = {}));
+//# sourceMappingURL=user.module.js.map
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        "use strict";
+        var ChangePasswordForm = (function () {
+            function ChangePasswordForm(identityService, userService, $location, $routeParams) {
+                var _this = this;
+                this.identityService = identityService;
+                this.userService = userService;
+                this.$location = $location;
+                this.$routeParams = $routeParams;
+                this.templateUrl = "/app/user/components/changePasswordForm/changePasswordForm.html";
+                this.restrict = "E";
+                this.scope = {};
+                this.replace = true;
+                this.link = function (scope) {
+                    scope.vm = {};
+                    scope.tryToChangePassword = function (form) {
+                        return _this.userService.changePassword({ model: scope.vm }).then(function (results) {
+                            _this.$location.path("/user/list");
+                        }).catch(function (error) {
+                        });
+                    };
+                    if (_this.$routeParams.changepasswordid) {
+                        return _this.userService.getById({ id: _this.$routeParams.changepasswordid }).then(function (results) {
+                            scope.vm = results;
+                        });
+                    }
+                    else {
+                        return _this.identityService.getCurrentUser().then(function (results) {
+                            scope.vm = results;
+                        });
+                    }
+                };
+                this.$inject = ["identityService", "userService", "$location", "$routeParams"];
+            }
+            ChangePasswordForm.componentId = "changePasswordForm";
+            return ChangePasswordForm;
+        })();
+        angular.module("user").directive(ChangePasswordForm.componentId, function (identityService, userService, $location, $routeParams) { return new ChangePasswordForm(identityService, userService, $location, $routeParams); });
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
 //# sourceMappingURL=changePasswordForm.js.map
 //# sourceMappingURL=preferences.js.map
 (function () {
@@ -2248,40 +2362,43 @@ var UserModule;
     }
 })();
 //# sourceMappingURL=registrationForm.js.map
-var UserModule;
-(function (UserModule) {
-    "use strict";
-    var SignInForm = (function () {
-        function SignInForm(identityService, token, $location) {
-            var _this = this;
-            this.identityService = identityService;
-            this.token = token;
-            this.$location = $location;
-            this.templateUrl = "/app/user/components/signInForm/signInForm.html";
-            this.restrict = "E";
-            this.scope = {};
-            this.replace = true;
-            this.link = function (scope) {
-                scope.vm = {
-                    username: "System",
-                    password: "password"
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        "use strict";
+        var SignInForm = (function () {
+            function SignInForm(identityService, token, $location) {
+                var _this = this;
+                this.identityService = identityService;
+                this.token = token;
+                this.$location = $location;
+                this.templateUrl = "/app/user/components/signInForm/signInForm.html";
+                this.restrict = "E";
+                this.scope = {};
+                this.replace = true;
+                this.link = function (scope) {
+                    scope.vm = {
+                        username: "System",
+                        password: "password"
+                    };
+                    scope.tryToSignIn = function (form) {
+                        return _this.identityService.signIn({ model: scope.vm }).then(function (results) {
+                            _this.token.set({ data: results });
+                            _this.$location.path("/");
+                        }).catch(function (error) {
+                            console.log("what what?");
+                        });
+                    };
                 };
-                scope.tryToSignIn = function (form) {
-                    return _this.identityService.signIn({ model: scope.vm }).then(function (results) {
-                        _this.token.set({ data: results });
-                        _this.$location.path("/");
-                    }).catch(function (error) {
-                        console.log("what what?");
-                    });
-                };
-            };
-            this.$inject = ["identityService", "token", "$location"];
-        }
-        SignInForm.componentId = "signInForm";
-        return SignInForm;
-    })();
-    angular.module("user").directive(SignInForm.componentId, function (identityService, token, $location) { return new SignInForm(identityService, token, $location); });
-})(UserModule || (UserModule = {}));
+                this.$inject = ["identityService", "token", "$location"];
+            }
+            SignInForm.componentId = "signInForm";
+            return SignInForm;
+        })();
+        angular.module("user").directive(SignInForm.componentId, function (identityService, token, $location) { return new SignInForm(identityService, token, $location); });
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
 //# sourceMappingURL=signinForm.js.map
 (function () {
     "use strict";
@@ -2299,104 +2416,113 @@ var UserModule;
     }
 })();
 //# sourceMappingURL=userAdminMenu.js.map
-var UserModule;
-(function (UserModule) {
-    var UserDropDownList = (function () {
-        function UserDropDownList() {
-            this.templateUrl = "/app/user/components/userDropDownList/userDropDownList.html";
-            this.restrict = "E";
-            this.scope = {
-                currentuser: "="
-            };
-            this.replace = true;
-            this.link = function (scope) {
-                scope.users = [
-                    { id: 0, name: "John" },
-                    { id: 1, name: "Quinn" },
-                    { id: 2, name: "Richard" }
-                ];
-            };
-        }
-        UserDropDownList.componentId = "userDropDownList";
-        return UserDropDownList;
-    })();
-    UserModule.UserDropDownList = UserDropDownList;
-    angular.module("user").directive(UserDropDownList.componentId, [function () { return new UserDropDownList(); }]);
-})(UserModule || (UserModule = {}));
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        var UserDropDownList = (function () {
+            function UserDropDownList() {
+                this.templateUrl = "/app/user/components/userDropDownList/userDropDownList.html";
+                this.restrict = "E";
+                this.scope = {
+                    currentuser: "="
+                };
+                this.replace = true;
+                this.link = function (scope) {
+                    scope.users = [
+                        { id: 0, name: "John" },
+                        { id: 1, name: "Quinn" },
+                        { id: 2, name: "Richard" }
+                    ];
+                };
+            }
+            UserDropDownList.componentId = "userDropDownList";
+            return UserDropDownList;
+        })();
+        user.UserDropDownList = UserDropDownList;
+        angular.module("user").directive(UserDropDownList.componentId, [function () { return new UserDropDownList(); }]);
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
 //# sourceMappingURL=userDropDownList.js.map
-var UserModule;
-(function (UserModule) {
-    var UserList = (function () {
-        function UserList(userService) {
-            var _this = this;
-            this.userService = userService;
-            this.replace = true;
-            this.restrict = "E";
-            this.templateUrl = "/app/user/components/userList/userList.html";
-            this.scope = {};
-            this.link = function (scope, element, attributes) {
-                scope.vm = {};
-                scope.vm.remove = function (entity) {
-                    return _this.userService.remove({ id: entity.id }).then(function () {
-                        for (var i = 0; i < scope.vm.entities.length; i++) {
-                            if (scope.vm.entities[i].id == entity.id) {
-                                scope.vm.entities.splice(i, 1);
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        var UserList = (function () {
+            function UserList(userService) {
+                var _this = this;
+                this.userService = userService;
+                this.replace = true;
+                this.restrict = "E";
+                this.templateUrl = "/app/user/components/userList/userList.html";
+                this.scope = {};
+                this.link = function (scope, element, attributes) {
+                    scope.vm = {};
+                    scope.vm.remove = function (entity) {
+                        return _this.userService.remove({ id: entity.id }).then(function () {
+                            for (var i = 0; i < scope.vm.entities.length; i++) {
+                                if (scope.vm.entities[i].id == entity.id) {
+                                    scope.vm.entities.splice(i, 1);
+                                }
                             }
-                        }
-                    }).catch(function (error) {
+                        }).catch(function (error) {
+                        });
+                    };
+                    return _this.userService.getAll().then(function (results) {
+                        return scope.vm.entities = results;
                     });
                 };
-                return _this.userService.getAll().then(function (results) {
-                    return scope.vm.entities = results;
-                });
-            };
-            this.$inject = ["userService"];
-        }
-        UserList.componentId = "userList";
-        return UserList;
-    })();
-    angular.module("user").directive(UserList.componentId, function (userService) { return new UserList(userService); });
-})(UserModule || (UserModule = {}));
+                this.$inject = ["userService"];
+            }
+            UserList.componentId = "userList";
+            return UserList;
+        })();
+        angular.module("user").directive(UserList.componentId, function (userService) { return new UserList(userService); });
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
 //# sourceMappingURL=userList.js.map
 //# sourceMappingURL=IPreferencesService.js.map
-var UserModule;
-(function (UserModule) {
-    var serviceId = "identityService";
-    angular.module("user").service(serviceId, ["$http", "alerting", "currentUser", "formEncode", service]);
-    function service($http, alerting, currentUser, formEncode) {
-        var self = this;
-        self.signIn = function (params) {
-            var configuration = {
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                }
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        var serviceId = "identityService";
+        angular.module("user").service(serviceId, ["$http", "alerting", "currentUser", "formEncode", service]);
+        function service($http, alerting, currentUser, formEncode) {
+            var self = this;
+            self.signIn = function (params) {
+                var configuration = {
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    }
+                };
+                var data = formEncode({
+                    username: params.model.username,
+                    password: params.model.password,
+                    grant_type: "password"
+                });
+                return $http.post("/login", data, configuration).then(function (results) {
+                    return results.data.access_token;
+                }).catch(function (error) {
+                });
             };
-            var data = formEncode({
-                username: params.model.username,
-                password: params.model.password,
-                grant_type: "password"
-            });
-            return $http.post("/login", data, configuration).then(function (results) {
-                return results.data.access_token;
-            }).catch(function (error) {
-            });
-        };
-        self.register = function (params) {
-            return $http({ method: "POST", url: "api/identity/register", data: JSON.stringify(params.model) }).then(function (results) {
-                return results.data.token;
-            }).catch(function () {
-            });
-        };
-        self.getCurrentUser = function () {
-            return $http({ method: "GET", url: "api/user/getCurrentUser" }).then(function (results) {
-                currentUser.set({ data: results.data });
-                return currentUser.get();
-            }).catch(function () {
-            });
-        };
-        return self;
-    }
-})(UserModule || (UserModule = {}));
+            self.register = function (params) {
+                return $http({ method: "POST", url: "api/identity/register", data: JSON.stringify(params.model) }).then(function (results) {
+                    return results.data.token;
+                }).catch(function () {
+                });
+            };
+            self.getCurrentUser = function () {
+                return $http({ method: "GET", url: "api/user/getCurrentUser" }).then(function (results) {
+                    currentUser.set({ data: results.data });
+                    return currentUser.get();
+                }).catch(function () {
+                });
+            };
+            return self;
+        }
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
 //# sourceMappingURL=identityService.js.map
 (function () {
     "use strict";
@@ -2415,117 +2541,123 @@ var UserModule;
     angular.module("user").service("preferencesService", preferencesService);
 })();
 //# sourceMappingURL=preferencesService.js.map
-var UserModule;
-(function (UserModule) {
-    var serviceId = "userRouteResolver";
-    angular.module("user").service(serviceId, ["$q", "$route", "configurationService", "userService", service]);
-    function service($q, $route, configurationService, userService) {
-        var self = this;
-        self.resolveRoute = function (params) {
-            return configurationService.get().then(function () {
-                if (params) {
-                    switch (params.route) {
-                        case "/admin/users":
-                            return userService.getAll().then(function () {
-                            });
-                            break;
-                        case "/admin/user/edit/:id":
-                            return userService.getById({ id: $route.params.id }).then(function () {
-                            });
-                            break;
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        var serviceId = "userRouteResolver";
+        angular.module("user").service(serviceId, ["$q", "$route", "configurationService", "userService", service]);
+        function service($q, $route, configurationService, userService) {
+            var self = this;
+            self.resolveRoute = function (params) {
+                return configurationService.get().then(function () {
+                    if (params) {
+                        switch (params.route) {
+                            case "/admin/users":
+                                return userService.getAll().then(function () {
+                                });
+                                break;
+                            case "/admin/user/edit/:id":
+                                return userService.getById({ id: $route.params.id }).then(function () {
+                                });
+                                break;
+                        }
                     }
-                }
-            }).catch(function (error) {
-                console.log(error);
-            });
-        };
-        return self;
-    }
-    ;
-})(UserModule || (UserModule = {}));
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            };
+            return self;
+        }
+        ;
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
 //# sourceMappingURL=userRouteResolver.js.map
-var UserModule;
-(function (UserModule) {
-    var dataServiceId = "userService";
-    angular.module("user").service(dataServiceId, ["$http", "$q", "$rootScope", dataService]);
-    function dataService($http, $q, $rootScope) {
-        var self = this;
-        self.getBaseUri = function () {
-            if ($rootScope.configuration && $rootScope.configuration.apiVersion) {
-                return "api/" + $rootScope.configuration.apiVersion + "/user/";
-            }
-            else {
-                return "api/user/";
-            }
-        };
-        self.cache = {
-            getAll: null,
-            getById: null
-        };
-        $rootScope.$on("$locationChangeStart", function () {
-            self.clearCache();
-        });
-        self.clearCache = function () {
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        var dataServiceId = "userService";
+        angular.module("user").service(dataServiceId, ["$http", "$q", "$rootScope", dataService]);
+        function dataService($http, $q, $rootScope) {
+            var self = this;
+            self.getBaseUri = function () {
+                if ($rootScope.configuration && $rootScope.configuration.apiVersion) {
+                    return "api/" + $rootScope.configuration.apiVersion + "/user/";
+                }
+                else {
+                    return "api/user/";
+                }
+            };
             self.cache = {
                 getAll: null,
                 getById: null
             };
-        };
-        self.getAll = function (params) {
-            if (self.cache.getAll) {
-                var deferred = $q.defer();
-                deferred.resolve(self.cache.getAll);
-                return deferred.promise;
-            }
-            ;
-            return $http({ method: "GET", url: self.getBaseUri() + "getAll", params: params }).then(function (results) {
-                self.cache.getAll = results.data;
-                return results.data;
-            }).catch(function (error) {
-            });
-        };
-        self.getById = function (params) {
-            if (self.cache.getById && self.cache.getById.id == params.id) {
-                var deferred = $q.defer();
-                deferred.resolve(self.cache.getById);
-                return deferred.promise;
-            }
-            return $http({ method: "GET", url: self.getBaseUri() + "getbyid?id=" + params.id }).then(function (results) {
-                self.cache.getById = results.data;
-                return results.data;
-            }).catch(function (error) {
-            });
-        };
-        self.remove = function (params) {
-            return $http({ method: "DELETE", url: self.getBaseUri() + "remove?id=" + params.id }).then(function (results) {
+            $rootScope.$on("$locationChangeStart", function () {
                 self.clearCache();
-                return results;
-            }).catch(function (error) {
             });
-        };
-        self.changePassword = function (params) {
-            return $http({ method: "POST", url: self.getBaseUri() + "changePassword", data: JSON.stringify(params.model) }).then(function (results) {
-                self.clearCache();
-                return results;
-            }).catch(function (error) {
-            });
-        };
-        self.add = function (params) {
-            return $http({ method: "POST", url: self.getBaseUri() + "add", data: JSON.stringify(params.model) }).then(function (results) {
-                self.clearCache();
-                return results;
-            }).catch(function (error) {
-            });
-        };
-        self.update = function (params) {
-            return $http({ method: "PUT", url: self.getBaseUri() + "update", data: JSON.stringify(params.model) }).then(function (results) {
-                self.clearCache();
-                return results;
-            }).catch(function (error) {
-                console.log("user service error:" + error);
-            });
-        };
-        return self;
-    }
-})(UserModule || (UserModule = {}));
+            self.clearCache = function () {
+                self.cache = {
+                    getAll: null,
+                    getById: null
+                };
+            };
+            self.getAll = function (params) {
+                if (self.cache.getAll) {
+                    var deferred = $q.defer();
+                    deferred.resolve(self.cache.getAll);
+                    return deferred.promise;
+                }
+                ;
+                return $http({ method: "GET", url: self.getBaseUri() + "getAll", params: params }).then(function (results) {
+                    self.cache.getAll = results.data;
+                    return results.data;
+                }).catch(function (error) {
+                });
+            };
+            self.getById = function (params) {
+                if (self.cache.getById && self.cache.getById.id == params.id) {
+                    var deferred = $q.defer();
+                    deferred.resolve(self.cache.getById);
+                    return deferred.promise;
+                }
+                return $http({ method: "GET", url: self.getBaseUri() + "getbyid?id=" + params.id }).then(function (results) {
+                    self.cache.getById = results.data;
+                    return results.data;
+                }).catch(function (error) {
+                });
+            };
+            self.remove = function (params) {
+                return $http({ method: "DELETE", url: self.getBaseUri() + "remove?id=" + params.id }).then(function (results) {
+                    self.clearCache();
+                    return results;
+                }).catch(function (error) {
+                });
+            };
+            self.changePassword = function (params) {
+                return $http({ method: "POST", url: self.getBaseUri() + "changePassword", data: JSON.stringify(params.model) }).then(function (results) {
+                    self.clearCache();
+                    return results;
+                }).catch(function (error) {
+                });
+            };
+            self.add = function (params) {
+                return $http({ method: "POST", url: self.getBaseUri() + "add", data: JSON.stringify(params.model) }).then(function (results) {
+                    self.clearCache();
+                    return results;
+                }).catch(function (error) {
+                });
+            };
+            self.update = function (params) {
+                return $http({ method: "PUT", url: self.getBaseUri() + "update", data: JSON.stringify(params.model) }).then(function (results) {
+                    self.clearCache();
+                    return results;
+                }).catch(function (error) {
+                    console.log("user service error:" + error);
+                });
+            };
+            return self;
+        }
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
 //# sourceMappingURL=userService.js.map

@@ -1,4 +1,4 @@
-module ProfileModule {
+module app.profile {
 
     "use strict";
 

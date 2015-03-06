@@ -1,4 +1,4 @@
-﻿module CoreModule {
+﻿module app.core {
 
     angular.module("core").value("$", $);
 } 

@@ -1,4 +1,4 @@
-﻿module SessionModule {
+﻿module app.session {
 
     var serviceId = "session";
 
