@@ -19,11 +19,10 @@ var app;
                 });
                 return deferred.promise;
             };
-            ConfigurationService.serviceId = "configurationService";
             return ConfigurationService;
         })();
         configuration.ConfigurationService = ConfigurationService;
-        angular.module("app.configuration").service(ConfigurationService.serviceId, ["$http", "$q", "$rootScope", function ($http, $q, $rootScope) { return new ConfigurationService($http, $q, $rootScope); }]);
+        angular.module("app.configuration").service("configurationService", ["$http", "$q", "$rootScope", ConfigurationService]);
     })(configuration = app.configuration || (app.configuration = {}));
 })(app || (app = {}));
-//# sourceMappingURL=configuration.service.js.map
+//# sourceMappingURL=configuration.provider.js.map

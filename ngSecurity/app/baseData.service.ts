@@ -10,9 +10,6 @@
 
          }
 
-
-         public static serviceId: string;
-
          public add = (options) => {
 
              var deferred = this.$q.defer();

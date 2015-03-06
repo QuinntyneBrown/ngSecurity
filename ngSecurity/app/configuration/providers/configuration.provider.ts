@@ -1,12 +1,10 @@
 ﻿module app.configuration {
 
     export class ConfigurationService implements IConfigurationService {
-        
+
         constructor(private $http: ng.IHttpService, private $q: ng.IQService, private $rootScope: ICoreRootScope) {
 
         }
-
-        public static serviceId = "configurationService";
 
         baseUri: string = "api/configuration/";
 
@@ -23,5 +21,5 @@
         }
     }
 
-    angular.module("app.configuration").service(ConfigurationService.serviceId, ["$http", "$q", "$rootScope", ($http, $q, $rootScope) => new ConfigurationService($http,$q,$rootScope)]);
+    angular.module("app.configuration").service("configurationService", ["$http", "$q", "$rootScope", ConfigurationService]);
 }

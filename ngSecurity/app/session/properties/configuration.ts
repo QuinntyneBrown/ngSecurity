@@ -2,10 +2,6 @@
 
     "use strict";
 
-    var serviceId = "configuration";
-
-    angular.module("app.session").service(serviceId, ["$rootScope", "storage", service]);
-
     function service($rootScope, storage) {
         var self = this;
         var data = null;
@@ -36,5 +32,7 @@
         });
         return self;
     }
+
+    angular.module("app.session").service("configuration", ["$rootScope", "storage", service]);
 
 }

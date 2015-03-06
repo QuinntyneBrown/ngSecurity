@@ -144,6 +144,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app-structure.txt" />
     <Content Include="app.js" />
     <Content Include="app\account\components\accountEditor\accountEditor.html" />
     <Content Include="app\account\components\accountEditor\accountEditorSpec.js">
@@ -190,9 +191,6 @@
     <Content Include="app\common\components\workSpinner\responsive less\workSpinner.sm.less" />
     <Content Include="app\common\components\workSpinner\responsive less\workSpinner.xs.less" />
     <Content Include="app\common\components\workSpinner\workSpinner.html" />
-    <Content Include="app\common\components\workSpinner\workSpinner.spec.js">
-      <DependentUpon>workSpinner.ts</DependentUpon>
-    </Content>
     <Content Include="app\core\storage\storage.js" />
     <Content Include="app\core\styles\a.less" />
     <Content Include="app\core\styles\app.css" />
@@ -270,14 +268,11 @@
     <Content Include="app\group\components\groupList\groupList.html" />
     <Content Include="app\group\components\groupList\groupList.js" />
     <Content Include="app\group\components\groupList\groupList.js.map" />
-    <Content Include="app\group\components\groupList\groupList.spec.js" />
     <Content Include="app\group\components\groupList\responsive less\groupList.less" />
     <Content Include="app\group\components\groupList\responsive less\groupList.lg.less" />
     <Content Include="app\group\components\groupList\responsive less\groupList.md.less" />
     <Content Include="app\group\components\groupList\responsive less\groupList.sm.less" />
     <Content Include="app\group\components\groupList\responsive less\groupList.xs.less" />
-    <Content Include="app\group\interfaces\IGroupService.js" />
-    <Content Include="app\group\interfaces\IGroupService.js.map" />
     <Content Include="app\profile\components\profileEditor\profileEditor.html" />
     <Content Include="app\profile\components\profileEditor\profileEditorSpec.js">
       <DependentUpon>profileEditor.ts</DependentUpon>
@@ -286,8 +281,8 @@
     <Content Include="app\profile\components\profileList\profileListSpec.js">
       <DependentUpon>profileList.ts</DependentUpon>
     </Content>
-    <Content Include="app\security\templates\addaccount.html" />
     <Content Include="app\security\default.html" />
+    <Content Include="app\security\templates\addaccount.html" />
     <Content Include="app\layout.less" />
     <Content Include="app\media-queries-variables.less" />
     <Content Include="app\role\components\roleEditor\responsive less\roleEditor.less" />
@@ -296,7 +291,6 @@
     <Content Include="app\role\components\roleEditor\responsive less\roleEditor.sm.less" />
     <Content Include="app\role\components\roleEditor\responsive less\roleEditor.xs.less" />
     <Content Include="app\role\components\roleEditor\roleEditor.html" />
-    <Content Include="app\role\components\roleEditor\roleEditor.spec.js" />
     <Content Include="app\role\components\roleList\responsive less\roleList.less" />
     <Content Include="app\role\components\roleList\responsive less\roleList.lg.less" />
     <Content Include="app\role\components\roleList\responsive less\roleList.md.less" />
@@ -422,8 +416,6 @@
     <Content Include="app\user\components\userList\userList.js" />
     <Content Include="app\user\components\userList\userList.js.map" />
     <Content Include="app\user\components\userList\userListSpec.js" />
-    <Content Include="app\user\interfaces\IPreferencesService.js" />
-    <Content Include="app\user\interfaces\IPreferencesService.js.map" />
     <Content Include="app\user\templates\edit.html" />
     <Content Include="app\user\templates\list.html" />
     <Content Include="app\user\templates\preferences.html" />
@@ -614,6 +606,7 @@
     <TypeScriptCompile Include="app\account\components\accountEditor\accountEditor.ts" />
     <TypeScriptCompile Include="app\account\components\accountList\accountList.ts" />
     <TypeScriptCompile Include="app\baseData.service.ts" />
+    <TypeScriptCompile Include="app\configuration\providers\configuration.provider.ts" />
     <TypeScriptCompile Include="app\shared\IAccountService.d.ts" />
     <TypeScriptCompile Include="app\account\account.module.ts" />
     <TypeScriptCompile Include="app\account\services\account.service.ts" />
@@ -628,14 +621,14 @@
     <TypeScriptCompile Include="app\common\services\exceptionHandler.ts" />
     <TypeScriptCompile Include="app\shared\IAlerting.d.ts" />
     <TypeScriptCompile Include="app\configuration\configuration.module.ts" />
-    <TypeScriptCompile Include="app\configuration\services\configuration.service.ts" />
-    <TypeScriptCompile Include="app\configuration\services\interfaces\IConfigurationService.d.ts" />
+    <TypeScriptCompile Include="app\shared\IConfigurationService.d.ts" />
     <TypeScriptCompile Include="app\shared\IApiEndpointConfig.d.ts" />
     <TypeScriptCompile Include="app\shared\IApiEndpointProvider.d.ts" />
+    <TypeScriptCompile Include="app\shared\IConfigurationServiceProvider.d.ts" />
     <TypeScriptCompile Include="app\shared\ICoreRootScope.d.ts" />
     <TypeScriptCompile Include="app\shared\IDataService.d.ts" />
-    <TypeScriptCompile Include="app\shared\IRouteProvider.ts" />
-    <TypeScriptCompile Include="app\shared\IRouteResolver.ts" />
+    <TypeScriptCompile Include="app\shared\IRouteProvider.d.ts" />
+    <TypeScriptCompile Include="app\shared\IRouteResolver.d.ts" />
     <TypeScriptCompile Include="app\core\intreceptors\authorizationInterceptor.ts" />
     <TypeScriptCompile Include="app\core\intreceptors\requestCounter.ts" />
     <TypeScriptCompile Include="app\core\jQuery\jQuery.ts" />
@@ -646,9 +639,9 @@
     <TypeScriptCompile Include="app\core\utilities\getStringFromUrl.ts" />
     <TypeScriptCompile Include="app\group\components\groupEditor\groupEditor.ts" />
     <TypeScriptCompile Include="app\group\components\groupList\groupList.ts" />
-    <TypeScriptCompile Include="app\group\interfaces\IGroupService.ts" />
+    <TypeScriptCompile Include="app\shared\IGroupService.d.ts" />
     <TypeScriptCompile Include="app\group\group.module.ts" />
-    <TypeScriptCompile Include="app\group\services\groupService.ts" />
+    <TypeScriptCompile Include="app\group\services\group.service.ts" />
     <TypeScriptCompile Include="app\profile\components\profileEditor\profileEditor.ts" />
     <TypeScriptCompile Include="app\profile\components\profileList\profileList.ts" />
     <TypeScriptCompile Include="app\shared\IProfileService.d.ts" />
@@ -656,7 +649,7 @@
     <TypeScriptCompile Include="app\profile\services\profileService.ts" />
     <TypeScriptCompile Include="app\role\components\roleEditor\roleEditor.ts" />
     <TypeScriptCompile Include="app\role\components\roleList\roleList.ts" />
-    <TypeScriptCompile Include="app\role\interfaces\IRoleService.ts" />
+    <TypeScriptCompile Include="app\shared\IRoleService.d.ts" />
     <TypeScriptCompile Include="app\role\role.module.ts" />
     <TypeScriptCompile Include="app\role\services\roleService.ts" />
     <TypeScriptCompile Include="app\security\components\securityMenu\securityMenu.ts" />
@@ -683,7 +676,7 @@
     <TypeScriptCompile Include="app\user\components\userAdminMenu\userAdminMenu.ts" />
     <TypeScriptCompile Include="app\user\components\userDropDownList\userDropDownList.ts" />
     <TypeScriptCompile Include="app\user\components\userList\userList.ts" />
-    <TypeScriptCompile Include="app\user\interfaces\IPreferencesService.ts" />
+    <TypeScriptCompile Include="app\shared\IPreferencesService.d.ts" />
     <TypeScriptCompile Include="app\user\user.module.ts" />
     <TypeScriptCompile Include="app\user\services\identityService.ts" />
     <TypeScriptCompile Include="app\user\services\preferencesService.ts" />
@@ -700,7 +693,6 @@
     <TypeScriptCompile Include="scripts\typings\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\core\interfaces\" />
     <Folder Include="app\core\services\" />
     <Folder Include="app\group\components\groupEditor\interfaces\" />
     <Folder Include="app\group\components\groupList\interfaces\" />

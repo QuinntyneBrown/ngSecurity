@@ -189,33 +189,6 @@ var app;
     })(account = app.account || (app.account = {}));
 })(app || (app = {}));
 //# sourceMappingURL=account.service.js.map
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
-var app;
-(function (app) {
-    var account;
-    (function (account) {
-        "use strict";
-        var AccountService = (function (_super) {
-            __extends(AccountService, _super);
-            function AccountService($http, $cacheFactory, $q, apiEndpoint) {
-                _super.call(this, $http, $cacheFactory, $q, apiEndpoint.baseUrl + "account/");
-                this.$http = $http;
-                this.$cacheFactory = $cacheFactory;
-                this.$q = $q;
-                this.apiEndpoint = apiEndpoint;
-            }
-            return AccountService;
-        })(app.BaseDataService);
-        account.AccountService = AccountService;
-        angular.module("app.account").service("accountService", ["$q", "$cacheFactory", "$http", "apiEndpoint", AccountService]);
-    })(account = app.account || (app.account = {}));
-})(app || (app = {}));
-//# sourceMappingURL=accountService.js.map
 var app;
 (function (_app) {
     var common;
@@ -377,17 +350,16 @@ var app;
         "use strict";
         var WorkSpinner = (function () {
             function WorkSpinner(requestCounter) {
-                var _this = this;
                 this.requestCounter = requestCounter;
                 this.restrict = "E";
                 this.scope = {};
                 this.template = "<div ng-show='requestCount' class='work-spinner'><i class='fa fa-spinner fa-spin fade'></i></div>";
                 this.link = function (scope) {
-                    scope.$watch(function () {
-                        return _this.requestCounter.getRequestCount();
-                    }, function (requestCount) {
-                        scope.requestCount = requestCount;
-                    });
+                    //scope.$watch(() => {
+                    //    return this.requestCounter.getRequestCount();
+                    //}, (requestCount) => {
+                    //    scope.requestCount = requestCount;
+                    //});
                 };
             }
             return WorkSpinner;
@@ -490,14 +462,13 @@ var app;
                 });
                 return deferred.promise;
             };
-            ConfigurationService.serviceId = "configurationService";
             return ConfigurationService;
         })();
         configuration.ConfigurationService = ConfigurationService;
-        angular.module("app.configuration").service(ConfigurationService.serviceId, ["$http", "$q", "$rootScope", function ($http, $q, $rootScope) { return new ConfigurationService($http, $q, $rootScope); }]);
+        angular.module("app.configuration").service("configurationService", ["$http", "$q", "$rootScope", ConfigurationService]);
     })(configuration = app.configuration || (app.configuration = {}));
 })(app || (app = {}));
-//# sourceMappingURL=configuration.service.js.map
+//# sourceMappingURL=configuration.provider.js.map
 var app;
 (function (_app) {
     var core;
@@ -537,26 +508,6 @@ var app;
     })(core = _app.core || (_app.core = {}));
 })(app || (app = {}));
 //# sourceMappingURL=core.module.js.map
-var app;
-(function (app) {
-    var core;
-    (function (core) {
-        "use strict";
-    })(core = app.core || (app.core = {}));
-})(app || (app = {}));
-//# sourceMappingURL=IApiEndpointConfig.js.map
-var app;
-(function (app) {
-    var core;
-    (function (core) {
-        "use strict";
-    })(core = app.core || (app.core = {}));
-})(app || (app = {}));
-//# sourceMappingURL=IApiEndpointProvider.js.map
-//# sourceMappingURL=ICoreRootScope.js.map
-//# sourceMappingURL=IDataService.js.map
-//# sourceMappingURL=IRouteProvider.js.map
-//# sourceMappingURL=IRouteResolver.js.map
 var app;
 (function (app) {
     var core;
@@ -613,9 +564,7 @@ var app;
                 getRequestCount: getRequestCount
             };
         }
-        var interceptorId = "requestCounter";
-        requestCounter.$inject = ["$q"];
-        angular.module("app.core").factory(interceptorId, requestCounter);
+        angular.module("app.core").factory("requestCounter", ["$q", requestCounter]);
     })(core = app.core || (app.core = {}));
 })(app || (app = {}));
 //# sourceMappingURL=requestCounter.js.map
@@ -876,7 +825,6 @@ var app;
     })(group = app.group || (app.group = {}));
 })(app || (app = {}));
 //# sourceMappingURL=groupList.js.map
-//# sourceMappingURL=IGroupService.js.map
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -902,7 +850,7 @@ var app;
         angular.module("app.group").service("groupService", ["$q", "$cacheFactory", "$http", "apiEndpoint", GroupService]);
     })(group = app.group || (app.group = {}));
 })(app || (app = {}));
-//# sourceMappingURL=groupService.js.map
+//# sourceMappingURL=group.service.js.map
 var app;
 (function (app) {
     var profile;
@@ -1117,7 +1065,6 @@ var app;
     })(role = app.role || (app.role = {}));
 })(app || (app = {}));
 //# sourceMappingURL=roleList.js.map
-//# sourceMappingURL=IRoleService.js.map
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -1690,8 +1637,6 @@ var app;
     var session;
     (function (session) {
         "use strict";
-        var serviceId = "configuration";
-        angular.module("app.session").service(serviceId, ["$rootScope", "storage", service]);
         function service($rootScope, storage) {
             var self = this;
             var data = null;
@@ -1719,6 +1664,7 @@ var app;
             });
             return self;
         }
+        angular.module("app.session").service("configuration", ["$rootScope", "storage", service]);
     })(session = app.session || (app.session = {}));
 })(app || (app = {}));
 //# sourceMappingURL=configuration.js.map
@@ -1798,12 +1744,6 @@ var app;
     })(session = app.session || (app.session = {}));
 })(app || (app = {}));
 //# sourceMappingURL=token.js.map
-//# sourceMappingURL=IApiEndpointConfig.js.map
-//# sourceMappingURL=IApiEndpointProvider.js.map
-//# sourceMappingURL=ICoreRootScope.js.map
-//# sourceMappingURL=IDataService.js.map
-//# sourceMappingURL=IRouteProvider.js.map
-//# sourceMappingURL=IRouteResolver.js.map
 var app;
 (function (app) {
     var tenant;
@@ -1892,3 +1832,487 @@ var TenantModule;
     angular.module("app.tenant").directive(TenantList.componentId, function (tenantService) { return new TenantList(tenantService); });
 })(TenantModule || (TenantModule = {}));
 //# sourceMappingURL=tenantList.js.map
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var app;
+(function (app) {
+    var tenant;
+    (function (tenant) {
+        var TenantService = (function (_super) {
+            __extends(TenantService, _super);
+            function TenantService($http, $cacheFactory, $q, apiEndpoint) {
+                _super.call(this, $http, $cacheFactory, $q, apiEndpoint.baseUrl + "tenant/");
+                this.$http = $http;
+                this.$cacheFactory = $cacheFactory;
+                this.$q = $q;
+                this.apiEndpoint = apiEndpoint;
+            }
+            return TenantService;
+        })(app.BaseDataService);
+        tenant.TenantService = TenantService;
+        angular.module("app.tenant").service("tenantService", ["$q", "$cacheFactory", "$http", "apiEndpoint", TenantService]);
+    })(tenant = app.tenant || (app.tenant = {}));
+})(app || (app = {}));
+//# sourceMappingURL=tenant.service.js.map
+var app;
+(function (_app) {
+    var user;
+    (function (user) {
+        var app = angular.module("app.user", [
+            "app.configuration",
+            "app.common",
+            "app.core",
+            "app.group",
+            "app.role",
+            "app.session",
+            "ngRoute"
+        ]).config(config);
+        config.$inject = ["$routeProvider"];
+        function config($routeProvider) {
+            $routeProvider.when("/signin", {
+                templateUrl: "/app/user/templates/signin.html",
+            }).when("/", {
+                templateUrl: "/app/user/templates/preferences.html",
+                controller: "preferencesController",
+                controllerAs: "vm",
+                resolve: {
+                    preferencesData: [
+                        "preferencesService",
+                        function (preferencesService) {
+                            return preferencesService.getClientPreferences();
+                        }
+                    ],
+                    routeData: [
+                        "userRouteResolver",
+                        function (userRouteResolver) {
+                            return userRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: false
+            }).when("/user/add", {
+                templateUrl: "/app/user/templates/edit.html",
+                resolve: {
+                    routeData: [
+                        "userRouteResolver",
+                        function (userRouteResolver) {
+                            return userRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true
+            }).when("/admin/user/edit/:id", {
+                templateUrl: "/app/user/templates/edit.html",
+                resolve: [
+                    "userRouteResolver",
+                    function (userRouteResolver) {
+                        return userRouteResolver.resolveRoute({ route: "/admin/user/edit/:id" });
+                    }
+                ],
+                authorizationRequired: true
+            }).when("/admin/users", {
+                templateUrl: "/app/user/templates/list.html",
+                resolve: [
+                    "userRouteResolver",
+                    function (userRouteResolver) {
+                        return userRouteResolver.resolveRoute({ route: "/admin/users" });
+                    }
+                ],
+                authorizationRequired: true
+            }).when("/register", {
+                templateUrl: "/app/user/templates/register.html",
+                resolve: {
+                    routeData: [
+                        "userRouteResolver",
+                        function (userRouteResolver) {
+                            return userRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: false
+            }).when("/preferences", {
+                templateUrl: "/app/user/templates/preferences.html",
+                controller: "preferencesController",
+                controllerAs: "vm",
+                resolve: {
+                    routeData: [
+                        "userRouteResolver",
+                        function (userRouteResolver) {
+                            return userRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true
+            });
+        }
+    })(user = _app.user || (_app.user = {}));
+})(app || (app = {}));
+//# sourceMappingURL=user.module.js.map
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        "use strict";
+        var ChangePasswordForm = (function () {
+            function ChangePasswordForm(identityService, userService, $location, $routeParams) {
+                var _this = this;
+                this.identityService = identityService;
+                this.userService = userService;
+                this.$location = $location;
+                this.$routeParams = $routeParams;
+                this.templateUrl = "/app/user/components/changePasswordForm/changePasswordForm.html";
+                this.restrict = "E";
+                this.scope = {};
+                this.replace = true;
+                this.link = function (scope) {
+                    scope.vm = {};
+                    scope.tryToChangePassword = function (form) {
+                        return _this.userService.changePassword({ model: scope.vm }).then(function (results) {
+                            _this.$location.path("/user/list");
+                        }).catch(function (error) {
+                        });
+                    };
+                    if (_this.$routeParams.changepasswordid) {
+                        return _this.userService.getById({ id: _this.$routeParams.changepasswordid }).then(function (results) {
+                            scope.vm = results;
+                        });
+                    }
+                    else {
+                        return _this.identityService.getCurrentUser().then(function (results) {
+                            scope.vm = results;
+                        });
+                    }
+                };
+                this.$inject = ["identityService", "userService", "$location", "$routeParams"];
+            }
+            ChangePasswordForm.componentId = "changePasswordForm";
+            return ChangePasswordForm;
+        })();
+        angular.module("app.user").directive(ChangePasswordForm.componentId, function (identityService, userService, $location, $routeParams) { return new ChangePasswordForm(identityService, userService, $location, $routeParams); });
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
+//# sourceMappingURL=changePasswordForm.js.map
+//# sourceMappingURL=preferences.js.map
+(function () {
+    "use strict";
+    var componentId = "registrationForm";
+    angular.module("app.user").directive(componentId, ["$location", "identityService", component]);
+    function component($location, identityService) {
+        return {
+            templateUrl: "/app/user/components/registrationForm/registrationForm.html",
+            restrict: "EA",
+            replace: true,
+            scope: {},
+            link: function (scope) {
+                scope.submit = function () {
+                    identityService.register({ model: scope.model }).then(function () {
+                        $location.path("/signin");
+                    });
+                };
+            }
+        };
+    }
+})();
+//# sourceMappingURL=registrationForm.js.map
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        "use strict";
+        var SignInForm = (function () {
+            function SignInForm(identityService, token, $location) {
+                var _this = this;
+                this.identityService = identityService;
+                this.token = token;
+                this.$location = $location;
+                this.templateUrl = "/app/user/components/signInForm/signInForm.html";
+                this.restrict = "E";
+                this.scope = {};
+                this.replace = true;
+                this.link = function (scope) {
+                    scope.vm = {
+                        username: "System",
+                        password: "password"
+                    };
+                    scope.tryToSignIn = function (form) {
+                        return _this.identityService.signIn({ model: scope.vm }).then(function (results) {
+                            _this.token.set({ data: results });
+                            _this.$location.path("/");
+                        }).catch(function (error) {
+                            console.log("what what?");
+                        });
+                    };
+                };
+                this.$inject = ["identityService", "token", "$location"];
+            }
+            SignInForm.componentId = "signInForm";
+            return SignInForm;
+        })();
+        angular.module("app.user").directive(SignInForm.componentId, function (identityService, token, $location) { return new SignInForm(identityService, token, $location); });
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
+//# sourceMappingURL=signinForm.js.map
+(function () {
+    "use strict";
+    var componentId = "userAdminMenu";
+    angular.module("app.user").directive(componentId, ["$location", "$routeParams", "app.session", component]);
+    function component($location, $routeParams, session) {
+        return {
+            templateUrl: "/app/user/components/userAdminMenu/userAdminMenu.html",
+            restrict: "EA",
+            replace: true,
+            scope: {},
+            link: function (scope) {
+            }
+        };
+    }
+})();
+//# sourceMappingURL=userAdminMenu.js.map
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        var UserDropDownList = (function () {
+            function UserDropDownList() {
+                this.templateUrl = "/app/user/components/userDropDownList/userDropDownList.html";
+                this.restrict = "E";
+                this.scope = {
+                    currentuser: "="
+                };
+                this.replace = true;
+                this.link = function (scope) {
+                    scope.users = [
+                        { id: 0, name: "John" },
+                        { id: 1, name: "Quinn" },
+                        { id: 2, name: "Richard" }
+                    ];
+                };
+            }
+            UserDropDownList.componentId = "userDropDownList";
+            return UserDropDownList;
+        })();
+        user.UserDropDownList = UserDropDownList;
+        angular.module("app.user").directive(UserDropDownList.componentId, [function () { return new UserDropDownList(); }]);
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
+//# sourceMappingURL=userDropDownList.js.map
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        var UserList = (function () {
+            function UserList(userService) {
+                var _this = this;
+                this.userService = userService;
+                this.replace = true;
+                this.restrict = "E";
+                this.templateUrl = "/app/user/components/userList/userList.html";
+                this.scope = {};
+                this.link = function (scope, element, attributes) {
+                    scope.vm = {};
+                    scope.vm.remove = function (entity) {
+                        return _this.userService.remove({ id: entity.id }).then(function () {
+                            for (var i = 0; i < scope.vm.entities.length; i++) {
+                                if (scope.vm.entities[i].id == entity.id) {
+                                    scope.vm.entities.splice(i, 1);
+                                }
+                            }
+                        }).catch(function (error) {
+                        });
+                    };
+                    return _this.userService.getAll().then(function (results) {
+                        return scope.vm.entities = results;
+                    });
+                };
+                this.$inject = ["userService"];
+            }
+            UserList.componentId = "userList";
+            return UserList;
+        })();
+        angular.module("app.user").directive(UserList.componentId, function (userService) { return new UserList(userService); });
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
+//# sourceMappingURL=userList.js.map
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        var serviceId = "identityService";
+        angular.module("app.user").service(serviceId, ["$http", "alerting", "currentUser", "formEncode", service]);
+        function service($http, alerting, currentUser, formEncode) {
+            var self = this;
+            self.signIn = function (params) {
+                var configuration = {
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    }
+                };
+                var data = formEncode({
+                    username: params.model.username,
+                    password: params.model.password,
+                    grant_type: "password"
+                });
+                return $http.post("/login", data, configuration).then(function (results) {
+                    return results.data.access_token;
+                }).catch(function (error) {
+                });
+            };
+            self.register = function (params) {
+                return $http({ method: "POST", url: "api/identity/register", data: JSON.stringify(params.model) }).then(function (results) {
+                    return results.data.token;
+                }).catch(function () {
+                });
+            };
+            self.getCurrentUser = function () {
+                return $http({ method: "GET", url: "api/user/getCurrentUser" }).then(function (results) {
+                    currentUser.set({ data: results.data });
+                    return currentUser.get();
+                }).catch(function () {
+                });
+            };
+            return self;
+        }
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
+//# sourceMappingURL=identityService.js.map
+(function () {
+    "use strict";
+    function preferencesService($http, $q, configuration) {
+        var _this = this;
+        var self = this;
+        this.$q = $q;
+        self.getClientPreferences = function () {
+            var deferred = _this.$q.defer();
+            deferred.resolve({ "Server": { "RecentPoLimit": 5 }, "Client": { "PlaceCallUse": "Skype", "StartScreen": "Dashboard", "PoDisplayLimit": "15", "PoOrderBy": "Due Date", "PoOrder": "Descending", "RecentPoLimit": "5" } });
+            return deferred.promise;
+        };
+        return self;
+    }
+    preferencesService.$inject = ["$http", "$q", "configuration"];
+    angular.module("app.user").service("preferencesService", preferencesService);
+})();
+//# sourceMappingURL=preferencesService.js.map
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        var serviceId = "userRouteResolver";
+        angular.module("app.user").service(serviceId, ["$q", "$route", "configurationService", "userService", service]);
+        function service($q, $route, configurationService, userService) {
+            var self = this;
+            self.resolveRoute = function (params) {
+                return configurationService.get().then(function () {
+                    if (params) {
+                        switch (params.route) {
+                            case "/admin/users":
+                                return userService.getAll().then(function () {
+                                });
+                                break;
+                            case "/admin/user/edit/:id":
+                                return userService.getById({ id: $route.params.id }).then(function () {
+                                });
+                                break;
+                        }
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            };
+            return self;
+        }
+        ;
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
+//# sourceMappingURL=userRouteResolver.js.map
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        var dataServiceId = "userService";
+        angular.module("app.user").service(dataServiceId, ["$http", "$q", "$rootScope", dataService]);
+        function dataService($http, $q, $rootScope) {
+            var self = this;
+            self.getBaseUri = function () {
+                if ($rootScope.configuration && $rootScope.configuration.apiVersion) {
+                    return "api/" + $rootScope.configuration.apiVersion + "/user/";
+                }
+                else {
+                    return "api/user/";
+                }
+            };
+            self.cache = {
+                getAll: null,
+                getById: null
+            };
+            $rootScope.$on("$locationChangeStart", function () {
+                self.clearCache();
+            });
+            self.clearCache = function () {
+                self.cache = {
+                    getAll: null,
+                    getById: null
+                };
+            };
+            self.getAll = function (params) {
+                if (self.cache.getAll) {
+                    var deferred = $q.defer();
+                    deferred.resolve(self.cache.getAll);
+                    return deferred.promise;
+                }
+                ;
+                return $http({ method: "GET", url: self.getBaseUri() + "getAll", params: params }).then(function (results) {
+                    self.cache.getAll = results.data;
+                    return results.data;
+                }).catch(function (error) {
+                });
+            };
+            self.getById = function (params) {
+                if (self.cache.getById && self.cache.getById.id == params.id) {
+                    var deferred = $q.defer();
+                    deferred.resolve(self.cache.getById);
+                    return deferred.promise;
+                }
+                return $http({ method: "GET", url: self.getBaseUri() + "getbyid?id=" + params.id }).then(function (results) {
+                    self.cache.getById = results.data;
+                    return results.data;
+                }).catch(function (error) {
+                });
+            };
+            self.remove = function (params) {
+                return $http({ method: "DELETE", url: self.getBaseUri() + "remove?id=" + params.id }).then(function (results) {
+                    self.clearCache();
+                    return results;
+                }).catch(function (error) {
+                });
+            };
+            self.changePassword = function (params) {
+                return $http({ method: "POST", url: self.getBaseUri() + "changePassword", data: JSON.stringify(params.model) }).then(function (results) {
+                    self.clearCache();
+                    return results;
+                }).catch(function (error) {
+                });
+            };
+            self.add = function (params) {
+                return $http({ method: "POST", url: self.getBaseUri() + "add", data: JSON.stringify(params.model) }).then(function (results) {
+                    self.clearCache();
+                    return results;
+                }).catch(function (error) {
+                });
+            };
+            self.update = function (params) {
+                return $http({ method: "PUT", url: self.getBaseUri() + "update", data: JSON.stringify(params.model) }).then(function (results) {
+                    self.clearCache();
+                    return results;
+                }).catch(function (error) {
+                    console.log("user service error:" + error);
+                });
+            };
+            return self;
+        }
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
+//# sourceMappingURL=userService.js.map

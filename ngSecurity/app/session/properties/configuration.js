@@ -3,8 +3,6 @@ var app;
     var session;
     (function (session) {
         "use strict";
-        var serviceId = "configuration";
-        angular.module("app.session").service(serviceId, ["$rootScope", "storage", service]);
         function service($rootScope, storage) {
             var self = this;
             var data = null;
@@ -32,6 +30,7 @@ var app;
             });
             return self;
         }
+        angular.module("app.session").service("configuration", ["$rootScope", "storage", service]);
     })(session = app.session || (app.session = {}));
 })(app || (app = {}));
 //# sourceMappingURL=configuration.js.map

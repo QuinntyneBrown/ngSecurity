@@ -23,4 +23,4 @@ var app;
         angular.module("app.group").service("groupService", ["$q", "$cacheFactory", "$http", "apiEndpoint", GroupService]);
     })(group = app.group || (app.group = {}));
 })(app || (app = {}));
-//# sourceMappingURL=groupService.js.map
+//# sourceMappingURL=group.service.js.map

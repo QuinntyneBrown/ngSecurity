@@ -5,17 +5,16 @@ var app;
         "use strict";
         var WorkSpinner = (function () {
             function WorkSpinner(requestCounter) {
-                var _this = this;
                 this.requestCounter = requestCounter;
                 this.restrict = "E";
                 this.scope = {};
                 this.template = "<div ng-show='requestCount' class='work-spinner'><i class='fa fa-spinner fa-spin fade'></i></div>";
                 this.link = function (scope) {
-                    scope.$watch(function () {
-                        return _this.requestCounter.getRequestCount();
-                    }, function (requestCount) {
-                        scope.requestCount = requestCount;
-                    });
+                    //scope.$watch(() => {
+                    //    return this.requestCounter.getRequestCount();
+                    //}, (requestCount) => {
+                    //    scope.requestCount = requestCount;
+                    //});
                 };
             }
             return WorkSpinner;

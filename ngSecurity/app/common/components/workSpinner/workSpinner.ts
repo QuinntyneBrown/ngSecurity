@@ -15,11 +15,11 @@ module app.common {
         template = "<div ng-show='requestCount' class='work-spinner'><i class='fa fa-spinner fa-spin fade'></i></div>";
 
         link= (scope) => {
-                scope.$watch(() => {
-                    return this.requestCounter.getRequestCount();
-                }, (requestCount) => {
-                    scope.requestCount = requestCount;
-                });
+                //scope.$watch(() => {
+                //    return this.requestCounter.getRequestCount();
+                //}, (requestCount) => {
+                //    scope.requestCount = requestCount;
+                //});
             };
     }
     

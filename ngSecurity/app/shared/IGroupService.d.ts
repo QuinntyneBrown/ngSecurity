@@ -1,4 +1,4 @@
-﻿module app.group {
+﻿declare module app {
     export interface IGroupService extends IDataService {
         
     }

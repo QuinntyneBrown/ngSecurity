@@ -40,10 +40,6 @@
 
     }
 
-    var interceptorId = "requestCounter";
-
-    requestCounter.$inject = ["$q"];
-
-    angular.module("app.core").factory(interceptorId, requestCounter);
+    angular.module("app.core").factory("requestCounter", ["$q",requestCounter]);
 
 }
