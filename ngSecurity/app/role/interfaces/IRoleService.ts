@@ -1,4 +1,4 @@
-﻿module RoleModule {
+﻿module app.role {
 
     export interface IRoleService extends IDataService {
         

@@ -2,4 +2,4 @@ var ConfigurationModule;
 (function (ConfigurationModule) {
     var app = angular.module("configuration", []);
 })(ConfigurationModule || (ConfigurationModule = {}));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=configuration.module.js.map

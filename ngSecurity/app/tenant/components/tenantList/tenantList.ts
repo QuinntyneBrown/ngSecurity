@@ -46,6 +46,6 @@ module TenantModule {
 
     }
 
-    angular.module("tenant").directive(TenantList.componentId,(tenantService) => new TenantList(tenantService));
+    angular.module("app.tenant").directive(TenantList.componentId,(tenantService) => new TenantList(tenantService));
 
 }

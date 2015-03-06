@@ -1,15 +1,15 @@
-﻿module SecurityModule {
+﻿module app.security {
 
-    angular.module("security", [
+    angular.module("app.security", [
         "account",
         "configuration",
         "common",
         "core",
         "group",
         "profile",
-        "role",
+        "app.role",
         "session",               
-        "tenant",
+        "app.tenant",
         "user",
 
         "ngRoute"

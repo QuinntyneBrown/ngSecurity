@@ -31,6 +31,6 @@ var TenantModule;
         TenantEditor.componentId = "tenantEditor";
         return TenantEditor;
     })();
-    angular.module("tenant").directive(TenantEditor.componentId, function ($location, tenantService) { return new TenantEditor($location, tenantService); });
+    angular.module("app.tenant").directive(TenantEditor.componentId, function ($location, tenantService) { return new TenantEditor($location, tenantService); });
 })(TenantModule || (TenantModule = {}));
 //# sourceMappingURL=tenantEditor.js.map

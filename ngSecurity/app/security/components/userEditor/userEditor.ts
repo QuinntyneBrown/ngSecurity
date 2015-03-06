@@ -1,4 +1,4 @@
-module SecurityModule {
+module app.security {
 
     class UserEditor {
 
@@ -52,6 +52,6 @@ module SecurityModule {
         }
     }
 
-    angular.module("security").directive(UserEditor.componentId,($location, $routeParams, securityUow) => new UserEditor($location, $routeParams, securityUow));
+    angular.module("app.security").directive(UserEditor.componentId,($location, $routeParams, securityUow) => new UserEditor($location, $routeParams, securityUow));
 
 }

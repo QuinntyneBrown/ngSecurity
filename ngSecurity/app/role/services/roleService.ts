@@ -1,4 +1,4 @@
-﻿module RoleModule {
+﻿module app.role {
 
     "use strict";
 
@@ -119,7 +119,7 @@
     }
 
 
-    angular.module("role").service(RoleService.serviceId,($http: ng.IHttpService, $q: ng.IQService, $rootScope: ICoreRootScope, configurationService: any) => new RoleService($http, $q, $rootScope, configurationService));
+    angular.module("app.role").service(RoleService.serviceId,($http: ng.IHttpService, $q: ng.IQService, $rootScope: ICoreRootScope, configurationService: any) => new RoleService($http, $q, $rootScope, configurationService));
 
 
 }

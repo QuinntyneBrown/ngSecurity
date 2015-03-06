@@ -1,4 +1,4 @@
-﻿module TenantModule {
+﻿module app.tenant {
 
     "use strict";
 
@@ -119,7 +119,7 @@
     }
 
 
-    angular.module("tenant").service(TenantService.serviceId,($http: ng.IHttpService, $q: ng.IQService, $rootScope: ICoreRootScope, configurationService: any) => new TenantService($http, $q, $rootScope, configurationService));
+    angular.module("app.tenant").service(TenantService.serviceId,($http: ng.IHttpService, $q: ng.IQService, $rootScope: ICoreRootScope, configurationService: any) => new TenantService($http, $q, $rootScope, configurationService));
 
 
 }

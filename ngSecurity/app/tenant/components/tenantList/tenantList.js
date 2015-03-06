@@ -30,6 +30,6 @@ var TenantModule;
         TenantList.componentId = "tenantList";
         return TenantList;
     })();
-    angular.module("tenant").directive(TenantList.componentId, function (tenantService) { return new TenantList(tenantService); });
+    angular.module("app.tenant").directive(TenantList.componentId, function (tenantService) { return new TenantList(tenantService); });
 })(TenantModule || (TenantModule = {}));
 //# sourceMappingURL=tenantList.js.map

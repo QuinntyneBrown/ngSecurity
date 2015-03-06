@@ -5,7 +5,7 @@
         "common",
         "core",
         "group",
-        "role",
+        "app.role",
         "session",
         "ngRoute"])
         .config(config);

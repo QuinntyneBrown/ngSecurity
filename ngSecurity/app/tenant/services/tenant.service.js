@@ -1,10 +1,10 @@
 var app;
 (function (app) {
-    var role;
-    (function (role) {
+    var tenant;
+    (function (tenant) {
         "use strict";
-        var RoleService = (function () {
-            function RoleService($http, $q, $rootScope, configurationService) {
+        var TenantService = (function () {
+            function TenantService($http, $q, $rootScope, configurationService) {
                 var _this = this;
                 this.$http = $http;
                 this.$q = $q;
@@ -24,10 +24,10 @@ var app;
                 };
                 this.getBaseUri = function () {
                     if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
-                        return "api/" + _this.$rootScope.configuration.apiVersion + "/role/";
+                        return "api/" + _this.$rootScope.configuration.apiVersion + "/tenant/";
                     }
                     else {
-                        return "api/role/";
+                        return "api/tenant/";
                     }
                 };
                 this.add = function (options) {
@@ -93,12 +93,12 @@ var app;
                     _this.clearDataStore();
                 });
             }
-            RoleService.serviceId = "roleService";
-            RoleService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
-            return RoleService;
+            TenantService.serviceId = "tenantService";
+            TenantService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
+            return TenantService;
         })();
-        role.RoleService = RoleService;
-        angular.module("app.role").service(RoleService.serviceId, function ($http, $q, $rootScope, configurationService) { return new RoleService($http, $q, $rootScope, configurationService); });
-    })(role = app.role || (app.role = {}));
+        tenant.TenantService = TenantService;
+        angular.module("app.tenant").service(TenantService.serviceId, function ($http, $q, $rootScope, configurationService) { return new TenantService($http, $q, $rootScope, configurationService); });
+    })(tenant = app.tenant || (app.tenant = {}));
 })(app || (app = {}));
-//# sourceMappingURL=roleService.js.map
+//# sourceMappingURL=tenant.service.js.map

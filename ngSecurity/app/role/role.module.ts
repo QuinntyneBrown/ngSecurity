@@ -1,6 +1,6 @@
-﻿module RoleModule {
+﻿module app.role {
 
-    angular.module("role", ["configuration", "common", "core", "session", "ngRoute"])
+    angular.module("app.role", ["configuration", "common", "core", "session", "ngRoute"])
         .config(config);
 
     config.$inject = ["$routeProvider"];

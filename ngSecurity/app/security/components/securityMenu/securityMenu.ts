@@ -1,4 +1,4 @@
-module SecurityModule {
+module app.security {
 
     class DashboardSecurityMenu {
 
@@ -18,6 +18,6 @@ module SecurityModule {
 
     }
 
-    angular.module("security").directive(DashboardSecurityMenu.componentId,() => new DashboardSecurityMenu());
+    angular.module("app.security").directive(DashboardSecurityMenu.componentId,() => new DashboardSecurityMenu());
 
 }

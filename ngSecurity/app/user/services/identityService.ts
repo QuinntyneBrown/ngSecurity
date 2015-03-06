@@ -43,7 +43,9 @@
             return $http({ method: "GET", url: "api/user/getCurrentUser" }).then((results) => {
                 currentUser.set({ data: results.data });
                 return currentUser.get();
-            }).catch(alerting.errorHandler("get user error"));
+            }).catch(() => {
+                
+            });
         };
 
         return self;

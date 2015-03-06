@@ -1,4 +1,4 @@
-module RoleModule {
+module app.role {
 
     class RoleEditor {
 
@@ -44,6 +44,6 @@ module RoleModule {
         }
     }
 
-    angular.module("role").directive(RoleEditor.componentId,($location, roleService) => new RoleEditor($location, roleService));
+    angular.module("app.role").directive(RoleEditor.componentId,($location, roleService) => new RoleEditor($location, roleService));
 
 }

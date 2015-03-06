@@ -11,4 +11,4 @@ var GroupModule;
         });
     }
 })(GroupModule || (GroupModule = {}));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=group.module.js.map

@@ -1,4 +1,4 @@
-﻿module SecurityModule {
+﻿module app.security {
     
 
     class SecurityUow {
@@ -16,5 +16,5 @@
         }
     }
 
-    angular.module("security").service(SecurityUow.serviceId,(groupService, identityService, roleService, userService) => new SecurityUow(groupService, identityService, roleService, userService));
+    angular.module("app.security").service(SecurityUow.serviceId,(groupService, identityService, roleService, userService) => new SecurityUow(groupService, identityService, roleService, userService));
 } 

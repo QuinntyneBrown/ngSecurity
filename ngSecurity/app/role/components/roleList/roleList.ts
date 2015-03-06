@@ -1,4 +1,4 @@
-module RoleModule {
+module app.role {
 
     class RoleList {
 
@@ -42,6 +42,6 @@ module RoleModule {
         }
     }
 
-    angular.module("role").directive(RoleList.componentId,(roleService) => new RoleList(roleService));
+    angular.module("app.role").directive(RoleList.componentId,(roleService) => new RoleList(roleService));
 
 }

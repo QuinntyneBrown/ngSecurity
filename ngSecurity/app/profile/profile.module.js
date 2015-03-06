@@ -11,4 +11,4 @@ var ProfileModule;
         });
     }
 })(ProfileModule || (ProfileModule = {}));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=profile.module.js.map

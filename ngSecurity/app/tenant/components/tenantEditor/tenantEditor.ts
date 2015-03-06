@@ -45,6 +45,6 @@ module TenantModule {
 
     }
 
-    angular.module("tenant").directive(TenantEditor.componentId,($location, tenantService) => new TenantEditor($location, tenantService));
+    angular.module("app.tenant").directive(TenantEditor.componentId,($location, tenantService) => new TenantEditor($location, tenantService));
 
 }

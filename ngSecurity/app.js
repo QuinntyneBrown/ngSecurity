@@ -11,7 +11,7 @@ var AccountModule;
         });
     }
 })(AccountModule || (AccountModule = {}));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=account.module.js.map
 var AccountModule;
 (function (AccountModule) {
     "use strict";
@@ -189,7 +189,31 @@ var CommonModule;
 (function (CommonModule) {
     var app = angular.module("common", ["configuration", "core", "session"]);
 })(CommonModule || (CommonModule = {}));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=common.module.js.map
+var CommonModule;
+(function (CommonModule) {
+    "use strict";
+    var AlertItem = (function () {
+        function AlertItem() {
+            this.$inject = [];
+            this.restrict = "E";
+            this.replace = true;
+            this.scope = {
+                alert: "="
+            };
+            this.templateUrl = "/app/common/components/alertItem/alertItem.html";
+            this.link = function (scope, element, attributes) {
+                scope.removeAlert = function (alert) {
+                    this.alerting.removeAlert(alert);
+                };
+            };
+        }
+        AlertItem.componentId = "alertItem";
+        return AlertItem;
+    })();
+    angular.module("common").directive(AlertItem.componentId, function () { return new AlertItem(); });
+})(CommonModule || (CommonModule = {}));
+//# sourceMappingURL=alertItem.js.map
 var CommonModule;
 (function (CommonModule) {
     "use strict";
@@ -203,11 +227,6 @@ var CommonModule;
             this.scope = {};
             this.templateUrl = "/app/common/components/alerts/alerts.html";
             this.link = function (scope, element, attributes) {
-
-                //scope.wtf = function() {
-                //    alert("wtf");
-                //};
-
                 scope.removeAlert = function (alert) {
                     this.alerting.removeAlert(alert);
                 };
@@ -394,7 +413,7 @@ var ConfigurationModule;
 (function (ConfigurationModule) {
     var app = angular.module("configuration", []);
 })(ConfigurationModule || (ConfigurationModule = {}));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=configuration.module.js.map
 var ConfigurationModule;
 (function (ConfigurationModule) {
     var ConfigurationService = (function () {
@@ -457,7 +476,7 @@ var CoreModule;
         });
     }
 })(CoreModule || (CoreModule = {}));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=core.module.js.map
 var CoreModule;
 (function (CoreModule) {
     "use strict";
@@ -683,7 +702,7 @@ var GroupModule;
         });
     }
 })(GroupModule || (GroupModule = {}));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=group.module.js.map
 var GroupModule;
 (function (GroupModule) {
     var GroupEditor = (function () {
@@ -870,7 +889,7 @@ var ProfileModule;
         });
     }
 })(ProfileModule || (ProfileModule = {}));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=profile.module.js.map
 var ProfileModule;
 (function (ProfileModule) {
     "use strict";
@@ -1044,636 +1063,662 @@ var ProfileModule;
     angular.module("profile").service(ProfileService.serviceId, function ($http, $q, $rootScope, configurationService) { return new ProfileService($http, $q, $rootScope, configurationService); });
 })(ProfileModule || (ProfileModule = {}));
 //# sourceMappingURL=profileService.js.map
-var RoleModule;
-(function (RoleModule) {
-    angular.module("role", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
-    config.$inject = ["$routeProvider"];
-    function config($routeProvider) {
-        $routeProvider.when("/role/add", {
-            templateUrl: ""
-        });
-        $routeProvider.when("/role/list", {
-            templateUrl: ""
-        });
-    }
-})(RoleModule || (RoleModule = {}));
-//# sourceMappingURL=module.js.map
-var RoleModule;
-(function (RoleModule) {
-    var RoleEditor = (function () {
-        function RoleEditor($location, roleService) {
-            var _this = this;
-            this.$location = $location;
-            this.roleService = roleService;
-            this.replace = true;
-            this.restrict = "E";
-            this.templateUrl = "/app/role/components/roleEditor/roleEditor.html";
-            this.scope = {
-                entity: "="
-            };
-            this.link = function (scope, element, attributes) {
-                scope.vm = {};
-                scope.vm.entity = scope.entity;
-                scope.tryToSave = function (form) {
-                    if (scope.vm.entity.id) {
-                        return _this.roleService.update({ entity: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/role/list");
-                        });
-                    }
-                    else {
-                        return _this.roleService.add({ entity: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/role/list");
-                        });
-                    }
-                };
-            };
-            this.$inject = ["$location", "roleService"];
+var app;
+(function (app) {
+    var role;
+    (function (role) {
+        angular.module("app.role", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
+        config.$inject = ["$routeProvider"];
+        function config($routeProvider) {
+            $routeProvider.when("/role/add", {
+                templateUrl: ""
+            });
+            $routeProvider.when("/role/list", {
+                templateUrl: ""
+            });
         }
-        RoleEditor.componentId = "roleEditor";
-        return RoleEditor;
-    })();
-    angular.module("role").directive(RoleEditor.componentId, function ($location, roleService) { return new RoleEditor($location, roleService); });
-})(RoleModule || (RoleModule = {}));
-//# sourceMappingURL=roleEditor.js.map
-var RoleModule;
-(function (RoleModule) {
-    var RoleList = (function () {
-        function RoleList(roleService) {
-            var _this = this;
-            this.roleService = roleService;
-            this.replace = true;
-            this.restrict = "E";
-            this.templateUrl = "/app/role/components/roleList/roleList.html";
-            this.scope = {};
-            this.link = function (scope, element, attributes) {
-                scope.vm = {};
-                scope.vm.remove = function (entity) {
-                    return _this.roleService.remove({ id: entity.id }).then(function () {
-                        for (var i = 0; i < scope.vm.entities.length; i++) {
-                            if (scope.vm.entities[i].id == entity.id) {
-                                scope.vm.entities.splice(i, 1);
-                            }
+    })(role = app.role || (app.role = {}));
+})(app || (app = {}));
+//# sourceMappingURL=role.module.js.map
+var app;
+(function (app) {
+    var role;
+    (function (role) {
+        var RoleEditor = (function () {
+            function RoleEditor($location, roleService) {
+                var _this = this;
+                this.$location = $location;
+                this.roleService = roleService;
+                this.replace = true;
+                this.restrict = "E";
+                this.templateUrl = "/app/role/components/roleEditor/roleEditor.html";
+                this.scope = {
+                    entity: "="
+                };
+                this.link = function (scope, element, attributes) {
+                    scope.vm = {};
+                    scope.vm.entity = scope.entity;
+                    scope.tryToSave = function (form) {
+                        if (scope.vm.entity.id) {
+                            return _this.roleService.update({ entity: scope.vm.entity }).then(function (results) {
+                                _this.$location.path("/role/list");
+                            });
                         }
-                    }).catch(function (error) {
+                        else {
+                            return _this.roleService.add({ entity: scope.vm.entity }).then(function (results) {
+                                _this.$location.path("/role/list");
+                            });
+                        }
+                    };
+                };
+                this.$inject = ["$location", "roleService"];
+            }
+            RoleEditor.componentId = "roleEditor";
+            return RoleEditor;
+        })();
+        angular.module("app.role").directive(RoleEditor.componentId, function ($location, roleService) { return new RoleEditor($location, roleService); });
+    })(role = app.role || (app.role = {}));
+})(app || (app = {}));
+//# sourceMappingURL=roleEditor.js.map
+var app;
+(function (app) {
+    var role;
+    (function (role) {
+        var RoleList = (function () {
+            function RoleList(roleService) {
+                var _this = this;
+                this.roleService = roleService;
+                this.replace = true;
+                this.restrict = "E";
+                this.templateUrl = "/app/role/components/roleList/roleList.html";
+                this.scope = {};
+                this.link = function (scope, element, attributes) {
+                    scope.vm = {};
+                    scope.vm.remove = function (entity) {
+                        return _this.roleService.remove({ id: entity.id }).then(function () {
+                            for (var i = 0; i < scope.vm.entities.length; i++) {
+                                if (scope.vm.entities[i].id == entity.id) {
+                                    scope.vm.entities.splice(i, 1);
+                                }
+                            }
+                        }).catch(function (error) {
+                        });
+                    };
+                    return _this.roleService.getAll().then(function (results) {
+                        return scope.vm.entities = results;
                     });
                 };
-                return _this.roleService.getAll().then(function (results) {
-                    return scope.vm.entities = results;
-                });
-            };
-            this.$inject = ["roleService"];
-        }
-        RoleList.componentId = "roleList";
-        return RoleList;
-    })();
-    angular.module("role").directive(RoleList.componentId, function (roleService) { return new RoleList(roleService); });
-})(RoleModule || (RoleModule = {}));
+                this.$inject = ["roleService"];
+            }
+            RoleList.componentId = "roleList";
+            return RoleList;
+        })();
+        angular.module("app.role").directive(RoleList.componentId, function (roleService) { return new RoleList(roleService); });
+    })(role = app.role || (app.role = {}));
+})(app || (app = {}));
 //# sourceMappingURL=roleList.js.map
 //# sourceMappingURL=IRoleService.js.map
-var RoleModule;
-(function (RoleModule) {
-    "use strict";
-    var RoleService = (function () {
-        function RoleService($http, $q, $rootScope, configurationService) {
-            var _this = this;
-            this.$http = $http;
-            this.$q = $q;
-            this.$rootScope = $rootScope;
-            this.configurationService = configurationService;
-            this.dataStore = {
-                getAll: null,
-                getById: null,
-                pages: []
-            };
-            this.clearDataStore = function () {
-                _this.dataStore = {
+var app;
+(function (app) {
+    var role;
+    (function (role) {
+        "use strict";
+        var RoleService = (function () {
+            function RoleService($http, $q, $rootScope, configurationService) {
+                var _this = this;
+                this.$http = $http;
+                this.$q = $q;
+                this.$rootScope = $rootScope;
+                this.configurationService = configurationService;
+                this.dataStore = {
                     getAll: null,
                     getById: null,
                     pages: []
                 };
-            };
-            this.getBaseUri = function () {
-                if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
-                    return "api/" + _this.$rootScope.configuration.apiVersion + "/role/";
-                }
-                else {
-                    return "api/role/";
-                }
-            };
-            this.add = function (options) {
-                var deferred = _this.$q.defer();
-                _this.$http({ method: "POST", url: _this.getBaseUri() + "add", data: options.entity }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.remove = function (options) {
-                var deferred = _this.$q.defer();
-                _this.$http({ method: "DELETE", url: _this.getBaseUri() + "remove?id=" + options.id }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getAll = function () {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getAll) {
-                    deferred.resolve(_this.dataStore.getAll);
-                    return deferred.promise;
-                }
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
-                    _this.dataStore.getAll = results.data;
-                    deferred.resolve(results.data);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getById = function (id) {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getById && _this.dataStore.getById.id == id) {
-                    deferred.resolve(_this.dataStore.getById);
-                    return deferred.promise;
-                }
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getbyid?id=" + id }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getPage = function (offset, setSize) {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getAll) {
-                    deferred.resolve(_this.dataStore.getAll);
-                    return deferred.promise;
-                }
-                ;
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.$rootScope.$on("$locationChangeStart", function () {
-                _this.clearDataStore();
-            });
-        }
-        RoleService.serviceId = "roleService";
-        RoleService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
-        return RoleService;
-    })();
-    RoleModule.RoleService = RoleService;
-    angular.module("role").service(RoleService.serviceId, function ($http, $q, $rootScope, configurationService) { return new RoleService($http, $q, $rootScope, configurationService); });
-})(RoleModule || (RoleModule = {}));
-//# sourceMappingURL=roleService.js.map
-var SecurityModule;
-(function (SecurityModule) {
-    angular.module("security", [
-        "account",
-        "configuration",
-        "common",
-        "core",
-        "group",
-        "profile",
-        "role",
-        "session",
-        "tenant",
-        "user",
-        "ngRoute"
-    ]).config(config);
-    config.$inject = ["$routeProvider"];
-    function config($routeProvider) {
-        $routeProvider.when("/", {
-            templateUrl: "/app/security/templates/splash.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/signin", {
-            templateUrl: "app/security/templates/signin.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: false,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/security", {
-            templateUrl: "app/security/templates/security.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/role/add", {
-            templateUrl: "/app/security/templates/addrole.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/role/edit/:roleid", {
-            templateUrl: "/app/security/templates/addrole.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/role/list", {
-            templateUrl: "/app/security/templates/roles.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/account/add", {
-            templateUrl: "/app/security/templates/addaccount.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/account/edit/:accountid", {
-            templateUrl: "/app/security/templates/addaccount.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/account/list", {
-            templateUrl: "/app/security/templates/accounts.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/profile/add", {
-            templateUrl: "/app/security/templates/addprofile.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/profile/edit/:profileid", {
-            templateUrl: "/app/security/templates/addprofile.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/profile/list", {
-            templateUrl: "/app/security/templates/profiles.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/tenant/add", {
-            templateUrl: "/app/security/templates/addtenant.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/tenant/edit/:tenantid", {
-            templateUrl: "/app/security/templates/addtenant.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/tenant/list", {
-            templateUrl: "/app/security/templates/tenants.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/user/changepassword/:changepasswordid", {
-            templateUrl: "/app/security/templates/changepassword.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/user/add", {
-            templateUrl: "/app/security/templates/adduser.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/user/edit/:userid", {
-            templateUrl: "/app/security/templates/adduser.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/user/list", {
-            templateUrl: "/app/security/templates/users.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/group/add", {
-            templateUrl: "/app/security/templates/addgroup.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/group/edit/:groupid", {
-            templateUrl: "/app/security/templates/addgroup.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.when("/group/list", {
-            templateUrl: "/app/security/templates/groups.html",
-            resolve: {
-                routeData: [
-                    "securityRouteResolver",
-                    function (securityRouteResolver) {
-                        return securityRouteResolver.resolveRoute();
-                    }
-                ]
-            },
-            authorizationRequired: true,
-            caseInsensitiveMatch: true
-        });
-        $routeProvider.otherwise("/");
-    }
-    function run() {
-    }
-})(SecurityModule || (SecurityModule = {}));
-//# sourceMappingURL=module.js.map
-var SecurityModule;
-(function (SecurityModule) {
-    var DashboardSecurityMenu = (function () {
-        function DashboardSecurityMenu() {
-            this.restrict = "E";
-            this.replace = true;
-            this.templateUrl = "/app/security/components/securityMenu/securityMenu.html";
-            this.scope = {};
-            this.link = function (scope, element, attributes) {
-            };
-        }
-        DashboardSecurityMenu.componentId = "securityMenu";
-        return DashboardSecurityMenu;
-    })();
-    angular.module("security").directive(DashboardSecurityMenu.componentId, function () { return new DashboardSecurityMenu(); });
-})(SecurityModule || (SecurityModule = {}));
-//# sourceMappingURL=securityMenu.js.map
-var SecurityModule;
-(function (SecurityModule) {
-    var UserEditor = (function () {
-        function UserEditor($location, $routeParams, securityUow) {
-            var _this = this;
-            this.$location = $location;
-            this.$routeParams = $routeParams;
-            this.securityUow = securityUow;
-            this.replace = true;
-            this.restrict = "E";
-            this.templateUrl = "/app/security/components/userEditor/userEditor.html";
-            this.scope = {};
-            this.link = function (scope, element, attributes) {
-                scope.vm = {};
-                scope.uow = {
-                    roles: _this.securityUow.roles,
-                    groups: _this.securityUow.groups
+                this.clearDataStore = function () {
+                    _this.dataStore = {
+                        getAll: null,
+                        getById: null,
+                        pages: []
+                    };
                 };
-                scope.tryToSave = function (form) {
-                    if (scope.vm.entity.id) {
-                        return _this.securityUow.users.update({ model: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/user/list");
-                        });
+                this.getBaseUri = function () {
+                    if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
+                        return "api/" + _this.$rootScope.configuration.apiVersion + "/role/";
                     }
                     else {
-                        return _this.securityUow.users.add({ model: scope.vm.entity }).then(function (results) {
-                            _this.$location.path("/user/list");
+                        return "api/role/";
+                    }
+                };
+                this.add = function (options) {
+                    var deferred = _this.$q.defer();
+                    _this.$http({ method: "POST", url: _this.getBaseUri() + "add", data: options.entity }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.remove = function (options) {
+                    var deferred = _this.$q.defer();
+                    _this.$http({ method: "DELETE", url: _this.getBaseUri() + "remove?id=" + options.id }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.getAll = function () {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getAll) {
+                        deferred.resolve(_this.dataStore.getAll);
+                        return deferred.promise;
+                    }
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                        _this.dataStore.getAll = results.data;
+                        deferred.resolve(results.data);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.getById = function (id) {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getById && _this.dataStore.getById.id == id) {
+                        deferred.resolve(_this.dataStore.getById);
+                        return deferred.promise;
+                    }
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getbyid?id=" + id }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.getPage = function (offset, setSize) {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getAll) {
+                        deferred.resolve(_this.dataStore.getAll);
+                        return deferred.promise;
+                    }
+                    ;
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.$rootScope.$on("$locationChangeStart", function () {
+                    _this.clearDataStore();
+                });
+            }
+            RoleService.serviceId = "roleService";
+            RoleService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
+            return RoleService;
+        })();
+        role.RoleService = RoleService;
+        angular.module("app.role").service(RoleService.serviceId, function ($http, $q, $rootScope, configurationService) { return new RoleService($http, $q, $rootScope, configurationService); });
+    })(role = app.role || (app.role = {}));
+})(app || (app = {}));
+//# sourceMappingURL=roleService.js.map
+var app;
+(function (app) {
+    var security;
+    (function (security) {
+        angular.module("app.security", [
+            "account",
+            "configuration",
+            "common",
+            "core",
+            "group",
+            "profile",
+            "app.role",
+            "session",
+            "app.tenant",
+            "user",
+            "ngRoute"
+        ]).config(config);
+        config.$inject = ["$routeProvider"];
+        function config($routeProvider) {
+            $routeProvider.when("/", {
+                templateUrl: "/app/security/templates/splash.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/signin", {
+                templateUrl: "app/security/templates/signin.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: false,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/security", {
+                templateUrl: "app/security/templates/security.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/role/add", {
+                templateUrl: "/app/security/templates/addrole.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/role/edit/:roleid", {
+                templateUrl: "/app/security/templates/addrole.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/role/list", {
+                templateUrl: "/app/security/templates/roles.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/account/add", {
+                templateUrl: "/app/security/templates/addaccount.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/account/edit/:accountid", {
+                templateUrl: "/app/security/templates/addaccount.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/account/list", {
+                templateUrl: "/app/security/templates/accounts.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/profile/add", {
+                templateUrl: "/app/security/templates/addprofile.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/profile/edit/:profileid", {
+                templateUrl: "/app/security/templates/addprofile.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/profile/list", {
+                templateUrl: "/app/security/templates/profiles.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/tenant/add", {
+                templateUrl: "/app/security/templates/addtenant.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/tenant/edit/:tenantid", {
+                templateUrl: "/app/security/templates/addtenant.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/tenant/list", {
+                templateUrl: "/app/security/templates/tenants.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/user/changepassword/:changepasswordid", {
+                templateUrl: "/app/security/templates/changepassword.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/user/add", {
+                templateUrl: "/app/security/templates/adduser.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/user/edit/:userid", {
+                templateUrl: "/app/security/templates/adduser.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/user/list", {
+                templateUrl: "/app/security/templates/users.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/group/add", {
+                templateUrl: "/app/security/templates/addgroup.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/group/edit/:groupid", {
+                templateUrl: "/app/security/templates/addgroup.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.when("/group/list", {
+                templateUrl: "/app/security/templates/groups.html",
+                resolve: {
+                    routeData: [
+                        "securityRouteResolver",
+                        function (securityRouteResolver) {
+                            return securityRouteResolver.resolveRoute();
+                        }
+                    ]
+                },
+                authorizationRequired: true,
+                caseInsensitiveMatch: true
+            });
+            $routeProvider.otherwise("/");
+        }
+        function run() {
+        }
+    })(security = app.security || (app.security = {}));
+})(app || (app = {}));
+//# sourceMappingURL=security.module.js.map
+var app;
+(function (app) {
+    var security;
+    (function (security) {
+        var DashboardSecurityMenu = (function () {
+            function DashboardSecurityMenu() {
+                this.restrict = "E";
+                this.replace = true;
+                this.templateUrl = "/app/security/components/securityMenu/securityMenu.html";
+                this.scope = {};
+                this.link = function (scope, element, attributes) {
+                };
+            }
+            DashboardSecurityMenu.componentId = "securityMenu";
+            return DashboardSecurityMenu;
+        })();
+        angular.module("app.security").directive(DashboardSecurityMenu.componentId, function () { return new DashboardSecurityMenu(); });
+    })(security = app.security || (app.security = {}));
+})(app || (app = {}));
+//# sourceMappingURL=securityMenu.js.map
+var app;
+(function (app) {
+    var security;
+    (function (security) {
+        var UserEditor = (function () {
+            function UserEditor($location, $routeParams, securityUow) {
+                var _this = this;
+                this.$location = $location;
+                this.$routeParams = $routeParams;
+                this.securityUow = securityUow;
+                this.replace = true;
+                this.restrict = "E";
+                this.templateUrl = "/app/security/components/userEditor/userEditor.html";
+                this.scope = {};
+                this.link = function (scope, element, attributes) {
+                    scope.vm = {};
+                    scope.uow = {
+                        roles: _this.securityUow.roles,
+                        groups: _this.securityUow.groups
+                    };
+                    scope.tryToSave = function (form) {
+                        if (scope.vm.entity.id) {
+                            return _this.securityUow.users.update({ model: scope.vm.entity }).then(function (results) {
+                                _this.$location.path("/user/list");
+                            });
+                        }
+                        else {
+                            return _this.securityUow.users.add({ model: scope.vm.entity }).then(function (results) {
+                                _this.$location.path("/user/list");
+                            });
+                        }
+                    };
+                    if (_this.$routeParams.userid) {
+                        return _this.securityUow.users.getById({ id: _this.$routeParams.userid }).then(function (results) {
+                            scope.vm.entity = results;
+                        }).catch(function (error) {
                         });
                     }
                 };
-                if (_this.$routeParams.userid) {
-                    return _this.securityUow.users.getById({ id: _this.$routeParams.userid }).then(function (results) {
-                        scope.vm.entity = results;
-                    }).catch(function (error) {
-                    });
-                }
-            };
-            this.$inject = ["$location", "userService"];
-        }
-        UserEditor.componentId = "userEditor";
-        return UserEditor;
-    })();
-    angular.module("security").directive(UserEditor.componentId, function ($location, $routeParams, securityUow) { return new UserEditor($location, $routeParams, securityUow); });
-})(SecurityModule || (SecurityModule = {}));
+                this.$inject = ["$location", "userService"];
+            }
+            UserEditor.componentId = "userEditor";
+            return UserEditor;
+        })();
+        angular.module("app.security").directive(UserEditor.componentId, function ($location, $routeParams, securityUow) { return new UserEditor($location, $routeParams, securityUow); });
+    })(security = app.security || (app.security = {}));
+})(app || (app = {}));
 //# sourceMappingURL=userEditor.js.map
-var SecurityModule;
-(function (SecurityModule) {
-    var SecurityUow = (function () {
-        function SecurityUow(groupService, identityService, roleService, userService) {
-            this.groupService = groupService;
-            this.identityService = identityService;
-            this.roleService = roleService;
-            this.userService = userService;
-            this.$inject = ["groupService", "identityService", "roleService", "userService"];
-            this.identity = this.identityService;
-            this.groups = this.groupService;
-            this.roles = this.roleService;
-            this.users = this.userService;
-        }
-        SecurityUow.serviceId = "securityUow";
-        return SecurityUow;
-    })();
-    angular.module("security").service(SecurityUow.serviceId, function (groupService, identityService, roleService, userService) { return new SecurityUow(groupService, identityService, roleService, userService); });
-})(SecurityModule || (SecurityModule = {}));
+var app;
+(function (app) {
+    var security;
+    (function (security) {
+        var SecurityUow = (function () {
+            function SecurityUow(groupService, identityService, roleService, userService) {
+                this.groupService = groupService;
+                this.identityService = identityService;
+                this.roleService = roleService;
+                this.userService = userService;
+                this.$inject = ["groupService", "identityService", "roleService", "userService"];
+                this.identity = this.identityService;
+                this.groups = this.groupService;
+                this.roles = this.roleService;
+                this.users = this.userService;
+            }
+            SecurityUow.serviceId = "securityUow";
+            return SecurityUow;
+        })();
+        angular.module("app.security").service(SecurityUow.serviceId, function (groupService, identityService, roleService, userService) { return new SecurityUow(groupService, identityService, roleService, userService); });
+    })(security = app.security || (app.security = {}));
+})(app || (app = {}));
 //# sourceMappingURL=uow.js.map
-var SecurityModule;
-(function (SecurityModule) {
-    var SecurityRouteResolver = (function () {
-        function SecurityRouteResolver(configurationService, securityUow, $q, $route) {
-            var _this = this;
-            this.configurationService = configurationService;
-            this.securityUow = securityUow;
-            this.$q = $q;
-            this.$route = $route;
-            this.resolveRoute = function () {
-                return _this.configurationService.get().then(function () {
-                    return _this.securityUow.identity.getCurrentUser().then(function () {
-                        if (_this.$route.current.params.userid) {
-                            return _this.$q.all([
-                                _this.securityUow.roles.getAll(),
-                                _this.securityUow.groups.getAll(),
-                                _this.securityUow.users.getById({ id: _this.$route.current.params.userid })
-                            ]).then(function (results) {
-                                return results;
-                            });
-                        }
-                        if (_this.$route.current.params.roleid) {
-                            return _this.$q.all([
-                                _this.securityUow.roles.getById({ id: _this.$route.current.params.roleid })
-                            ]).then(function (results) {
-                                return results;
-                            });
-                        }
-                        if (_this.$route.current.params.groupid) {
-                            return _this.$q.all([
-                                _this.securityUow.groups.getById({ id: _this.$route.current.params.groupid })
-                            ]).then(function (results) {
-                                return results;
-                            });
-                        }
-                        return true;
+var app;
+(function (app) {
+    var security;
+    (function (security) {
+        var SecurityRouteResolver = (function () {
+            function SecurityRouteResolver(configurationService, securityUow, $q, $route) {
+                var _this = this;
+                this.configurationService = configurationService;
+                this.securityUow = securityUow;
+                this.$q = $q;
+                this.$route = $route;
+                this.resolveRoute = function () {
+                    return _this.configurationService.get().then(function () {
+                        return _this.securityUow.identity.getCurrentUser().then(function () {
+                            if (_this.$route.current.params.userid) {
+                                return _this.$q.all([
+                                    _this.securityUow.roles.getAll(),
+                                    _this.securityUow.groups.getAll(),
+                                    _this.securityUow.users.getById({ id: _this.$route.current.params.userid })
+                                ]).then(function (results) {
+                                    return results;
+                                });
+                            }
+                            if (_this.$route.current.params.roleid) {
+                                return _this.$q.all([
+                                    _this.securityUow.roles.getById({ id: _this.$route.current.params.roleid })
+                                ]).then(function (results) {
+                                    return results;
+                                });
+                            }
+                            if (_this.$route.current.params.groupid) {
+                                return _this.$q.all([
+                                    _this.securityUow.groups.getById({ id: _this.$route.current.params.groupid })
+                                ]).then(function (results) {
+                                    return results;
+                                });
+                            }
+                            return true;
+                        });
                     });
-                });
-            };
-        }
-        SecurityRouteResolver.serviceId = "securityRouteResolver";
-        return SecurityRouteResolver;
-    })();
-    angular.module("security").service(SecurityRouteResolver.serviceId, function (configurationService, securityUow, $q, $route) { return new SecurityRouteResolver(configurationService, securityUow, $q, $route); });
-})(SecurityModule || (SecurityModule = {}));
+                };
+            }
+            SecurityRouteResolver.serviceId = "securityRouteResolver";
+            return SecurityRouteResolver;
+        })();
+        angular.module("app.security").service(SecurityRouteResolver.serviceId, function (configurationService, securityUow, $q, $route) { return new SecurityRouteResolver(configurationService, securityUow, $q, $route); });
+    })(security = app.security || (app.security = {}));
+})(app || (app = {}));
 //# sourceMappingURL=securityRouteResolver.js.map
 (function () {
     "use strict";
     var app = angular.module("session", ["configuration", "common", "core"]);
 })();
 //# sourceMappingURL=module.js.map
-//# sourceMappingURL=ISession.js.map
 var SessionModule;
 (function (SessionModule) {
     var serviceId = "session";
@@ -1856,20 +1901,24 @@ var SessionModule;
     ;
 })(SessionModule || (SessionModule = {}));
 //# sourceMappingURL=token.js.map
-var TenantModule;
-(function (TenantModule) {
-    angular.module("tenant", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
-    config.$inject = ["$routeProvider"];
-    function config($routeProvider) {
-        $routeProvider.when("/tenant/add", {
-            templateUrl: ""
-        });
-        $routeProvider.when("/tenant/list", {
-            templateUrl: ""
-        });
-    }
-})(TenantModule || (TenantModule = {}));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=ISession.js.map
+var app;
+(function (app) {
+    var tenant;
+    (function (tenant) {
+        angular.module("app.tenant", ["configuration", "common", "core", "session", "ngRoute"]).config(config);
+        config.$inject = ["$routeProvider"];
+        function config($routeProvider) {
+            $routeProvider.when("/tenant/add", {
+                templateUrl: ""
+            });
+            $routeProvider.when("/tenant/list", {
+                templateUrl: ""
+            });
+        }
+    })(tenant = app.tenant || (app.tenant = {}));
+})(app || (app = {}));
+//# sourceMappingURL=tenant.module.js.map
 var TenantModule;
 (function (TenantModule) {
     "use strict";
@@ -1903,7 +1952,7 @@ var TenantModule;
         TenantEditor.componentId = "tenantEditor";
         return TenantEditor;
     })();
-    angular.module("tenant").directive(TenantEditor.componentId, function ($location, tenantService) { return new TenantEditor($location, tenantService); });
+    angular.module("app.tenant").directive(TenantEditor.componentId, function ($location, tenantService) { return new TenantEditor($location, tenantService); });
 })(TenantModule || (TenantModule = {}));
 //# sourceMappingURL=tenantEditor.js.map
 var TenantModule;
@@ -1938,111 +1987,113 @@ var TenantModule;
         TenantList.componentId = "tenantList";
         return TenantList;
     })();
-    angular.module("tenant").directive(TenantList.componentId, function (tenantService) { return new TenantList(tenantService); });
+    angular.module("app.tenant").directive(TenantList.componentId, function (tenantService) { return new TenantList(tenantService); });
 })(TenantModule || (TenantModule = {}));
 //# sourceMappingURL=tenantList.js.map
-//# sourceMappingURL=ITenantService.js.map
-var TenantModule;
-(function (TenantModule) {
-    "use strict";
-    var TenantService = (function () {
-        function TenantService($http, $q, $rootScope, configurationService) {
-            var _this = this;
-            this.$http = $http;
-            this.$q = $q;
-            this.$rootScope = $rootScope;
-            this.configurationService = configurationService;
-            this.dataStore = {
-                getAll: null,
-                getById: null,
-                pages: []
-            };
-            this.clearDataStore = function () {
-                _this.dataStore = {
+var app;
+(function (app) {
+    var tenant;
+    (function (tenant) {
+        "use strict";
+        var TenantService = (function () {
+            function TenantService($http, $q, $rootScope, configurationService) {
+                var _this = this;
+                this.$http = $http;
+                this.$q = $q;
+                this.$rootScope = $rootScope;
+                this.configurationService = configurationService;
+                this.dataStore = {
                     getAll: null,
                     getById: null,
                     pages: []
                 };
-            };
-            this.getBaseUri = function () {
-                if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
-                    return "api/" + _this.$rootScope.configuration.apiVersion + "/tenant/";
-                }
-                else {
-                    return "api/tenant/";
-                }
-            };
-            this.add = function (options) {
-                var deferred = _this.$q.defer();
-                _this.$http({ method: "POST", url: _this.getBaseUri() + "add", data: options.entity }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.remove = function (options) {
-                var deferred = _this.$q.defer();
-                _this.$http({ method: "DELETE", url: _this.getBaseUri() + "remove?id=" + options.id }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getAll = function () {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getAll) {
-                    deferred.resolve(_this.dataStore.getAll);
+                this.clearDataStore = function () {
+                    _this.dataStore = {
+                        getAll: null,
+                        getById: null,
+                        pages: []
+                    };
+                };
+                this.getBaseUri = function () {
+                    if (_this.$rootScope.configuration && _this.$rootScope.configuration.apiVersion) {
+                        return "api/" + _this.$rootScope.configuration.apiVersion + "/tenant/";
+                    }
+                    else {
+                        return "api/tenant/";
+                    }
+                };
+                this.add = function (options) {
+                    var deferred = _this.$q.defer();
+                    _this.$http({ method: "POST", url: _this.getBaseUri() + "add", data: options.entity }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
                     return deferred.promise;
-                }
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
-                    _this.dataStore.getAll = results.data;
-                    deferred.resolve(results.data);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getById = function (id) {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getById && _this.dataStore.getById.id == id) {
-                    deferred.resolve(_this.dataStore.getById);
+                };
+                this.remove = function (options) {
+                    var deferred = _this.$q.defer();
+                    _this.$http({ method: "DELETE", url: _this.getBaseUri() + "remove?id=" + options.id }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
                     return deferred.promise;
-                }
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getbyid?id=" + id }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
-                });
-                return deferred.promise;
-            };
-            this.getPage = function (offset, setSize) {
-                var deferred = _this.$q.defer();
-                if (_this.dataStore.getAll) {
-                    deferred.resolve(_this.dataStore.getAll);
+                };
+                this.getAll = function () {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getAll) {
+                        deferred.resolve(_this.dataStore.getAll);
+                        return deferred.promise;
+                    }
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                        _this.dataStore.getAll = results.data;
+                        deferred.resolve(results.data);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
                     return deferred.promise;
-                }
-                ;
-                _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
-                    deferred.resolve(results);
-                }).catch(function (error) {
-                    deferred.reject(error);
+                };
+                this.getById = function (id) {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getById && _this.dataStore.getById.id == id) {
+                        deferred.resolve(_this.dataStore.getById);
+                        return deferred.promise;
+                    }
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getbyid?id=" + id }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.getPage = function (offset, setSize) {
+                    var deferred = _this.$q.defer();
+                    if (_this.dataStore.getAll) {
+                        deferred.resolve(_this.dataStore.getAll);
+                        return deferred.promise;
+                    }
+                    ;
+                    _this.$http({ method: "GET", url: _this.getBaseUri() + "getAll" }).then(function (results) {
+                        deferred.resolve(results);
+                    }).catch(function (error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                };
+                this.$rootScope.$on("$locationChangeStart", function () {
+                    _this.clearDataStore();
                 });
-                return deferred.promise;
-            };
-            this.$rootScope.$on("$locationChangeStart", function () {
-                _this.clearDataStore();
-            });
-        }
-        TenantService.serviceId = "tenantService";
-        TenantService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
-        return TenantService;
-    })();
-    TenantModule.TenantService = TenantService;
-    angular.module("tenant").service(TenantService.serviceId, function ($http, $q, $rootScope, configurationService) { return new TenantService($http, $q, $rootScope, configurationService); });
-})(TenantModule || (TenantModule = {}));
-//# sourceMappingURL=tenantService.js.map
+            }
+            TenantService.serviceId = "tenantService";
+            TenantService.$inject = ["$http", "$q", "$rootScope", "configurationService"];
+            return TenantService;
+        })();
+        tenant.TenantService = TenantService;
+        angular.module("app.tenant").service(TenantService.serviceId, function ($http, $q, $rootScope, configurationService) { return new TenantService($http, $q, $rootScope, configurationService); });
+    })(tenant = app.tenant || (app.tenant = {}));
+})(app || (app = {}));
+//# sourceMappingURL=tenant.service.js.map
 var UserModule;
 (function (UserModule) {
     var app = angular.module("user", [
@@ -2050,7 +2101,7 @@ var UserModule;
         "common",
         "core",
         "group",
-        "role",
+        "app.role",
         "session",
         "ngRoute"
     ]).config(config);
@@ -2133,7 +2184,7 @@ var UserModule;
         });
     }
 })(UserModule || (UserModule = {}));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=user.module.js.map
 var UserModule;
 (function (UserModule) {
     "use strict";
@@ -2340,7 +2391,8 @@ var UserModule;
             return $http({ method: "GET", url: "api/user/getCurrentUser" }).then(function (results) {
                 currentUser.set({ data: results.data });
                 return currentUser.get();
-            }).catch(alerting.errorHandler("get user error"));
+            }).catch(function () {
+            });
         };
         return self;
     }

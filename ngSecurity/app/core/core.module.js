@@ -33,4 +33,4 @@ var CoreModule;
         });
     }
 })(CoreModule || (CoreModule = {}));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=core.module.js.map

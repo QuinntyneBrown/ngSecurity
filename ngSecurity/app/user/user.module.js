@@ -5,7 +5,7 @@ var UserModule;
         "common",
         "core",
         "group",
-        "role",
+        "app.role",
         "session",
         "ngRoute"
     ]).config(config);
@@ -88,4 +88,4 @@ var UserModule;
         });
     }
 })(UserModule || (UserModule = {}));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=user.module.js.map

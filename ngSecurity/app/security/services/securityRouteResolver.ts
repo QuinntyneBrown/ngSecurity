@@ -1,4 +1,4 @@
-﻿module SecurityModule {
+﻿module app.security {
     
 
     class SecurityRouteResolver implements IRouteResolver {
@@ -50,5 +50,5 @@
         }
     }
 
-    angular.module("security").service(SecurityRouteResolver.serviceId,(configurationService, securityUow, $q, $route) => new SecurityRouteResolver(configurationService, securityUow, $q, $route));
+    angular.module("app.security").service(SecurityRouteResolver.serviceId,(configurationService, securityUow, $q, $route) => new SecurityRouteResolver(configurationService, securityUow, $q, $route));
 } 
