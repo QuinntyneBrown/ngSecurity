@@ -18,7 +18,7 @@ app\core\core.module.js
 app\core\intreceptors\authorizationInterceptor.js
 app\core\intreceptors\requestCounter.js
 app\core\jQuery\jQuery.js
-app\core\providers\ApiEndpointProvider.js
+app\core\providers\apiEndpointProvider.js
 app\core\storage\storage.js
 app\core\storage\items\configuration.js
 app\core\utilities\formEncode.js
@@ -49,6 +49,7 @@ app\tenant\tenant.module.js
 app\tenant\components\tenantEditor\tenantEditor.js
 app\tenant\components\tenantList\tenantList.js
 app\tenant\services\tenant.service.js
+app\ui\module.js
 app\user\user.module.js
 app\user\components\changePasswordForm\changePasswordForm.js
 app\user\components\preferences\preferences.js

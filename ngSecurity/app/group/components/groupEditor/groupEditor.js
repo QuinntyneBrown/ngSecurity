@@ -29,12 +29,10 @@ var app;
                         }
                     };
                 };
-                this.$inject = ["$location", "groupService"];
             }
-            GroupEditor.componentId = "groupEditor";
             return GroupEditor;
         })();
-        angular.module("app.group").directive(GroupEditor.componentId, function ($location, groupService) { return new GroupEditor($location, groupService); });
+        angular.module("app.group").directive("groupEditor", ["$location", "groupService", function ($location, groupService) { return new GroupEditor($location, groupService); }]);
     })(group = app.group || (app.group = {}));
 })(app || (app = {}));
 //# sourceMappingURL=groupEditor.js.map

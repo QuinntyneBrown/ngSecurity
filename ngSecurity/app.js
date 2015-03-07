@@ -350,21 +350,22 @@ var app;
         "use strict";
         var WorkSpinner = (function () {
             function WorkSpinner(requestCounter) {
+                var _this = this;
                 this.requestCounter = requestCounter;
                 this.restrict = "E";
                 this.scope = {};
                 this.template = "<div ng-show='requestCount' class='work-spinner'><i class='fa fa-spinner fa-spin fade'></i></div>";
-                this.link = function (scope) {
-                    //scope.$watch(() => {
-                    //    return this.requestCounter.getRequestCount();
-                    //}, (requestCount) => {
-                    //    scope.requestCount = requestCount;
-                    //});
+                this.link = function (scope, element, attributes) {
+                    scope.$watch(function () {
+                        return _this.requestCounter.getRequestCount();
+                    }, function (requestCount) {
+                        scope.requestCount = requestCount;
+                    });
                 };
             }
             return WorkSpinner;
         })();
-        angular.module("app.common").directive("workSpinner", ["$rootScope", "requestCounter", function (requestCounter) { return new WorkSpinner(requestCounter); }]);
+        angular.module("app.common").directive("workSpinner", ["requestCounter", function (requestCounter) { return new WorkSpinner(requestCounter); }]);
     })(common = app.common || (app.common = {}));
 })(app || (app = {}));
 //# sourceMappingURL=workSpinner.js.map
@@ -421,15 +422,15 @@ var app;
 (function (app) {
     var common;
     (function (common) {
-        angular.module("app.common").config(function ($provide) {
-            $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
+        angular.module("app.common").config(["$provide", function ($provide) {
+            $provide.decorator("$exceptionHandler", ["$delegate", "$injector", function ($delegate, $injector) {
                 return function (exception, cause) {
                     $delegate(exception, cause);
                     var alerting = $injector.get("alerting");
                     alerting.addDanger(exception.message);
                 };
-            });
-        });
+            }]);
+        }]);
     })(common = app.common || (app.common = {}));
 })(app || (app = {}));
 //# sourceMappingURL=exceptionHandler.js.map
@@ -599,7 +600,7 @@ var app;
         angular.module("app.core").provider("apiEndpoint", ApiEndpointProvider);
     })(core = app.core || (app.core = {}));
 })(app || (app = {}));
-//# sourceMappingURL=ApiEndpointProvider.js.map
+//# sourceMappingURL=apiEndpointProvider.js.map
 (function () {
     "use strict";
 
@@ -779,12 +780,10 @@ var app;
                         }
                     };
                 };
-                this.$inject = ["$location", "groupService"];
             }
-            GroupEditor.componentId = "groupEditor";
             return GroupEditor;
         })();
-        angular.module("app.group").directive(GroupEditor.componentId, function ($location, groupService) { return new GroupEditor($location, groupService); });
+        angular.module("app.group").directive("groupEditor", ["$location", "groupService", function ($location, groupService) { return new GroupEditor($location, groupService); }]);
     })(group = app.group || (app.group = {}));
 })(app || (app = {}));
 //# sourceMappingURL=groupEditor.js.map
@@ -812,16 +811,17 @@ var app;
                         }).catch(function (error) {
                         });
                     };
-                    return _this.groupService.getAll().then(function (results) {
-                        return scope.vm.entities = results;
-                    });
+                    function initialize() {
+                        return this.groupService.getAll().then(function (results) {
+                            return scope.vm.entities = results;
+                        });
+                    }
+                    initialize();
                 };
-                this.$inject = ["groupService"];
             }
-            GroupList.componentId = "groupList";
             return GroupList;
         })();
-        angular.module("app.group").directive(GroupList.componentId, function (groupService) { return new GroupList(groupService); });
+        angular.module("app.group").directive("groupList", ["groupService", function (groupService) { return new GroupList(groupService); }]);
     })(group = app.group || (app.group = {}));
 })(app || (app = {}));
 //# sourceMappingURL=groupList.js.map
@@ -975,16 +975,7 @@ var app;
 (function (app) {
     var role;
     (function (role) {
-        angular.module("app.role", ["app.configuration", "app.common", "app.core", "app.session", "ngRoute"]).config(config);
-        config.$inject = ["$routeProvider"];
-        function config($routeProvider) {
-            $routeProvider.when("/role/add", {
-                templateUrl: ""
-            });
-            $routeProvider.when("/role/list", {
-                templateUrl: ""
-            });
-        }
+        angular.module("app.role", ["app.configuration", "app.common", "app.core", "app.session", "ngRoute"]);
     })(role = app.role || (app.role = {}));
 })(app || (app = {}));
 //# sourceMappingURL=role.module.js.map
@@ -1105,6 +1096,7 @@ var app;
             "app.role",
             "app.session",
             "app.tenant",
+            "app.ui",
             "app.user",
             "ngRoute"
         ]).config(["$routeProvider", "apiEndpointProvider", config]);
@@ -1532,10 +1524,9 @@ var app;
                     });
                 };
             }
-            SecurityRouteResolver.serviceId = "securityRouteResolver";
             return SecurityRouteResolver;
         })();
-        angular.module("app.security").service(SecurityRouteResolver.serviceId, function (configurationService, securityUow, $q, $route) { return new SecurityRouteResolver(configurationService, securityUow, $q, $route); });
+        angular.module("app.security").service("securityRouteResolver", ["configurationService", "securityUow", "$q", "$route", SecurityRouteResolver]);
     })(security = app.security || (app.security = {}));
 })(app || (app = {}));
 //# sourceMappingURL=securityRouteResolver.js.map
@@ -1672,7 +1663,6 @@ var app;
 (function (app) {
     var session;
     (function (session) {
-        angular.module("app.session").service("currentUser", function ($rootScope, storage) { return new CurrentUser($rootScope, storage); });
         var CurrentUser = (function () {
             function CurrentUser($rootScope, storage) {
                 var _this = this;
@@ -1701,9 +1691,9 @@ var app;
                     }
                 });
             }
-            CurrentUser.$inject = ["$rootScope", "storage"];
             return CurrentUser;
         })();
+        angular.module("app.session").service("currentUser", ["$rootScope", "storage", CurrentUser]);
     })(session = app.session || (app.session = {}));
 })(app || (app = {}));
 //# sourceMappingURL=currentUser.js.map
@@ -1859,6 +1849,14 @@ var app;
 })(app || (app = {}));
 //# sourceMappingURL=tenant.service.js.map
 var app;
+(function (app) {
+    var ui;
+    (function (ui) {
+        angular.module("ui", []);
+    })(ui = app.ui || (app.ui = {}));
+})(app || (app = {}));
+//# sourceMappingURL=module.js.map
+var app;
 (function (_app) {
     var user;
     (function (user) {
@@ -1997,26 +1995,29 @@ var app;
 })(app || (app = {}));
 //# sourceMappingURL=changePasswordForm.js.map
 //# sourceMappingURL=preferences.js.map
-(function () {
-    "use strict";
-    var componentId = "registrationForm";
-    angular.module("app.user").directive(componentId, ["$location", "identityService", component]);
-    function component($location, identityService) {
-        return {
-            templateUrl: "/app/user/components/registrationForm/registrationForm.html",
-            restrict: "EA",
-            replace: true,
-            scope: {},
-            link: function (scope) {
-                scope.submit = function () {
-                    identityService.register({ model: scope.model }).then(function () {
-                        $location.path("/signin");
-                    });
-                };
-            }
-        };
-    }
-})();
+var app;
+(function (app) {
+    var user;
+    (function (user) {
+        "use strict";
+        function component($location, identityService) {
+            return {
+                templateUrl: "/app/user/components/registrationForm/registrationForm.html",
+                restrict: "EA",
+                replace: true,
+                scope: {},
+                link: function (scope) {
+                    scope.submit = function () {
+                        identityService.register({ model: scope.model }).then(function () {
+                            $location.path("/signin");
+                        });
+                    };
+                }
+            };
+        }
+        angular.module("app.user").directive("registrationForm", ["$location", "identityService", component]);
+    })(user = app.user || (app.user = {}));
+})(app || (app = {}));
 //# sourceMappingURL=registrationForm.js.map
 var app;
 (function (app) {
@@ -2043,16 +2044,14 @@ var app;
                             _this.token.set({ data: results });
                             _this.$location.path("/");
                         }).catch(function (error) {
-                            console.log("what what?");
                         });
                     };
                 };
-                this.$inject = ["identityService", "token", "$location"];
             }
             SignInForm.componentId = "signInForm";
             return SignInForm;
         })();
-        angular.module("app.user").directive(SignInForm.componentId, function (identityService, token, $location) { return new SignInForm(identityService, token, $location); });
+        angular.module("app.user").directive(SignInForm.componentId, ["identityService", "token", "$location", function (identityService, token, $location) { return new SignInForm(identityService, token, $location); }]);
     })(user = app.user || (app.user = {}));
 })(app || (app = {}));
 //# sourceMappingURL=signinForm.js.map
@@ -2200,8 +2199,6 @@ var app;
 (function (app) {
     var user;
     (function (user) {
-        var serviceId = "userRouteResolver";
-        angular.module("app.user").service(serviceId, ["$q", "$route", "configurationService", "userService", service]);
         function service($q, $route, configurationService, userService) {
             var self = this;
             self.resolveRoute = function (params) {
@@ -2219,12 +2216,12 @@ var app;
                         }
                     }
                 }).catch(function (error) {
-                    console.log(error);
                 });
             };
             return self;
         }
         ;
+        angular.module("app.user").service("userRouteResolver", ["$q", "$route", "configurationService", "userService", service]);
     })(user = app.user || (app.user = {}));
 })(app || (app = {}));
 //# sourceMappingURL=userRouteResolver.js.map

@@ -146,6 +146,9 @@
   <ItemGroup>
     <Content Include="app-structure.txt" />
     <Content Include="app.js" />
+    <Content Include="app.min.js">
+      <DependentUpon>app.js</DependentUpon>
+    </Content>
     <Content Include="app\account\components\accountEditor\accountEditor.html" />
     <Content Include="app\account\components\accountEditor\accountEditorSpec.js">
       <DependentUpon>accountEditor.ts</DependentUpon>
@@ -171,6 +174,9 @@
     <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.md.less" />
     <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.sm.less" />
     <Content Include="app\common\components\entityAdminMenu\responsive less\entityAdminMenu.xs.less" />
+    <Content Include="app.min.js.map">
+      <DependentUpon>app.min.js</DependentUpon>
+    </Content>
     <None Include="app\common\components\identityMenu\identityMenu.less" />
     <Content Include="app\common\components\identityMenu\identityMenu.html" />
     <Content Include="app\common\components\multiEntitySelect\multiEntitySelect.html" />
@@ -257,9 +263,9 @@
     <Content Include="app\core\utilities\getStringFromUrl.js" />
     <Content Include="app\core\utilities\getStringFromUrl.js.map" />
     <Content Include="app\group\components\groupEditor\groupEditor.html" />
-    <Content Include="app\group\components\groupEditor\groupEditor.js" />
-    <Content Include="app\group\components\groupEditor\groupEditor.js.map" />
-    <Content Include="app\group\components\groupEditor\groupEditorSpec.js" />
+    <Content Include="app\group\components\groupEditor\groupEditorSpec.js">
+      <DependentUpon>groupEditor.ts</DependentUpon>
+    </Content>
     <Content Include="app\group\components\groupEditor\responsive less\groupEditor.less" />
     <Content Include="app\group\components\groupEditor\responsive less\groupEditor.lg.less" />
     <Content Include="app\group\components\groupEditor\responsive less\groupEditor.md.less" />
@@ -373,16 +379,16 @@
     <Content Include="app\user\components\preferences\preferences.html" />
     <Content Include="app\user\components\preferences\preferences.js" />
     <Content Include="app\user\components\preferences\preferences.js.map" />
-    <Content Include="app\user\components\preferences\preferencesSpec.js" />
+    <Content Include="app\user\components\preferences\preferencesSpec.js">
+      <DependentUpon>preferences.ts</DependentUpon>
+    </Content>
     <Content Include="app\user\components\preferences\responsive less\preferences.less" />
     <Content Include="app\user\components\preferences\responsive less\preferences.lg.less" />
     <Content Include="app\user\components\preferences\responsive less\preferences.md.less" />
     <Content Include="app\user\components\preferences\responsive less\preferences.sm.less" />
     <Content Include="app\user\components\preferences\responsive less\preferences.xs.less" />
-    <Content Include="app\user\components\registrationForm\registrationForm.css" />
+    <None Include="app\user\components\registrationForm\registrationForm.less" />
     <Content Include="app\user\components\registrationForm\registrationForm.html" />
-    <Content Include="app\user\components\registrationForm\registrationForm.js" />
-    <Content Include="app\user\components\registrationForm\registrationForm.js.map" />
     <Content Include="app\user\components\signinForm\responsive less\signinForm.less" />
     <Content Include="app\user\components\signinForm\responsive less\signinForm.lg.less" />
     <Content Include="app\user\components\signinForm\responsive less\signinForm.md.less" />
@@ -390,32 +396,26 @@
     <Content Include="app\user\components\signinForm\responsive less\signinForm.xs.less" />
     <Content Include="app\user\components\signinForm\signInForm.css" />
     <Content Include="app\user\components\signinForm\signinForm.html" />
-    <Content Include="app\user\components\signinForm\signinForm.js" />
-    <Content Include="app\user\components\signinForm\signinForm.js.map" />
     <Content Include="app\user\components\signinForm\signinForm.spec.js">
       <DependentUpon>signinForm.ts</DependentUpon>
     </Content>
     <Content Include="app\user\components\userAdminMenu\userAdminMenu.css" />
     <Content Include="app\user\components\userAdminMenu\userAdminMenu.html" />
-    <Content Include="app\user\components\userAdminMenu\userAdminMenu.js" />
-    <Content Include="app\user\components\userAdminMenu\userAdminMenu.js.map" />
     <Content Include="app\user\components\userDropDownList\responsive less\userDropDownList.less" />
     <Content Include="app\user\components\userDropDownList\responsive less\userDropDownList.lg.less" />
     <Content Include="app\user\components\userDropDownList\responsive less\userDropDownList.md.less" />
     <Content Include="app\user\components\userDropDownList\responsive less\userDropDownList.sm.less" />
     <Content Include="app\user\components\userDropDownList\responsive less\userDropDownList.xs.less" />
     <Content Include="app\user\components\userDropDownList\userDropDownList.html" />
-    <Content Include="app\user\components\userDropDownList\userDropDownList.js" />
-    <Content Include="app\user\components\userDropDownList\userDropDownList.js.map" />
     <Content Include="app\user\components\userList\responsive less\userList.less" />
     <Content Include="app\user\components\userList\responsive less\userList.lg.less" />
     <Content Include="app\user\components\userList\responsive less\userList.md.less" />
     <Content Include="app\user\components\userList\responsive less\userList.sm.less" />
     <Content Include="app\user\components\userList\responsive less\userList.xs.less" />
     <Content Include="app\user\components\userList\userList.html" />
-    <Content Include="app\user\components\userList\userList.js" />
-    <Content Include="app\user\components\userList\userList.js.map" />
-    <Content Include="app\user\components\userList\userListSpec.js" />
+    <Content Include="app\user\components\userList\userListSpec.js">
+      <DependentUpon>userList.ts</DependentUpon>
+    </Content>
     <Content Include="app\user\templates\edit.html" />
     <Content Include="app\user\templates\list.html" />
     <Content Include="app\user\templates\preferences.html" />
@@ -522,6 +522,7 @@
     <Compile Include="Server\Api\v1\GroupController.cs" />
     <Compile Include="Server\Api\v1\IdentityController.cs" />
     <Compile Include="Server\Api\v1\RoleController.cs" />
+    <Compile Include="Server\Api\v1\SecurityController.cs" />
     <Compile Include="Server\Api\v1\TenantController.cs" />
     <Compile Include="Server\Api\v1\UserController.cs" />
     <Compile Include="Server\Auth\JwtOptions.cs" />
@@ -633,7 +634,7 @@
     <TypeScriptCompile Include="app\core\intreceptors\requestCounter.ts" />
     <TypeScriptCompile Include="app\core\jQuery\jQuery.ts" />
     <TypeScriptCompile Include="app\core\core.module.ts" />
-    <TypeScriptCompile Include="app\core\providers\ApiEndpointProvider.ts" />
+    <TypeScriptCompile Include="app\core\providers\apiEndpointProvider.ts" />
     <TypeScriptCompile Include="app\core\storage\items\configuration.ts" />
     <TypeScriptCompile Include="app\core\utilities\formEncode.ts" />
     <TypeScriptCompile Include="app\core\utilities\getStringFromUrl.ts" />
@@ -669,6 +670,7 @@
     <TypeScriptCompile Include="app\shared\ITenantService.d.ts" />
     <TypeScriptCompile Include="app\tenant\services\tenant.service.ts" />
     <TypeScriptCompile Include="app\tenant\tenant.module.ts" />
+    <TypeScriptCompile Include="app\ui\module.ts" />
     <TypeScriptCompile Include="app\user\components\changePasswordForm\changePasswordForm.ts" />
     <TypeScriptCompile Include="app\user\components\preferences\preferences.ts" />
     <TypeScriptCompile Include="app\user\components\registrationForm\registrationForm.ts" />
@@ -704,11 +706,8 @@
     <Folder Include="app\security\components\userEditor\interfaces\" />
     <Folder Include="app\tenant\components\tenantEditor\interfaces\" />
     <Folder Include="app\tenant\components\tenantList\interfaces\" />
-    <Folder Include="app\user\components\changePasswordForm\interfaces\" />
-    <Folder Include="app\user\components\preferences\interfaces\" />
-    <Folder Include="app\user\components\signinForm\interfaces\" />
-    <Folder Include="app\user\components\userDropDownList\interfaces\" />
-    <Folder Include="app\user\components\userList\interfaces\" />
+    <Folder Include="app\ui\components\" />
+    <Folder Include="app\ui\services\" />
     <Folder Include="Server\Api\vNext\" />
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,6 @@ var app;
 (function (app) {
     var session;
     (function (session) {
-        angular.module("app.session").service("currentUser", function ($rootScope, storage) { return new CurrentUser($rootScope, storage); });
         var CurrentUser = (function () {
             function CurrentUser($rootScope, storage) {
                 var _this = this;
@@ -31,9 +30,9 @@ var app;
                     }
                 });
             }
-            CurrentUser.$inject = ["$rootScope", "storage"];
             return CurrentUser;
         })();
+        angular.module("app.session").service("currentUser", ["$rootScope", "storage", CurrentUser]);
     })(session = app.session || (app.session = {}));
 })(app || (app = {}));
 //# sourceMappingURL=currentUser.js.map

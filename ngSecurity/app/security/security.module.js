@@ -12,6 +12,7 @@ var app;
             "app.role",
             "app.session",
             "app.tenant",
+            "app.ui",
             "app.user",
             "ngRoute"
         ]).config(["$routeProvider", "apiEndpointProvider", config]);

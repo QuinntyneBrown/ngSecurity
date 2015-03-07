@@ -22,16 +22,17 @@ var app;
                         }).catch(function (error) {
                         });
                     };
-                    return _this.groupService.getAll().then(function (results) {
-                        return scope.vm.entities = results;
-                    });
+                    function initialize() {
+                        return this.groupService.getAll().then(function (results) {
+                            return scope.vm.entities = results;
+                        });
+                    }
+                    initialize();
                 };
-                this.$inject = ["groupService"];
             }
-            GroupList.componentId = "groupList";
             return GroupList;
         })();
-        angular.module("app.group").directive(GroupList.componentId, function (groupService) { return new GroupList(groupService); });
+        angular.module("app.group").directive("groupList", ["groupService", function (groupService) { return new GroupList(groupService); }]);
     })(group = app.group || (app.group = {}));
 })(app || (app = {}));
 //# sourceMappingURL=groupList.js.map

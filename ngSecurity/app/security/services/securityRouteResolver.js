@@ -40,10 +40,9 @@ var app;
                     });
                 };
             }
-            SecurityRouteResolver.serviceId = "securityRouteResolver";
             return SecurityRouteResolver;
         })();
-        angular.module("app.security").service(SecurityRouteResolver.serviceId, function (configurationService, securityUow, $q, $route) { return new SecurityRouteResolver(configurationService, securityUow, $q, $route); });
+        angular.module("app.security").service("securityRouteResolver", ["configurationService", "securityUow", "$q", "$route", SecurityRouteResolver]);
     })(security = app.security || (app.security = {}));
 })(app || (app = {}));
 //# sourceMappingURL=securityRouteResolver.js.map

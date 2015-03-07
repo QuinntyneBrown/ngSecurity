@@ -1,14 +1,7 @@
 ﻿using Microsoft.Owin.Security.OAuth;
-using ngSecurity.Server.Dto.v1;
-using ngSecurity.Server.Models;
 using ngSecurity.Server.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
-using Microsoft.Practices.Unity;
 
 namespace ngSecurity.Server.Auth
 {

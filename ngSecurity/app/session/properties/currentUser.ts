@@ -1,12 +1,7 @@
 ﻿module app.session {
 
-    angular.module("app.session")
-        .service("currentUser",($rootScope, storage) => new CurrentUser($rootScope, storage) );
-
     class CurrentUser {
         
-        public static $inject = ["$rootScope", "storage"];
-
         constructor(private $rootScope, private storage) {
 
             $rootScope.$on("$routeChangeStart",(event, newUrl, oldUrl) => {
@@ -40,4 +35,7 @@
             this.storage.put({ name: name, value: value.data });
         }
     }
+
+    angular.module("app.session").service("currentUser", ["$rootScope", "storage", CurrentUser]);
+
 }

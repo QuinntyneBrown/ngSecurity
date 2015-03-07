@@ -2,7 +2,9 @@ module app.group {
 
     class GroupEditor {
 
-        public static componentId: string = "groupEditor";
+        constructor(private $location, private groupService) {
+
+        }
 
         public replace: boolean = true;
 
@@ -37,13 +39,8 @@ module app.group {
             }
         }
 
-        public $inject: string[] = ["$location","groupService"];
-
-        constructor(private $location, private groupService) {
-
-        }
     }
 
-    angular.module("app.group").directive(GroupEditor.componentId,($location, groupService) => new GroupEditor($location, groupService));
+    angular.module("app.group").directive("groupEditor", ["$location", "groupService",($location, groupService) => new GroupEditor($location, groupService)]);
 
 }

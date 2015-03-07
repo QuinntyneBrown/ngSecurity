@@ -2,7 +2,9 @@ module app.group {
 
     class GroupList {
 
-        public static componentId: string = "groupList";
+        constructor(private groupService: IGroupService) {
+
+        }
 
         public replace: boolean = true;
 
@@ -30,18 +32,17 @@ module app.group {
                 });
             }
 
-            return this.groupService.getAll().then((results) => {
-                return scope.vm.entities = results;
-            });
+            function initialize() {
+                return this.groupService.getAll().then((results) => {
+                    return scope.vm.entities = results;
+                });
+            }
+
+            initialize();
         }
 
-        public $inject: string[] = ["groupService"];
-
-        constructor(private groupService) {
-
-        }
     }
 
-    angular.module("app.group").directive(GroupList.componentId,(groupService) => new GroupList(groupService));
+    angular.module("app.group").directive("groupList", ["groupService",(groupService) => new GroupList(groupService)]);
 
 }

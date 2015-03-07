@@ -10,6 +10,7 @@
         "app.role",
         "app.session",               
         "app.tenant",
+        "app.ui",
         "app.user",
 
         "ngRoute"

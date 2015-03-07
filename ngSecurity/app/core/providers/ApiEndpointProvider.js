@@ -21,4 +21,4 @@ var app;
         angular.module("app.core").provider("apiEndpoint", ApiEndpointProvider);
     })(core = app.core || (app.core = {}));
 })(app || (app = {}));
-//# sourceMappingURL=ApiEndpointProvider.js.map
+//# sourceMappingURL=apiEndpointProvider.js.map

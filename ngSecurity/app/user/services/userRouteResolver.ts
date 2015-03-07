@@ -1,9 +1,5 @@
 ﻿module app.user {
-
-    var serviceId = "userRouteResolver";
-
-    angular.module("app.user").service(serviceId, ["$q", "$route", "configurationService", "userService", service]);
-
+      
     function service($q, $route, configurationService, userService) {
 
         var self = this;
@@ -28,7 +24,7 @@
                     }
                 }
             }).catch((error) => {
-                console.log(error);
+
             });
 
         };
@@ -37,4 +33,5 @@
 
     };
 
+    angular.module("app.user").service("userRouteResolver", ["$q", "$route", "configurationService", "userService", service]);
 }

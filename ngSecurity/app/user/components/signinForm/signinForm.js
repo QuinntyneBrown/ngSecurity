@@ -23,16 +23,14 @@ var app;
                             _this.token.set({ data: results });
                             _this.$location.path("/");
                         }).catch(function (error) {
-                            console.log("what what?");
                         });
                     };
                 };
-                this.$inject = ["identityService", "token", "$location"];
             }
             SignInForm.componentId = "signInForm";
             return SignInForm;
         })();
-        angular.module("app.user").directive(SignInForm.componentId, function (identityService, token, $location) { return new SignInForm(identityService, token, $location); });
+        angular.module("app.user").directive(SignInForm.componentId, ["identityService", "token", "$location", function (identityService, token, $location) { return new SignInForm(identityService, token, $location); }]);
     })(user = app.user || (app.user = {}));
 })(app || (app = {}));
 //# sourceMappingURL=signinForm.js.map

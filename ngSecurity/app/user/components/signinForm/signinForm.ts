@@ -4,6 +4,10 @@
 
     class SignInForm {
 
+        constructor(private identityService: any, private token, private $location: ng.ILocationService) {
+
+        }
+
         public templateUrl: string = "/app/user/components/signInForm/signInForm.html";
 
         public static componentId: string = "signInForm";
@@ -30,22 +34,17 @@
                     this.$location.path("/");
 
                 }).catch((error) => {
-                    console.log("what what?");
 
                 });
 
             };
         }
 
-        public $inject: string[] = ["identityService", "token","$location"];
 
-        constructor(private identityService: any, private token, private $location: ng.ILocationService) {
-            
-        }
 
         
     }
 
-    angular.module("app.user").directive(SignInForm.componentId,(identityService, token, $location) => new SignInForm(identityService, token, $location));
+    angular.module("app.user").directive(SignInForm.componentId, ["identityService", "token", "$location",(identityService, token, $location) => new SignInForm(identityService, token, $location)]);
 
 }

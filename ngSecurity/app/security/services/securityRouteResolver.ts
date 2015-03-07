@@ -3,7 +3,9 @@
 
     class SecurityRouteResolver implements IRouteResolver {
         
-        public static serviceId: string = "securityRouteResolver";
+        constructor(private configurationService, private securityUow, private $q, private $route) {
+
+        }
 
         resolveRoute = () => {
 
@@ -45,10 +47,8 @@
             });
         }
 
-        constructor(private configurationService, private securityUow, private $q, private $route) {
-            
-        }
+
     }
 
-    angular.module("app.security").service(SecurityRouteResolver.serviceId,(configurationService, securityUow, $q, $route) => new SecurityRouteResolver(configurationService, securityUow, $q, $route));
+    angular.module("app.security").service("securityRouteResolver", ["configurationService", "securityUow", "$q", "$route", SecurityRouteResolver]);
 } 

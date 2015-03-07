@@ -1,9 +1,6 @@
-﻿(() => {
+﻿module app.user {
+
     "use strict";
-
-    var componentId = "registrationForm";
-
-    angular.module("app.user").directive(componentId, ["$location", "identityService", component]);
 
     function component($location, identityService) {
 
@@ -22,4 +19,6 @@
             }
         };
     }
-})();
+
+    angular.module("app.user").directive("registrationForm", ["$location", "identityService", component]);
+}

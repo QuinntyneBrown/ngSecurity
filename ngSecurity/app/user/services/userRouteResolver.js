@@ -2,8 +2,6 @@ var app;
 (function (app) {
     var user;
     (function (user) {
-        var serviceId = "userRouteResolver";
-        angular.module("app.user").service(serviceId, ["$q", "$route", "configurationService", "userService", service]);
         function service($q, $route, configurationService, userService) {
             var self = this;
             self.resolveRoute = function (params) {
@@ -21,12 +19,12 @@ var app;
                         }
                     }
                 }).catch(function (error) {
-                    console.log(error);
                 });
             };
             return self;
         }
         ;
+        angular.module("app.user").service("userRouteResolver", ["$q", "$route", "configurationService", "userService", service]);
     })(user = app.user || (app.user = {}));
 })(app || (app = {}));
 //# sourceMappingURL=userRouteResolver.js.map
